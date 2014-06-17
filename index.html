@@ -59,7 +59,7 @@
                     <h2>What's in a BBC Micro?</h2>
                     <ul>
                         <li>2MHz 6502 CPU</li>
-                        <li>32KB RAM</li>
+                        <li>32KB RAM / 32KB ROM</li>
                         <li>Memory-mapped hardware:
                             <ul>
                                 <li>Video circuitry</li>
@@ -104,14 +104,18 @@ JSR / RTS           ; jump to subroutine / return from subroutine
                      <h2>Addressing modes</h2>
                      <pre><code class="asm6502" data-trim>
 a9 20       LDA #32             ; A = 32
+
 a5 70       LDA $70             ; A = readmem(0x70)
-b5 70       LDA $70, X          ; A = readmem(0x70 + X)
+
 ad 34 12    LDA $1234           ; A = readmem(0x1234)
 bd 34 12    LDA $1234, X        ; A = readmem(0x1234 + X)
 b9 34 12    LDA $1234, Y        ; A = readmem(0x1234 + Y)
+
 b1 70       LDA ($70), Y        ; t1 = readmem(0x70)
                                 ; t2 = readmem(0x71)
                                 ; A = readmem((t1 | (21&lt;&lt;8)) + Y)
+
+b5 70       LDA $70, X          ; A = readmem(0x70 + X)
 a1 70       LDA ($70, X)        ; t1 = readmem(0x70 + X)
                                 ; t2 = readmem(0x71 + X)
                                 ; A = readmem(t1 | (t2&lt;&lt;8))
@@ -119,12 +123,65 @@ a1 70       LDA ($70, X)        ; t1 = readmem(0x70 + X)
                  </section>
                  <section>
                      <h2>Example</h2>
+                     <pre><code class="asm6502" data-trim>
+.strlen                     ; 0x70/0x71 point to string.
+                            ; returns length in A (low) and X (high)
+a0 00       LDY #0          ; we're going to use Y as the loop counter. Start at 0
+a2 00       LDX #0          ; initialize the high part of the length
+.lp
+b1 70       LDA ($70), Y    ; read the byte pointed to by (0x70/0x71) + Y
+f0 09       BEQ end         ; if it's zero, we're at the end of the string
+c8          INY             ; otherwise increment the loop counter
+d0 f9       BNE lp          ; if it didn't overflow past 0xff to 0, re-loop
+e6 71       INC $71         ; else, increment the high part of the address
+e8          INX             ; and the X counter
+d0 f4       BNE lp          ; and re-loop (NB falling off here would mean &gt; 65536)
+.end
+98          TYA             ; put the loop counter into A (the low part of the length)
+60          RTS             ; and return
+                     </code></pre>
+                 </section>
+                 <section>
+                     <h2>Emulating the 6502</h2>
+                     <pre><code class="javascript" data-trim>
+function readbyte(addr) { /* ... */ }
+var a = 0, x = 0, y = 0, s = 0, p = 0;
+var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
+while (true) {
+    var opcode = readbyte(pc); pc++;
+    switch (opcode) {
+        //...
+        case 0x98: /*TYA*/ a = y; break;
+        //...
+        case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
+        case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
+        case 0xa9: /*LDA #xx*/ a = readbyte(pc); pc++; break;
+        //...
+        case 0xb1: /*LDA (xx),Y*/ 
+            addr = readbyte(pc); pc++; 
+            a = readbyte(addr + y); 
+            break;
+        //...
+        case 0xe8: /*INX*/ x = x + 1; break;
+    }
+}
+                     </code></pre>
+                 </section>
+                 <section>
+                     <h2>Except...</h2>
+                     <ul>
+                         <li>Setting flags</li>
+                         <li>Memory access</li>
+                         <li>Hardware</li>
+                         <li>Interrupts</li>
+                         <li>Handling time</li>
+                     </ul>
                  </section>
                  <section>
                      <h2>Emulating the video</h2>
                  </section>
                  <section>
-                     <h2>
+                     <h2>Moo</h2>
                  </section>
 			</div>
 		</div>
