@@ -24,7 +24,12 @@ based on dark.css by Ivan Sagalaev
 }
 
 .hljs-label {
-    color: #fcc
+    color: #99d;
+}
+
+.asm6502 .hljs-labeldef {
+    color: #99d;
+    font-weight: bold;
 }
 
 .django .hljs-template_tag,
@@ -82,6 +87,7 @@ based on dark.css by Ivan Sagalaev
 .hljs-opcodes {
     color: #888;
 }
+
 .diff .hljs-deletion,
 .hljs-string,
 .hljs-tag .hljs-value,

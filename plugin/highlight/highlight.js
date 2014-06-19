@@ -30,9 +30,9 @@ function asm6502(hljs) {
                       'SEC CLC SED CLD SEI CLI',
              built_in: 'A X Y' },
         c: [ { cN: 'comment', b: ';', e: '$' },
-             { cN: 'label', b: '^\\.[a-zA-Z_][a-zA-Z_0-9]*'},
+             { cN: 'labeldef', b: '^\\.[a-zA-Z_][a-zA-Z_0-9]*'},
              { cN: 'opcodes', b: '^[0-9a-f]{2}( [0-9a-f]{2})*' },
-             { cN: 'label', b: '[a-zA-Z]+' },
+             { cN: 'label', b: '[a-z][a-zA-Z]*' },
              { cN: 'literal', b: '#?\\$?[0-9a-f]+' } ]
     };
 }

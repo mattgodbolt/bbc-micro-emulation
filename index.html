@@ -30,7 +30,19 @@
 				document.getElementsByTagName( 'head' )[0].appendChild( link );
 			}
 		</script>
+        <style>
+table.horizontal th, table.horizontal td {
+    text-align: center;
+    width: 6em;
+}
 
+table.memmap th {
+    width: 6em;
+    font-family: monospace;
+    font-weight: normal;
+    text-align:center;
+}
+        </style>
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
 		<![endif]-->
@@ -53,6 +65,7 @@
                     <p>
                     TODO: story of the beeb
                     TODO: pic of Beeb
+                    TODO: why
                     </p>
                 </section>
                 <section>
@@ -140,23 +153,23 @@ d0 f4       BNE lp          ; and re-loop (NB falling off here would mean &gt; 6
 98          TYA             ; put the loop counter into A (the low part of the length)
 60          RTS             ; and return
                      </code></pre>
+                     <!-- http://localhost/6502/expert.html?a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100 -->
                  </section>
                  <section>
                      <h2>Emulating the 6502</h2>
                      <pre><code class="javascript" data-trim>
 function readbyte(addr) { /* ... */ }
-var a = 0, x = 0, y = 0, s = 0, p = 0;
+var a = 0, x = 0, y = 0, s = 0, p = {c:false, z:false /* ... */};
 var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
 while (true) {
     var opcode = readbyte(pc); pc++;
     switch (opcode) {
         //...
+        case 0x69: /*ADC #xx*/ a += readbyte(pc); pc++; break;
         case 0x98: /*TYA*/ a = y; break;
-        //...
         case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
         case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
         case 0xa9: /*LDA #xx*/ a = readbyte(pc); pc++; break;
-        //...
         case 0xb1: /*LDA (xx),Y*/ 
             addr = readbyte(pc); pc++; 
             a = readbyte(addr + y); 
@@ -176,6 +189,99 @@ while (true) {
                          <li>Interrupts</li>
                          <li>Handling time</li>
                      </ul>
+                 </section>
+                 <section>
+                     <section>
+                         <h2>Flags</h2>
+                         <table class="horizontal">
+                             <thead><tr><th>7</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th><th>0</th></tr></thead>
+                             <tbody><tr><td>Negative</td><td>oVerflow</td><td>-</td><td>-</td><td>Decimal</td><td>Interrupt<br>disable</td><td>Zero</td><td>Carry</tr></tbody>
+                         </table>
+                         <br>
+                         <ul class="fragment">
+                             <li>Z &amp; N set on ALU/load instruction</li>
+                             <li>C set by shifts &amp; arithmetic</li>
+                             <li>V set by arithmetic</li>
+                             <li>D, V, C and I controlled by special instructions</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>So now we have:</h2>
+                         <pre><code class="javascript" data-trim>
+case 0x69: /*ADC #xx*/
+    a += readbyte(pc); pc++;
+    if (p.c) a++; // previous carry
+    p.c = a &gt; 0xff; // new carry
+    a &amp;= 0xff;
+    p.z = !!a;
+    p.n = !!(a &amp; 0x80);
+    break;
+case 0xb1: /*LDA (xx),Y*/ 
+    addr = readbyte(pc); pc++; 
+    a = readbyte(addr + y); 
+    p.z = !!a;
+    p.n = !!(a &amp; 0x80);
+    break;
+                         </pre></code>
+                     </section>
+                 </section>
+                 <section>
+                     <section>
+                         <h2>Memory</h2>
+                         <table class="memmap">
+                             <tbody>
+                             <tr><th>0xffff</th></tr>
+                             <tr><th>&uarr;<br>0xff00</th><td>256 bytes OS ROM</td></tr>
+                             <tr><th>&uarr;<br>0xfe00</th><td>256 bytes hardware</td></tr>
+                             <tr><th>&uarr;<br>0xc000</th><td>15.5KB OS ROM</td></tr>
+                             <tr><th>&uarr;<br>0x8000</th><td>16KB Paged ROM</td></tr>
+                             <tr><th>&uarr;<br>0x0000</th><td>32KB RAM</td></tr>
+                             </tbody>
+                         </table>
+                     </section>
+                     <section>
+                         <pre><code class="javascript" data-trim>
+var ram = new Uint8Array(0x8000);
+var os = load("OS");
+var romsel = 0;
+var roms = [];                        
+roms[15] = load("BASIC");
+
+function readmem(addr) {
+    if (addr &lt; 0x8000) return ram[addr];
+    if (addr &lt; 0xc000) return roms[romsel][addr - 0xc000];
+    if (addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00) return readhw(addr);
+    return os[addr - 0xc000];
+}
+
+function writemem(addr, b) {
+    if (addr &lt; 0x8000) ram[addr] = b;
+    if (addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00) writehw(addr, b);
+    // else does nothing - it's ROM
+}
+                         </pre></code>
+                     </section>
+                 </section>
+                 <section>
+                     <section>
+                         <h2>Hardware</h2>
+                         <ul>
+                             <li>Keyboard</li>
+                             <li>Timers</li>
+                             <li>Video circuitry</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>Keyboard</h2>
+                         <img class="stretch" src="KeyboardCircuitDiagram.jpeg">
+                     </section>
+                     <section>
+                         <h2>Timers</h2>
+                         <img class="stretch" src="6522BlockDiagram.jpeg">
+                     </section>
+                 </section>
+                 <section>
+                     <h2>Interrupts &amp; Timing</h2>
                  </section>
                  <section>
                      <h2>Emulating the video</h2>
