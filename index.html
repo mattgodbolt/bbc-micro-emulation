@@ -267,7 +267,7 @@ function writemem(addr, b) {
                          <h2>Hardware</h2>
                          <ul>
                              <li>Keyboard</li>
-                             <li>Timers</li>
+                             <li>I/O &amp; Timers</li>
                              <li>Video circuitry</li>
                          </ul>
                      </section>
@@ -276,12 +276,64 @@ function writemem(addr, b) {
                          <img class="stretch" src="KeyboardCircuitDiagram.jpeg">
                      </section>
                      <section>
-                         <h2>Timers</h2>
+                         <h2>Scanning</h2>
+                         <pre><code class="javascript" data-trim>
+function updateKeys() {
+    if (freescanning) {
+        for (i = 0; i &lt; 10; ++i) {
+            for (j = 1; j &lt; 8; ++j) if (keys[i][j]) setca2();
+        }
+    } else {
+        for (j = 1; j &lt; 8; ++j) if (keys[curCol[j]) setca2();
+    }
+}
+                         </code></pre>
+                     </section>
+                     <section>
+                         <h2>I/O &amp; Timers</h2>
                          <img class="stretch" src="6522BlockDiagram.jpeg">
+                     </section>
+                     <section>
+                         <h2>6522 Versatile Interface Adapter</h2>
+                         <ul>
+                             <li>Interface with peripherals at 1MHz</li>
+                             <li>Source of interrupts</li>
+                             <li>BBC has two VIAs:
+                             <ul>
+                                 <li>System: keyboard, sound, LEDs, system timers</li>
+                                 <li>User: printer, user, mouse, user timers</li>
+                             </ul>
+                             </li>
+                             <li>Each VIA has two timers</li>
+                             <li>Timers can count down, latch, cause IRQ</li>
+                             <li>Shift registers for serial</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>One timer</h2>
+                         <pre><code class="javascript" data-trim>
+function tickTimer1() {
+    count--;
+    if (count == -3 &amp;&amp; !suppressed) {
+        // Timer fired!
+        timerFlags |= T1HIT; // mark we hit in timer flags
+        // Send an IRQ if needed
+        if (irqEnabled &amp; timerFlags)
+            cpu.interrupt();
+        // If we're in one-shot mode, prevent further IRQs
+        if (!(configFlags &amp; 0x40)) suppressed = true;
+    }
+    // Reload timer value
+    if (count == 3) count += latch + 4;
+}
+                         </code></pre>
                      </section>
                  </section>
                  <section>
                      <h2>Interrupts &amp; Timing</h2>
+                     <ul>
+                         <li></li>
+                     </ul>
                  </section>
                  <section>
                      <h2>Emulating the video</h2>
