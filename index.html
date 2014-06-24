@@ -31,17 +31,51 @@
 			}
 		</script>
         <style>
+@font-face {
+    font-family: 'Teletext';
+    src: url('teletext.ttf');
+}
+.reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+  font-family: "Teletext", Impact, sans-serif;
+}
+table.horizontal {
+    border-collapse: collapse;
+}
 table.horizontal th, table.horizontal td {
+    border: 1px solid grey;
     text-align: center;
     width: 6em;
 }
+table.horizontal th:nth-child(even) {
+    background-color: #444;
+}
+table.horizontal th:nth-child(odd) {
+    background-color: #222;
+}
+table.horizontal td:nth-child(even) {
+    background-color: #444;
+}
+table.horizontal td:nth-child(odd) {
+    background-color: #222;
+}
 
+table.memmap {
+    width: 100%;
+}
 table.memmap th {
     width: 6em;
     font-family: monospace;
     font-weight: normal;
     text-align:center;
 }
+table.memmap td {
+    vertical-align:middle;
+}
+table.memmap tr.osrom { background-color: #222244; }
+table.memmap tr.hw { background-color: #444433; }
+table.memmap tr.rom1 { background-color: #222233; }
+table.memmap tr.ram1 { background-color: #223322; }
+table.memmap tr.ram2 { background-color: #283828; }
         </style>
 		<!--[if lt IE 9]>
 		<script src="lib/js/html5shiv.js"></script>
@@ -54,8 +88,9 @@ table.memmap th {
 
 			<div class="slides">
                 <section>
-					<h1>Emulating a BBC Micro in Javascript</h1>
-					<h3>Trying to recapture a lost youth</h3>
+                    <h1>Emulating a BBC Micro</h1>
+                    <h2>in Javascript</h2>
+					<h5>Trying to recapture a lost youth</h3>
 					<p>
 						<small>Matt Godbolt</small>
 					</p>
@@ -92,11 +127,20 @@ table.memmap th {
                             <li>32KB RAM / 32KB ROM</li>
                             <li>Memory-mapped hardware:
                             <ul>
-                                <li>Video circuitry</li>
+                                <li>Video</li>
                                 <li>Sound</li>
-                                <li>Tape</li>
-                                <li>Floppy disc</li>
-                                <li>ADC</li>
+                                <li>Tape / floppy disc</li>
+                                <li>ADC / Econet / 2nd processor</li>
+                            </ul>
+                            </li>
+                            <li>Video hardware
+                            <ul>
+                                <li>"Teletext" character map</li>
+                                <li>Various bitmap modes up
+                                <ul>
+                                    <li>640x256 in 2-colour</li>
+                                    <li>160x256 in 8-colour</li>
+                                </ul>
                             </ul>
                             </li>
                         </ul>
@@ -183,6 +227,7 @@ d0 f4       BNE lp          ; and re-loop (NB falling off here would mean &gt; 6
 function readbyte(addr) { /* ... */ }
 var a = 0, x = 0, y = 0, s = 0, p = {c:false, z:false /* ... */};
 var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
+
 while (true) {
     var opcode = readbyte(pc); pc++;
     switch (opcode) {
@@ -252,12 +297,13 @@ case 0xb1: /*LDA (xx),Y*/
                          <h2>Memory</h2>
                          <table class="memmap">
                              <tbody>
-                             <tr><th>0xffff</th></tr>
-                             <tr><th>&uarr;<br>0xff00</th><td>256 bytes OS ROM</td></tr>
-                             <tr><th>&uarr;<br>0xfe00</th><td>256 bytes hardware</td></tr>
-                             <tr><th>&uarr;<br>0xc000</th><td>15.5KB OS ROM</td></tr>
-                             <tr><th>&uarr;<br>0x8000</th><td>16KB Paged ROM</td></tr>
-                             <tr><th>&uarr;<br>0x0000</th><td>32KB RAM</td></tr>
+                             <tr><th>0x10000</th></tr>
+                             <tr class="osrom"><th>&uarr;<br>0xff00</th><td>256 bytes OS ROM</td></tr>
+                             <tr class="hw"><th>&uarr;<br>0xfe00</th><td>256 bytes hardware</td></tr>
+                             <tr class="osrom"><th>&uarr;<br>&uarr;<br>0xc000</th><td>15.5KB OS ROM</td></tr>
+                             <tr class="rom1"><th>&uarr;<br>&uarr;<br>0x8000</th><td>16KB Paged ROM</td></tr>
+                             <tr class="ram2"><th>&uarr;<br>&uarr;<br>0x4000</th><td>16KB RAM</td></tr>
+                             <tr class="ram1"><th>&uarr;<br>&uarr;<br>0x0000</th><td>16KB RAM</td></tr>
                              </tbody>
                          </table>
                      </section>
@@ -322,8 +368,8 @@ function updateKeys() {
                              <li>Source of interrupts</li>
                              <li>BBC has two VIAs:
                              <ul>
-                                 <li>System: keyboard, sound, LEDs, system timers</li>
-                                 <li>User: printer, user, mouse, user timers</li>
+                                 <li>$fe40-$fe4f System: keyboard, sound, LEDs, system timers</li>
+                                 <li>$fe60-$fe6f User: printer, user, mouse, user timers</li>
                              </ul>
                              </li>
                              <li>Each VIA has two timers</li>
@@ -350,21 +396,168 @@ function tickTimer1() {
 }
                          </code></pre>
                      </section>
+                     <section>
+                         <h2>Video interface</h2>
+                         <ul>
+                             <li>Video has several registers</li>
+                             <li>$fe40 - register select</li>
+                             <li>$fe41 - register value</li>
+                         </ul>
+                     </section>
                  </section>
                  <section>
-                     <h2>Interrupts &amp; Timing</h2>
-                     <ul>
-                         <li></li>
-                     </ul>
+                     <section>
+                         <h2>Interrupts &amp; Timing</h2>
+                         <ul>
+                             <li>2MHz clock</li>
+                             <li>So emulate 2,000,000 per second</li>
+                             <li>Intructions take different times:
+                                 <pre><code class="asm6502" data-trim>
+LDA #42         ; 2 cycles
+LDA &amp;70         ; 3 cycles
+LDA &amp;1234       ; 4 cycles
+LDA (&amp;70), Y    ; 5-6 cycles
+INC &amp;1234, X    ; 7 cycles
+                         </code></pre>
+                             </li>
+                             <li>Interrupts checked at instruction end</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>Our code now looks like</h2>
+                     <pre><code class="javascript" data-trim>
+function runCpu(clocks) {
+    while (clocks &gt; 0) {
+        var opcode = readbyte(pc); pc++;
+        switch (opcode) {
+            case 0xb1: /*LDA (xx),Y*/ 
+                addr = readbyte(pc); pc++; 
+                addrNonCarry = (addr &amp; 0xff00) | ((addr + y) &amp; 0xff);
+                a = readbyte(addr + y); 
+                p.z = !!a;
+                p.n = !!(a &amp; 0x80);
+                if (addr !== addrNonCarry) clocks -= 6;
+                else clocks -= 5;
+                break;
+        }
+        if (irqFlag &amp;&amp; p.i == false) {
+            // ...
+            p.i = true;
+            pc = irqHandler;
+        }
+    }
+}
+                     </code></pre>
+                     </section>
+                     <section>
+                         <h2>But!</h2>
+                         <ul>
+                             <li>More complicated than that!</li>
+                             <li class="fragment">Mid-instruction reads...</li>
+                             <li class="fragment">Multiple reads and redundant writes</li>
+                             <li class="fragment">IRQs actually checked on penultimate cycle</li>
+                             <li class="fragment">1MHz bus cycle-stretching</li>
+                             <li class="fragment">...probably too much to cover here</li>
+                         </ul>
+                     </section>
+                 </section>
+                 <section>
+                     <section>
+                         <h2>Real implementation</h2>
+                         <ul>
+                             <li>Many similar opcodes</li>
+                             <li class="fragment">Similar addressing modes</li>
+                             <li class="fragment">...code generate!</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>High-level code - 'op'</h2>
+                         <pre><code class="javascript" data-trim>
+function getOp(op) {
+    switch (op) {
+        case "NOP": return { op: [] }
+        case "LDA": return { op: ["cpu.a = REG", "cpu.setzn(REG);"], read: true }
+        case "STA": return { op: ["REG = cpu.a"], write: true }
+        case "LDX": return { op: ["cpu.x = REG", "cpu.setzn(REG);"], read: true }
+        //...
+        case "INC": return {
+            op: ["REG = (REG + 1) &amp; 0xff;", "cpu.setzn(REG);" ],
+            read: true, write: true
+        };
+        //...
+    }
+}
+                         </pre></code>
+                     </section>
+                     <section>
+                         <h2>High-level code - addressing mode</h2>
+                         <pre><code class="javascript" data-trim>
+function gen(op, addrMode) {
+    var ig = InstructionGen();
+    var op = getOp(op);
+    switch (addrMode) {
+        case "abs":
+            ig.tick(3);
+            ig.append("var addr = cpu.getw();");
+            if (op.read) {
+                ig.readOp("addr", "REG");
+                if (op.write) ig.writeOp("addr", "REG"); // spurious write
+            }
+            ig.append(op.op);
+            if (op.write ig.writeOp("addr", "REG");
+            return ig.render();
+        //...
+    }
+}
+                         </pre></code>
+                     </section>
+                     <section>
+                         <h2>InstructionGen</h2>
+                         <ul>
+                             <li>Knows about weird memory rules</li>
+                             <li>Schedules "ticks"</li>
+                             <li>Optimizes</li>
+                             <li>Renders as Javascript source</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>INC $1234</h2>
+                         <pre><code class="javascript" data-trim>
+var REG = 0|0;
+var addr = cpu.getw();
+cpu.polltimeAddr(4, addr);
+REG = cpu.readmem(addr);
+cpu.polltimeAddr(1, addr);
+cpu.checkInt();
+cpu.writemem(addr, REG);
+REG = (REG + 1) &amp; 0xff;
+cpu.setzn(REG);
+cpu.polltimeAddr(1, addr);
+cpu.writemem(addr, REG);
+                         </code></pre>
+                     </section>
                  </section>
                  <section>
                      <h2>Emulating the video</h2>
                  </section>
                  <section>
-                     <h2>Moo</h2>
-                     pic of elite thing from Bell
+                     <section>
+                         <h2>Live demo!</h2>
+                     </section>
+                     <section>
+                         <h2>Other stuff</h2>
+                         <ul>
+                             <li>Undocumented opcodes</li>
+                             <li>Exact timing</li>
+                             <li><a href="http://localhost/6502/expert.html?a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100">People are more crazy than me...</a></li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>Worth it!</h2>
+                         <img class="stretch" src="tt26.jpg">
+                     </section>
                  </section>
-			</div>
+             </div>
 		</div>
 
 		<script src="lib/js/head.min.js"></script>
