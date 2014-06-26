@@ -38,6 +38,10 @@
 .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
   font-family: "Teletext", Impact, sans-serif;
 }
+.reveal .teletext {
+  font-family: "Teletext", Impact, sans-serif;
+}
+
 table.horizontal {
     border-collapse: collapse;
 }
@@ -135,7 +139,7 @@ table.memmap tr.ram2 { background-color: #283828; }
                             </li>
                             <li>Video hardware
                             <ul>
-                                <li>"Teletext" character map</li>
+                                <li>"<span class="teletext">Teletext</span>" character map</li>
                                 <li>Various bitmap modes up
                                 <ul>
                                     <li>640x256 in 2-colour</li>
@@ -167,7 +171,7 @@ table.memmap tr.ram2 { background-color: #283828; }
                  <section>
                      <h2>Instructions</h2>
                      <pre><code class="asm6502" data-trim>
-LDA / STA / STX etc ; load A / store A
+LDA / STA / LDX etc ; load A / store A / load X / etc
 TAX / TXA etc       ; transfer A to X
 PHA / PLA           ; push A / pull A
 CMP                 ; compare with A
@@ -192,7 +196,7 @@ b9 34 12    LDA $1234, Y        ; A = readmem(0x1234 + Y)
 
 b1 70       LDA ($70), Y        ; t1 = readmem(0x70)
                                 ; t2 = readmem(0x71)
-                                ; A = readmem((t1 | (21&lt;&lt;8)) + Y)
+                                ; A = readmem((t1 | (t2&lt;&lt;8)) + Y)
 
 b5 70       LDA $70, X          ; A = readmem(0x70 + X)
 a1 70       LDA ($70, X)        ; t1 = readmem(0x70 + X)
@@ -231,20 +235,18 @@ var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
 while (true) {
     var opcode = readbyte(pc); pc++;
     switch (opcode) {
-        //...
         case 0x69: /*ADC #xx*/ a += readbyte(pc); pc++; break;
         case 0x98: /*TYA*/ a = y; break;
         case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
         case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
         case 0xa9: /*LDA #xx*/ a = readbyte(pc); pc++; break;
         case 0xb1: /*LDA (xx),Y*/ 
-            addr = readbyte(pc); pc++; 
+            zp = readbyte(pc); pc++; 
+            addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
             a = readbyte(addr + y); 
             break;
-        //...
         case 0xe8: /*INX*/ x = x + 1; break;
-    }
-}
+        // and so on...
                      </code></pre>
                  </section>
                  <section>
@@ -284,7 +286,8 @@ case 0x69: /*ADC #xx*/
     p.n = !!(a &amp; 0x80);
     break;
 case 0xb1: /*LDA (xx),Y*/ 
-    addr = readbyte(pc); pc++; 
+    zp = readbyte(pc); pc++; 
+    addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
     a = readbyte(addr + y); 
     p.z = !!a;
     p.n = !!(a &amp; 0x80);
@@ -295,7 +298,7 @@ case 0xb1: /*LDA (xx),Y*/
                  <section>
                      <section>
                          <h2>Memory</h2>
-                         <table class="memmap">
+                         <table class="fragment memmap">
                              <tbody>
                              <tr><th>0x10000</th></tr>
                              <tr class="osrom"><th>&uarr;<br>0xff00</th><td>256 bytes OS ROM</td></tr>
@@ -399,7 +402,13 @@ function tickTimer1() {
                      <section>
                          <h2>Video interface</h2>
                          <ul>
-                             <li>Video has several registers</li>
+                             <li>Pixel generator shares RAM with CPU</li>
+                             <li>Video has 12 registers
+                             <ul>
+                                 <li>Screen mem addr</li>
+                                 <li>Number of colours</li>
+                                 <li>Resolution, etc</li>
+                             </ul></li>
                              <li>$fe40 - register select</li>
                              <li>$fe41 - register value</li>
                          </ul>
@@ -431,19 +440,18 @@ function runCpu(clocks) {
         var opcode = readbyte(pc); pc++;
         switch (opcode) {
             case 0xb1: /*LDA (xx),Y*/ 
-                addr = readbyte(pc); pc++; 
+                zp = readbyte(pc); pc++; 
+                addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
+                a = readbyte(addr + y); 
                 addrNonCarry = (addr &amp; 0xff00) | ((addr + y) &amp; 0xff);
                 a = readbyte(addr + y); 
-                p.z = !!a;
-                p.n = !!(a &amp; 0x80);
-                if (addr !== addrNonCarry) clocks -= 6;
-                else clocks -= 5;
+                p.z = !!a; p.n = !!(a &amp; 0x80);
+                clocks -= (addr !== addrNonCarry) ? 6 : 5;
                 break;
+            // ...and other opcodes...
         }
         if (irqFlag &amp;&amp; p.i == false) {
-            // ...
-            p.i = true;
-            pc = irqHandler;
+            pc = irqHandler;  // ...and much more...
         }
     }
 }
@@ -467,8 +475,21 @@ function runCpu(clocks) {
                          <ul>
                              <li>Many similar opcodes</li>
                              <li class="fragment">Similar addressing modes</li>
-                             <li class="fragment">...code generate!</li>
+                             <li class="fragment">Code generate from disassembly table:</li>
                          </ul>
+                     <pre class="fragment"><code class="javascript" data-trim>
+var opcodes6502 = {
+    0x00: "BRK",
+    0x01: "ORA (,x)",
+    0x03: "SLO (,x)",
+    0x04: "NOP zp",
+    0x05: "ORA zp",
+    // skipping a few...
+    0xFD: "SBC abs,x",
+    0xFE: "INC abs,x",
+    0xFF: "ISB abs,x",
+};
+                     </code></pre>
                      </section>
                      <section>
                          <h2>High-level code - 'op'</h2>
@@ -521,7 +542,7 @@ function gen(op, addrMode) {
                          </ul>
                      </section>
                      <section>
-                         <h2>INC $1234</h2>
+                         <h2>INC abs</h2>
                          <pre><code class="javascript" data-trim>
 var REG = 0|0;
 var addr = cpu.getw();
@@ -538,23 +559,88 @@ cpu.writemem(addr, REG);
                      </section>
                  </section>
                  <section>
-                     <h2>Emulating the video</h2>
+                     <section>
+                         <h2>Emulating the video</h2>
+                         <ul class="fragment">
+                             <li>Co-routine with processor</li>
+                             <li>Every clock cycle:
+                             <ul><li>reads one byte of RAM</li>
+                                 <li>generate 8 TV pixels based on settings</li>
+                             </ul></li>
+                             <li>Generate IRQs at top of screen</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>Something like</h2>
+                         <pre><code class="javascript" data-trim>
+scrx += 8;
+var b = readbyte(addr++);
+var offset = scry * 1280 + scrx;
+for (var i = 0; i &lt; 8; ++i) {
+    fb32[offset + i] = convertPixel(b, i);
+}
+if (scrx &gt;= curEndPos) {
+    scrx = curStartPos;
+    scry ++;
+    if (scry &gt;= numLines) {
+        scry = 0;
+        generateIrq();
+    }
+}
+                         </code></pre>
+                     </section>
+                     <section>
+                         <h2>Image processing</h2>
+                         <ul>
+                             <li>Real BBC usually hooked to a TV</li>
+                             <li>Blur image on blit to canvas</li>
+                             <li>TODO: interlace...</li>
+                         </ul>
+                     </section>
+                 </section>
+                 <section>
+                     <h2>Sound</h2>
+                     <ul>
+                         <li>Same chip as in the Sega Master System</li>
+                         <li>Another coroutine</li>
+                     </ul>
+                 </section>
+                 <section>
+                     <h2>Live demo!</h2>
                  </section>
                  <section>
                      <section>
-                         <h2>Live demo!</h2>
+                         <h2>Misc stuff</h2>
                      </section>
                      <section>
-                         <h2>Other stuff</h2>
+                         <h2>Performance</h2>
                          <ul>
-                             <li>Undocumented opcodes</li>
+                             <li><code>switch</code> problems</li>
+                             <li>Dynamic dispatch</li>
+                             <li>Loop unrolloing for video</li>
+                             <li>Uint32Array for screen</li>
+                         </ul>
+                     </section>
+                     <section>
+                         <h2>More stuff</h2>
+                         <ul>
                              <li>Exact timing</li>
+                             <li>Undocumented opcodes</li>
                              <li><a href="http://localhost/6502/expert.html?a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100">People are more crazy than me...</a></li>
                          </ul>
                      </section>
                      <section>
                          <h2>Worth it!</h2>
                          <img class="stretch" src="tt26.jpg">
+                         <p>Also finally hacked Lunar Jetman</p>
+                     </section>
+                     <section>
+                         <h2>Any questions?</h2>
+                         <ul>
+                             <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
+                             <li>Source on github</li>
+                             <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
+                         </ul>
                      </section>
                  </section>
              </div>
