@@ -228,18 +228,18 @@ d0 f4       BNE lp          ; and re-loop (NB falling off here would mean &gt; 6
                  <section>
                      <h2>Emulating the 6502</h2>
                      <pre><code class="javascript" data-trim>
-function readbyte(addr) { /* ... */ }
 var a = 0, x = 0, y = 0, s = 0, p = {c:false, z:false /* ... */};
+function readbyte(addr) { /* ... */ }
 var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
 
 while (true) {
     var opcode = readbyte(pc); pc++;
     switch (opcode) {
-        case 0x69: /*ADC #xx*/ a += readbyte(pc); pc++; break;
-        case 0x98: /*TYA*/ a = y; break;
-        case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
-        case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
         case 0xa9: /*LDA #xx*/ a = readbyte(pc); pc++; break;
+        case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
+        case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
+        case 0x98: /*TYA*/ a = y; break;
+        case 0x69: /*ADC #xx*/ a += readbyte(pc); pc++; break;
         case 0xb1: /*LDA (xx),Y*/ 
             zp = readbyte(pc); pc++; 
             addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
