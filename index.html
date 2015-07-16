@@ -122,7 +122,11 @@
             <h5>Trying to recapture a lost youth</h5>
 
             <p>
-                <small>Matt Godbolt</small>
+                <small><a href="mailto:matt@godbolt.org">Matt Godbolt</a></small>
+                <br>
+                <small>Hit Escape to see all slides, space for next<br>
+                    Arrow keys also work
+                </small>
             </p>
         </section>
         <section>
@@ -359,6 +363,14 @@ case 0xb1: /*LDA (xx),Y*/
                         <td>256 bytes hardware</td>
                     </tr>
                     <tr class="osrom">
+                        <th>&uarr;<br>0xfd00</th>
+                        <td>256 bytes ROM</td>
+                    </tr>
+                    <tr class="hw">
+                        <th>&uarr;<br>0xfc00</th>
+                        <td>256 bytes hardware</td>
+                    </tr>
+                    <tr class="osrom">
                         <th>&uarr;<br>&uarr;<br>0xc000</th>
                         <td>15.5KB OS ROM</td>
                     </tr>
@@ -388,7 +400,8 @@ roms[15] = load("BASIC");
 function readmem(addr) {
     if (addr &lt; 0x8000) return ram[addr];
     if (addr &lt; 0xc000) return roms[romsel][addr - 0x8000];
-    if (addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00) return readhw(addr);
+    if ((addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00)
+        || (addr &gt;= 0xfc00 &amp;&amp; addr &lt; 0xfd00)) return readhw(addr);
     return os[addr - 0xc000];
 }
 
@@ -477,8 +490,8 @@ function tickTimer1() {
                             <li>Resolution, etc</li>
                         </ul>
                     </li>
-                    <li>$fe40 - register select</li>
-                    <li>$fe41 - register value</li>
+                    <li>$fe00 - register select</li>
+                    <li>$fe01 - register value</li>
                 </ul>
             </section>
         </section>
@@ -695,7 +708,8 @@ if (scrx &gt;= curEndPos) {
                     <li>Exact timing</li>
                     <li>Undocumented opcodes</li>
                     <li>
-                        <a href="http://visual6502.org/JSSim/expert.html?steps=88&a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100" target="_blank">People
+                        <a href="http://visual6502.org/JSSim/expert.html?steps=88&a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100"
+                           target="_blank">People
                             are more crazy than me...</a></li>
                 </ul>
             </section>
