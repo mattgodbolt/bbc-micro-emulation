@@ -123,10 +123,6 @@
 
             <p>
                 <small><a href="mailto:matt@godbolt.org">Matt Godbolt</a></small>
-                <br>
-                <small>Hit Escape to see all slides, space for next<br>
-                    Arrow keys also work
-                </small>
             </p>
         </section>
         <section>
@@ -137,20 +133,6 @@
                     <li>BBC Computer Literacy Project</li>
                     <li>1981</li>
                 </ul>
-            </section>
-            <section>
-                <img class="stretch" src="BBC_Micro_Elite_screenshot.png">
-            </section>
-            <section>
-                <img class="stretch" src="474053-exile-bbc-micro-screenshot-just-three-of-the-many-different.gif">
-            </section>
-            <section>
-                <h2>Why me?</h2>
-                <img class="stretch" src="AcornUser1.png">
-            </section>
-            <section>
-                <h2>Why me?</h2>
-                <img class="stretch" src="AcornUser2.png">
             </section>
         </section>
         <section>
@@ -179,60 +161,24 @@
                     </li>
                 </ul>
             </section>
-            <section>
-                <h2>What's inside?</h2>
-                <img class="stretch" src="circuit-board.jpeg">
-            </section>
         </section>
         <section>
             <h2>What's in a 6502</h2>
             <ul>
-                <li>5 8-bit registers:
+                <li>3 general 8-bit registers:
                     <ul>
-                        <li>A - accumulator</li>
-                        <li>X - index register</li>
-                        <li>Y - index register</li>
-                        <li>P - flags register</li>
-                        <li>S - stack pointer</li>
+                        <li><code>A</code> - accumulator</li>
+                        <li><code>X</code> - index register</li>
+                        <li><code>Y</code> - index register</li>
+                    </ul>
+                </li>
+                <li>2 special 8-bit registers
+                    <ul>
+                        <li><code>P</code> - flags register</li>
+                        <li><code>S</code> - stack pointer</li>
                     </ul>
                 <li>16-bit program counter</li>
             </ul>
-        </section>
-        <section>
-            <h2>Instructions</h2>
-                     <pre><code class="asm6502" data-trim>
-LDA / STA / LDX etc ; load A / store A / load X / etc
-TAX / TXA etc       ; transfer A to X
-PHA / PLA           ; push A / pull A
-CMP                 ; compare with A
-ADC / SBC           ; add/subtract with carry
-CLC / SEC           ; clear / set carry
-JMP                 ; jump
-BEQ / BNE / BCC /   ; branch if equal / not equal / carry clear
-  BCS / BMI etc     ; / carry set / minus etc
-JSR / RTS           ; jump to subroutine / return from subroutine
-                     </code></pre>
-        </section>
-        <section>
-            <h2>Addressing modes</h2>
-                     <pre><code class="asm6502" data-trim>
-a9 20       LDA #32             ; A = 32
-
-a5 70       LDA $70             ; A = readmem(0x70)
-
-ad 34 12    LDA $1234           ; A = readmem(0x1234)
-bd 34 12    LDA $1234, X        ; A = readmem(0x1234 + X)
-b9 34 12    LDA $1234, Y        ; A = readmem(0x1234 + Y)
-
-b1 70       LDA ($70), Y        ; t1 = readmem(0x70)
-                                ; t2 = readmem(0x71)
-                                ; A = readmem((t1 | (t2&lt;&lt;8)) + Y)
-
-b5 70       LDA $70, X          ; A = readmem(0x70 + X)
-a1 70       LDA ($70, X)        ; t1 = readmem(0x70 + X)
-                                ; t2 = readmem(0x71 + X)
-                                ; A = readmem(t1 | (t2&lt;&lt;8))
-                     </code></pre>
         </section>
         <section>
             <h2>Example</h2>
@@ -290,84 +236,23 @@ while (true) {
         </section>
         <section>
             <section>
-                <h2>Flags</h2>
-                <table class="horizontal">
-                    <thead>
-                    <tr>
-                        <th>7</th>
-                        <th>6</th>
-                        <th>5</th>
-                        <th>4</th>
-                        <th>3</th>
-                        <th>2</th>
-                        <th>1</th>
-                        <th>0</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Negative</td>
-                        <td>oVerflow</td>
-                        <td>-</td>
-                        <td>-</td>
-                        <td>Decimal</td>
-                        <td>Interrupt<br>disable</td>
-                        <td>Zero</td>
-                        <td>Carry
-                    </tr>
-                    </tbody>
-                </table>
-                <br>
-                <ul class="fragment">
-                    <li>Z &amp; N set on ALU/load instruction</li>
-                    <li>C set by shifts &amp; arithmetic</li>
-                    <li>V set by arithmetic</li>
-                    <li>D, V, C and I controlled by special instructions</li>
-                </ul>
-            </section>
-            <section>
-                <h2>So now we have:</h2>
-                         <pre><code class="javascript" data-trim>
-case 0x69: /*ADC #xx*/
-    a += readbyte(pc); pc++;
-    if (p.c) a++; // previous carry
-    p.c = a &gt; 0xff; // new carry
-    a &amp;= 0xff;
-    p.z = !!a;
-    p.n = !!(a &amp; 0x80);
-    break;
-case 0xb1: /*LDA (xx),Y*/
-    zp = readbyte(pc); pc++;
-    addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
-    a = readbyte(addr + y);
-    p.z = !!a;
-    p.n = !!(a &amp; 0x80);
-    break;
-                         </code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
                 <h2>Memory</h2>
-                <table class="fragment memmap">
+                <table class="memmap">
                     <tbody>
-                    <tr>
-                        <th>0x10000</th>
-                    </tr>
                     <tr class="osrom">
-                        <th>&uarr;<br>0xff00</th>
+                        <th>0xff00</th>
                         <td>256 bytes OS ROM</td>
                     </tr>
                     <tr class="hw">
-                        <th>&uarr;<br>0xfe00</th>
+                        <th>0xfe00</th>
                         <td>256 bytes hardware</td>
                     </tr>
                     <tr class="osrom">
-                        <th>&uarr;<br>0xfd00</th>
-                        <td>256 bytes ROM</td>
+                        <th>0xfd00</th>
+                        <td>256 bytes OS ROM</td>
                     </tr>
                     <tr class="hw">
-                        <th>&uarr;<br>0xfc00</th>
+                        <th>0xfc00</th>
                         <td>256 bytes hardware</td>
                     </tr>
                     <tr class="osrom">
@@ -414,285 +299,9 @@ function writemem(addr, b) {
             </section>
         </section>
         <section>
-            <section>
-                <h2>Hardware</h2>
-                <ul>
-                    <li>Keyboard</li>
-                    <li>I/O &amp; Timers</li>
-                    <li>Video circuitry</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Keyboard</h2>
-                <img class="stretch" src="KeyboardCircuitDiagram.jpeg">
-            </section>
-            <section>
-                <h2>Scanning</h2>
-                         <pre><code class="javascript" data-trim>
-function updateKeys() {
-    if (freescanning) {
-        for (i = 0; i &lt; 10; ++i) {
-            for (j = 1; j &lt; 8; ++j) if (keys[i][j]) setca2();
-        }
-    } else {
-        for (j = 1; j &lt; 8; ++j) if (keys[curCol[j]) setca2();
-    }
-}
-                         </code></pre>
-            </section>
-            <section>
-                <h2>I/O &amp; Timers</h2>
-                <img class="stretch" src="6522BlockDiagram.jpeg">
-            </section>
-            <section>
-                <h2>6522 Versatile Interface Adapter</h2>
-                <ul>
-                    <li>Interface with peripherals at 1MHz</li>
-                    <li>Source of interrupts</li>
-                    <li>BBC has two VIAs:
-                        <ul>
-                            <li>$fe40-$fe4f System: keyboard, sound, LEDs, system timers</li>
-                            <li>$fe60-$fe6f User: printer, user, mouse, user timers</li>
-                        </ul>
-                    </li>
-                    <li>Each VIA has two timers</li>
-                    <li>Timers can count down, latch, cause IRQ</li>
-                    <li>Shift registers for serial</li>
-                </ul>
-            </section>
-            <section>
-                <h2>One timer</h2>
-                         <pre><code class="javascript" data-trim>
-function tickTimer1() {
-    count--;
-    if (count == -3 &amp;&amp; !suppressed) {
-        // Timer fired!
-        timerFlags |= T1HIT; // mark we hit in timer flags
-        // Send an IRQ if needed
-        if (irqEnabled &amp; timerFlags)
-            cpu.interrupt();
-        // If we're in one-shot mode, prevent further IRQs
-        if (!(configFlags &amp; 0x40)) suppressed = true;
-    }
-    // Reload timer value
-    if (count == 3) count += latch + 4;
-}
-                         </code></pre>
-            </section>
-            <section>
-                <h2>Video interface</h2>
-                <ul>
-                    <li>Pixel generator shares RAM with CPU</li>
-                    <li>Video has 12 registers
-                        <ul>
-                            <li>Screen mem addr</li>
-                            <li>Number of colours</li>
-                            <li>Resolution, etc</li>
-                        </ul>
-                    </li>
-                    <li>$fe00 - register select</li>
-                    <li>$fe01 - register value</li>
-                </ul>
-            </section>
+            <h2><a href="https://bbc.godbolt.org/?autoboot" target="_blank">Live demo!</a></h2>
         </section>
         <section>
-            <section>
-                <h2>Interrupts &amp; Timing</h2>
-                <ul>
-                    <li>2MHz clock</li>
-                    <li>So emulate 2,000,000 cycles per second</li>
-                    <li>Intructions take different times:
-                                 <pre><code class="asm6502" data-trim>
-LDA #42         ; 2 cycles
-LDA &amp;70         ; 3 cycles
-LDA &amp;1234       ; 4 cycles
-LDA (&amp;70), Y    ; 5-6 cycles
-INC &amp;1234, X    ; 7 cycles
-                         </code></pre>
-                    </li>
-                    <li>Interrupts checked at instruction end</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Our code now looks like</h2>
-                     <pre><code class="javascript" data-trim>
-function runCpu(clocks) {
-    while (clocks &gt; 0) {
-        var opcode = readbyte(pc); pc++;
-        switch (opcode) {
-            case 0xb1: /*LDA (xx),Y*/
-                zp = readbyte(pc); pc++;
-                addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
-                a = readbyte(addr + y);
-                p.z = !!a; p.n = !!(a &amp; 0x80);
-                clocks -= 5;
-                break;
-            // ...and other opcodes...
-        }
-        if (irqFlag &amp;&amp; p.i == false) {
-            pc = irqHandler;  // ...and much more...
-        }
-    }
-}
-                     </code></pre>
-            </section>
-            <section>
-                <h2>But!</h2>
-                <ul>
-                    <li>More complicated than that!</li>
-                    <li class="fragment">Mid-instruction reads...</li>
-                    <li class="fragment">Multiple reads and redundant writes</li>
-                    <li class="fragment">IRQs actually checked on penultimate cycle</li>
-                    <li class="fragment">1MHz bus cycle-stretching</li>
-                    <li class="fragment">...probably too much to cover here</li>
-                </ul>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Real implementation</h2>
-                <ul>
-                    <li>Many similar opcodes</li>
-                    <li class="fragment">Similar addressing modes</li>
-                    <li class="fragment">Code generate from disassembly table:</li>
-                </ul>
-                     <pre class="fragment"><code class="javascript" data-trim>
-var opcodes6502 = {
-    0x00: "BRK",
-    0x01: "ORA (,x)",
-    0x03: "SLO (,x)",
-    0x04: "NOP zp",
-    0x05: "ORA zp",
-    // skipping a few...
-    0xFD: "SBC abs,x",
-    0xFE: "INC abs,x",
-    0xFF: "ISB abs,x",
-};
-                     </code></pre>
-            </section>
-            <section>
-                <h2>High-level code - 'op'</h2>
-                         <pre><code class="javascript" data-trim>
-function getOp(op) {
-    switch (op) {
-        case "NOP": return { op: [] }
-        case "LDA": return { op: ["cpu.a = REG", "cpu.setzn(REG);"], read: true }
-        case "STA": return { op: ["REG = cpu.a"], write: true }
-        case "LDX": return { op: ["cpu.x = REG", "cpu.setzn(REG);"], read: true }
-        //...
-        case "INC": return {
-            op: ["REG = (REG + 1) &amp; 0xff;", "cpu.setzn(REG);" ],
-            read: true, write: true
-        };
-        //...
-    }
-}
-                         </code></pre>
-            </section>
-            <section>
-                <h2>High-level code - addressing mode</h2>
-                         <pre><code class="javascript" data-trim>
-function gen(op, addrMode) {
-    var ig = InstructionGen();
-    var op = getOp(op);
-    switch (addrMode) {
-        case "abs":
-            ig.tick(3);
-            ig.append("var addr = cpu.getw();");
-            if (op.read) {
-                ig.readOp("addr", "REG");
-                if (op.write) ig.writeOp("addr", "REG"); // spurious write
-            }
-            ig.append(op.op);
-            if (op.write ig.writeOp("addr", "REG");
-            return ig.render();
-        //...
-    }
-}
-                         </code></pre>
-            </section>
-            <section>
-                <h2>InstructionGen</h2>
-                <ul>
-                    <li>Knows about weird memory rules</li>
-                    <li>Schedules "ticks"</li>
-                    <li>Optimizes</li>
-                    <li>Renders as Javascript source</li>
-                </ul>
-            </section>
-            <section>
-                <h2>INC abs</h2>
-                         <pre><code class="javascript" data-trim>
-var REG = 0|0;
-var addr = cpu.getw();
-cpu.polltimeAddr(4, addr);
-REG = cpu.readmem(addr);
-cpu.polltimeAddr(1, addr);
-cpu.checkInt();
-cpu.writemem(addr, REG);
-REG = (REG + 1) &amp; 0xff;
-cpu.setzn(REG);
-cpu.polltimeAddr(1, addr);
-cpu.writemem(addr, REG);
-                         </code></pre>
-            </section>
-        </section>
-        <section>
-            <section>
-                <h2>Emulating the video</h2>
-                <ul class="fragment">
-                    <li>Co-routine with processor</li>
-                    <li>Every clock cycle:
-                        <ul>
-                            <li>reads one byte of RAM</li>
-                            <li>generate 8 TV pixels based on settings</li>
-                        </ul>
-                    </li>
-                    <li>Generate IRQs at top of screen</li>
-                </ul>
-            </section>
-            <section>
-                <h2>Something like</h2>
-                         <pre><code class="javascript" data-trim>
-scrx += 8;
-var b = readbyte(addr++);
-var offset = scry * 1280 + scrx;
-for (var i = 0; i &lt; 8; ++i) {
-    fb32[offset + i] = convertPixel(b, i);
-}
-if (scrx &gt;= curEndPos) {
-    scrx = curStartPos;
-    scry ++;
-    if (scry &gt;= numLines) {
-        scry = 0;
-        generateIrq();
-    }
-}
-                         </code></pre>
-            </section>
-            <section>
-                <h2>Image processing</h2>
-                <ul>
-                    <li>Real BBC usually hooked to a TV</li>
-                    <li>Blur image on blit to canvas</li>
-                    <li>Interlace</li>
-                </ul>
-            </section>
-        </section>
-        <section>
-            <h2>Sound</h2>
-            <ul>
-                <li>Same chip as in the Sega Master System</li>
-                <li>Another coroutine</li>
-            </ul>
-        </section>
-        <section>
-            <h2><a href="http://bbc.godbolt.org/?autoboot" target="_blank">Live demo!</a></h2>
-        </section>
-        <section>
-            <section>
-                <h2>Misc stuff</h2>
-            </section>
             <section>
                 <h2>Performance</h2>
                 <ul>
@@ -703,30 +312,18 @@ if (scrx &gt;= curEndPos) {
                 </ul>
             </section>
             <section>
-                <h2>More stuff</h2>
-                <ul>
-                    <li>Exact timing</li>
-                    <li>Undocumented opcodes</li>
-                    <li>
-                        <a href="http://visual6502.org/JSSim/expert.html?steps=88&a=0&d=a000a200b170f009c8d0f9e671e8d0f49860&a=70&d=d000&a=d000&a=d0&d=414100"
-                           target="_blank">People
-                            are more crazy than me...</a></li>
-                </ul>
-            </section>
-            <section>
                 <h2>Worth it!</h2>
                 <img class="stretch" src="tt26.jpg">
 
                 <p>Also finally hacked Lunar Jetman</p>
             </section>
-            <section>
-                <h2>Any questions?</h2>
-                <ul>
-                    <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
-                    <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github</a></li>
-                    <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
-                </ul>
-            </section>
+        </section>
+        <section>
+            <h2>Any questions?</h2>
+            <ul>
+                <li><a href="https://bbc.godbolt.org/">https://bbc.godbolt.org/</a></li>
+                <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github</a></li>
+            </ul>
         </section>
     </div>
 </div>
