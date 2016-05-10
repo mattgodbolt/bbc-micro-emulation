@@ -81,6 +81,10 @@
             text-align: center;
         }
 
+        table.memmap .addr {
+            font-family: monospace;
+        }
+
         table.memmap td {
             vertical-align: middle;
         }
@@ -104,6 +108,11 @@
         table.memmap tr.ram2 {
             background-color: #283828;
         }
+
+        code.asm6502, code.javascript {
+            font-size: 22pt;
+            line-height: 110%;
+        }
     </style>
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
@@ -122,11 +131,7 @@
             <h5>Trying to recapture a lost youth</h5>
 
             <p>
-                <small><a href="mailto:matt@godbolt.org">Matt Godbolt</a></small>
-                <br>
-                <small>Hit Escape to see all slides, space for next<br>
-                    Arrow keys also work
-                </small>
+                <small>Matt Godbolt &lt;<a href="mailto:matt@godbolt.org">matt@godbolt.org</a>&gt;</small>
             </p>
         </section>
         <section>
@@ -136,13 +141,17 @@
                 <ul>
                     <li>BBC Computer Literacy Project</li>
                     <li>1981</li>
+                    <li>Acorn Computers</li>
                 </ul>
+                <aside class="notes">Acorn being the original A in ARM</aside>
             </section>
             <section>
                 <img class="stretch" src="BBC_Micro_Elite_screenshot.png">
+                <aside class="notes">Released in 1984, 100k copies for the BBC</aside>
             </section>
             <section>
                 <img class="stretch" src="474053-exile-bbc-micro-screenshot-just-three-of-the-many-different.gif">
+                <aside class="notes">Released in 1988</aside>
             </section>
             <section>
                 <h2>Why me?</h2>
@@ -159,7 +168,7 @@
                 <ul>
                     <li>2MHz 6502 CPU</li>
                     <li>32KB RAM / 32KB ROM</li>
-                    <li>Memory-mapped hardware:
+                    <li>Memory-mapped hardware
                         <ul>
                             <li>Video</li>
                             <li>Sound</li>
@@ -167,17 +176,8 @@
                             <li>ADC / Econet / 2nd processor</li>
                         </ul>
                     </li>
-                    <li>Video hardware
-                        <ul>
-                            <li>"<span class="teletext">Teletext</span>" character map</li>
-                            <li>Various bitmap modes up
-                                <ul>
-                                    <li>640x256 in 2-colour</li>
-                                    <li>160x256 in 8-colour</li>
-                                </ul>
-                        </ul>
-                    </li>
                 </ul>
+                <aside class="notes">Amusingly the RAM ran at 4MHz</aside>
             </section>
             <section>
                 <h2>What's inside?</h2>
@@ -187,105 +187,118 @@
         <section>
             <h2>What's in a 6502</h2>
             <ul>
-                <li>5 8-bit registers:
-                    <ul>
-                        <li>A - accumulator</li>
-                        <li>X - index register</li>
-                        <li>Y - index register</li>
-                        <li>P - flags register</li>
-                        <li>S - stack pointer</li>
-                    </ul>
                 <li>16-bit program counter</li>
+                <li>5 8-bit registers:
+                    <table class="horizontal">
+                        <tr>
+                            <td>A</td>
+                            <td>X</td>
+                            <td>Y</td>
+                            <td>P</td>
+                            <td>S</td>
+                        </tr>
+                    </table>
+                </li>
             </ul>
         </section>
         <section>
             <h2>Instructions</h2>
                      <pre><code class="asm6502" data-trim>
-LDA / STA / LDX etc ; load A / store A / load X / etc
-TAX / TXA etc       ; transfer A to X
-PHA / PLA           ; push A / pull A
-CMP                 ; compare with A
-ADC / SBC           ; add/subtract with carry
-CLC / SEC           ; clear / set carry
-JMP                 ; jump
-BEQ / BNE / BCC /   ; branch if equal / not equal / carry clear
-  BCS / BMI etc     ; / carry set / minus etc
-JSR / RTS           ; jump to subroutine / return from subroutine
+LDA STA LDX ... ; load / store A, X, Y
+TAX TXA ...     ; transfer A to X
+PHA PLA         ; push A / pull A
+CMP             ; compare with A
+ADC SBC         ; add/subtract with carry
+CLC SEC         ; clear / set carry
+JMP             ; jump
+BEQ BNE BCC BCS ; branch ==, !=, carry set/clear
+BMI BPL ...     ; &lt;0, &gt;=0
+JSR             ; jump to subroutine
+RTS             ; return from subroutine
                      </code></pre>
         </section>
         <section>
-            <h2>Addressing modes</h2>
+            <section>
+                <h2>Addressing modes</h2>
                      <pre><code class="asm6502" data-trim>
-a9 20       LDA #32             ; A = 32
+a9 20     LDA #$20     ; A = 0x20
 
-a5 70       LDA $70             ; A = readmem(0x70)
+a5 70     LDA $70      ; A = readmem(0x70)
 
-ad 34 12    LDA $1234           ; A = readmem(0x1234)
-bd 34 12    LDA $1234, X        ; A = readmem(0x1234 + X)
-b9 34 12    LDA $1234, Y        ; A = readmem(0x1234 + Y)
-
-b1 70       LDA ($70), Y        ; t1 = readmem(0x70)
-                                ; t2 = readmem(0x71)
-                                ; A = readmem((t1 | (t2&lt;&lt;8)) + Y)
-
-b5 70       LDA $70, X          ; A = readmem(0x70 + X)
-a1 70       LDA ($70, X)        ; t1 = readmem(0x70 + X)
-                                ; t2 = readmem(0x71 + X)
-                                ; A = readmem(t1 | (t2&lt;&lt;8))
+ad 34 12  LDA $1234    ; A = readmem(0x1234)
                      </code></pre>
+            </section>
+            <section>
+                <h2>Addressing modes</h2>
+                     <pre><code class="asm6502" data-trim>
+bd 34 12  LDA $1234, X ; A = readmem(0x1234 + X)
+b9 34 12  LDA $1234, Y ; A = readmem(0x1234 + Y)
+
+b1 70     LDA ($70), Y ; t1 = readmem(0x70)
+                       ; t2 = readmem(0x71)
+                       ; addr = t1 | (t2&lt;&lt;8)
+                       ; A = readmem(addr + Y)
+
+b5 70     LDA $70, X   ; A = readmem(0x70 + X)
+                     </code></pre>
+            </section>
         </section>
         <section>
             <h2>Example</h2>
                      <pre><code class="asm6502" data-trim>
-.strlen                     ; 0x70/0x71 point to string.
-                            ; returns length in A (low) and X (high)
-a0 00       LDY #0          ; we're going to use Y as the loop counter. Start at 0
-a2 00       LDX #0          ; initialize the high part of the length
-.lp
-b1 70       LDA ($70), Y    ; read the byte pointed to by (0x70/0x71) + Y
-f0 09       BEQ end         ; if it's zero, we're at the end of the string
-c8          INY             ; otherwise increment the loop counter
-d0 f9       BNE lp          ; if it didn't overflow past 0xff to 0, re-loop
-e6 71       INC $71         ; else, increment the high part of the address
-e8          INX             ; and the X counter
-d0 f4       BNE lp          ; and re-loop (NB falling off here would mean &gt; 65536)
-.end
-98          TYA             ; put the loop counter into A (the low part of the length)
-60          RTS             ; and return
+.memcpy                ; copy X bytes from $70/71
+                       ; to &72/&73
+a0 00   LDY #0         ; Y = 0
+.loop
+b1 70   LDA ($70), Y   ; A = *(src + Y)
+91 72   STA ($72), Y   ; *(dst + Y) = A
+c8      INY            ; Y++
+ca      DEX            ; X--
+d0 f8   BNE loop       ; if non zero goto loop
+60      RTS            ; return
                      </code></pre>
         </section>
         <section>
-            <h2>Emulating the 6502</h2>
+            <section>
+                <h2>Emulating the 6502</h2>
                      <pre><code class="javascript" data-trim>
-var a = 0, x = 0, y = 0, s = 0, p = {c:false, z:false /* ... */};
-function readbyte(addr) { /* ... */ }
-var pc = readbyte(0xfffc) | (readbyte(0xfffd) &lt;&lt; 8);
-
 while (true) {
-    var opcode = readbyte(pc); pc++;
-    switch (opcode) {
-        case 0xa9: /*LDA #xx*/ a = readbyte(pc); pc++; break;
-        case 0xa2: /*LDX #xx*/ x = readbyte(pc); pc++; break;
-        case 0xa0: /*LDY #xx*/ y = readbyte(pc); pc++; break;
-        case 0x98: /*TYA*/ a = y; break;
-        case 0x69: /*ADC #xx*/ a += readbyte(pc); pc++; break;
-        case 0xb1: /*LDA (xx),Y*/
-            zp = readbyte(pc); pc++;
-            addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
-            a = readbyte(addr + y);
-            break;
-        case 0xe8: /*INX*/ x = x + 1; break;
-        // and so on...
+  var opcode = readbyte(pc); pc++;
+  switch (opcode) {
+    case 0xa9: // LDA #xx
+      a = readbyte(pc); pc++; break;
+    case 0xa2: // LDX #xx
+      x = readbyte(pc); pc++; break;
+    case 0xa0: // LDY #xx
+      y = readbyte(pc); pc++; break;
+    case 0x98: // TYA
+      a = y; break;
                      </code></pre>
+            </section>
+            <section>
+                <h2>Emulating the 6502</h2>
+                     <pre><code class="javascript" data-trim>
+case 0x69: // ADC #xx
+  a += readbyte(pc); pc++; break;
+case 0xb1: // LDA (xx),Y
+  zp = readbyte(pc); pc++;
+  addr = readbyte(zp) | (readbyte(zp+1)&lt;&lt;8);
+  a = readbyte(addr + y);
+  break;
+case 0xe8: // INX
+  x = x + 1; break;
+// and so on...
+                     </code></pre>
+            </section>
         </section>
         <section>
             <h2>Except...</h2>
             <ul>
                 <li>Setting flags</li>
-                <li>Memory access</li>
-                <li>Hardware</li>
-                <li>Interrupts</li>
-                <li>Handling time</li>
+                <li class="fragment">Memory access</li>
+                <li class="fragment">Hardware</li>
+                <li class="fragment">Interrupts</li>
+                <li class="fragment">Handling time</li>
             </ul>
         </section>
         <section>
@@ -328,51 +341,43 @@ while (true) {
             <section>
                 <h2>So now we have:</h2>
                          <pre><code class="javascript" data-trim>
-case 0x69: /*ADC #xx*/
-    a += readbyte(pc); pc++;
-    if (p.c) a++; // previous carry
-    p.c = a &gt; 0xff; // new carry
-    a &amp;= 0xff;
-    p.z = !!a;
-    p.n = !!(a &amp; 0x80);
-    break;
-case 0xb1: /*LDA (xx),Y*/
-    zp = readbyte(pc); pc++;
-    addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
-    a = readbyte(addr + y);
-    p.z = !!a;
-    p.n = !!(a &amp; 0x80);
-    break;
+case 0xb1: // LDA (xx),Y
+  zp = readbyte(pc); pc++;
+  addr = readbyte(zp) | (readbyte(zp+1)&lt;&lt;8);
+  a = readbyte(addr + y);
+  p.z = !!a;
+  p.n = !!(a &amp; 0x80);
+  break;
+                         </code></pre>
+            </section>
+            <section>
+                <h2>Adding:</h2>
+                         <pre><code class="javascript" data-trim>
+case 0x69: // ADC #xx
+  if (p.d) { /* BCD mode */ }
+  var val = readbyte(pc); pc++;
+  var res = a + val;
+  if (p.c) a++; // previous carry
+  p.c = a &gt; 0xff; // new carry
+  p.v = !!((a ^ res) & (val ^ res) & 0x80);
+  a = res &amp; 0xff;
+  p.z = !!a;
+  p.n = !!(a &amp; 0x80);
+  break;
                          </code></pre>
             </section>
         </section>
         <section>
             <section>
                 <h2>Memory</h2>
-                <table class="fragment memmap">
+                <table class="memmap">
                     <tbody>
                     <tr>
                         <th>0x10000</th>
                     </tr>
                     <tr class="osrom">
-                        <th>&uarr;<br>0xff00</th>
-                        <td>256 bytes OS ROM</td>
-                    </tr>
-                    <tr class="hw">
-                        <th>&uarr;<br>0xfe00</th>
-                        <td>256 bytes hardware</td>
-                    </tr>
-                    <tr class="osrom">
-                        <th>&uarr;<br>0xfd00</th>
-                        <td>256 bytes ROM</td>
-                    </tr>
-                    <tr class="hw">
-                        <th>&uarr;<br>0xfc00</th>
-                        <td>256 bytes hardware</td>
-                    </tr>
-                    <tr class="osrom">
                         <th>&uarr;<br>&uarr;<br>0xc000</th>
-                        <td>15.5KB OS ROM</td>
+                        <td>16KB OS ROM, Hardware (<span class="addr">0xfcXX 0xfeXX</span>)</td>
                     </tr>
                     <tr class="rom1">
                         <th>&uarr;<br>&uarr;<br>0x8000</th>
@@ -390,25 +395,33 @@ case 0xb1: /*LDA (xx),Y*/
                 </table>
             </section>
             <section>
+                <h2>Memory</h2>
                          <pre><code class="javascript" data-trim>
-var ram = new Uint8Array(0x8000);
-var os = load("OS");
-var romsel = 0;
-var roms = [];
-roms[15] = load("BASIC");
-
 function readmem(addr) {
-    if (addr &lt; 0x8000) return ram[addr];
-    if (addr &lt; 0xc000) return roms[romsel][addr - 0x8000];
-    if ((addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00)
-        || (addr &gt;= 0xfc00 &amp;&amp; addr &lt; 0xfd00)) return readhw(addr);
-    return os[addr - 0xc000];
+  if (addr &lt; 0x8000) // normal RAM?
+    return ram[addr];
+  if (addr &lt; 0xc000) // paged ROM?
+    return roms[romsel][addr - 0x8000];
+  // Memory-mapped hardware?
+  if ((addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00)
+      || (addr &gt;= 0xfc00 &amp;&amp; addr &lt; 0xfd00))
+    return readhw(addr);
+  // else, it's OS ROM
+  return os[addr - 0xc000];
 }
-
+                         </code></pre>
+            </section>
+            <section>
+                <h2>Memory</h2>
+                         <pre><code class="javascript" data-trim>
 function writemem(addr, b) {
-    if (addr &lt; 0x8000) ram[addr] = b;
-    if (addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00) writehw(addr, b);
-    // else does nothing - it's ROM
+  if (addr &lt; 0x8000) // normal RAM
+    ram[addr] = b;
+  // Memory-mapped hardware?
+  else if ((addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00)
+      || (addr &gt;= 0xfc00 &amp;&amp; addr &lt; 0xfd00))
+    writehw(addr, b);
+  // else does nothing - it's ROM
 }
                          </code></pre>
             </section>
@@ -420,6 +433,7 @@ function writemem(addr, b) {
                     <li>Keyboard</li>
                     <li>I/O &amp; Timers</li>
                     <li>Video circuitry</li>
+                    <li>Sound</li>
                 </ul>
             </section>
             <section>
@@ -430,13 +444,15 @@ function writemem(addr, b) {
                 <h2>Scanning</h2>
                          <pre><code class="javascript" data-trim>
 function updateKeys() {
-    if (freescanning) {
-        for (i = 0; i &lt; 10; ++i) {
-            for (j = 1; j &lt; 8; ++j) if (keys[i][j]) setca2();
-        }
-    } else {
-        for (j = 1; j &lt; 8; ++j) if (keys[curCol[j]) setca2();
+  if (freescanning) {
+    for (i = 0; i &lt; 10; ++i) {
+      for (j = 1; j &lt; 8; ++j)
+        if (keys[i][j]) irq();
     }
+  } else {
+    for (j = 1; j &lt; 8; ++j)
+      if (keys[curCol][j]) irq();
+  }
 }
                          </code></pre>
             </section>
@@ -503,37 +519,34 @@ function tickTimer1() {
                     <li>So emulate 2,000,000 cycles per second</li>
                     <li>Intructions take different times:
                                  <pre><code class="asm6502" data-trim>
-LDA #42         ; 2 cycles
-LDA &amp;70         ; 3 cycles
-LDA &amp;1234       ; 4 cycles
-LDA (&amp;70), Y    ; 5-6 cycles
-INC &amp;1234, X    ; 7 cycles
+LDA #42       ; 2 cycles
+LDA &amp;70       ; 3 cycles
+LDA &amp;1234     ; 4 cycles
+LDA (&amp;70), Y  ; 5-6 cycles
+INC &amp;1234, X  ; 7 cycles
                          </code></pre>
                     </li>
                     <li>Interrupts checked at instruction end</li>
+                    <aside class="notes">Why does this matter? Games protection systems used this, as did games
+                        themselves!
+                    </aside>
                 </ul>
             </section>
             <section>
                 <h2>Our code now looks like</h2>
                      <pre><code class="javascript" data-trim>
 function runCpu(clocks) {
-    while (clocks &gt; 0) {
-        var opcode = readbyte(pc); pc++;
-        switch (opcode) {
-            case 0xb1: /*LDA (xx),Y*/
-                zp = readbyte(pc); pc++;
-                addr = readbyte(zp) | (readbyte(zp+1)&gt;&gt;8);
-                a = readbyte(addr + y);
-                p.z = !!a; p.n = !!(a &amp; 0x80);
-                clocks -= 5;
-                break;
-            // ...and other opcodes...
-        }
-        if (irqFlag &amp;&amp; p.i == false) {
-            pc = irqHandler;  // ...and much more...
-        }
+  while (clocks &gt; 0) {
+    var opcode = readbyte(pc); pc++;
+    switch (opcode) {
+    case 0xa9: // LDA #xx
+      a = readbyte(pc); pc++;
+      p.z = !!a; p.n = !!(a &amp; 0x80);
+      clocks -= 2;
+      break;
+      // ...etc...
     }
-}
+    if (irqFlag &amp;&amp; !p.i) handleIrq();
                      </code></pre>
             </section>
             <section>
@@ -541,11 +554,19 @@ function runCpu(clocks) {
                 <ul>
                     <li>More complicated than that!</li>
                     <li class="fragment">Mid-instruction reads...</li>
-                    <li class="fragment">Multiple reads and redundant writes</li>
+                    <li class="fragment">Redundant and spurious reads and writes</li>
                     <li class="fragment">IRQs actually checked on penultimate cycle</li>
                     <li class="fragment">1MHz bus cycle-stretching</li>
-                    <li class="fragment">...probably too much to cover here</li>
                 </ul>
+                <aside class="notes">To save space on the chip, there was no memory enable.
+                    So the 6502 accesses memory every cycle unconditionally. This leads to
+                    spurious reads and writes while computations are happened.
+                    Carry for memory addresses takes another cycle and the uncarried address is read/written to in some cases.
+                    CPU is pipelined and fetches the next instruction on the last cycle; an IRQ at this point is "too late".
+                    Handy for IRQ handlers and still used on x86 today!
+                    2MHz/1MHz cycle stretching for slow peripherals...
+                    Amusing that the RAM ran at 4MHz!
+                </aside>
             </section>
         </section>
         <section>
@@ -558,15 +579,15 @@ function runCpu(clocks) {
                 </ul>
                      <pre class="fragment"><code class="javascript" data-trim>
 var opcodes6502 = {
-    0x00: "BRK",
-    0x01: "ORA (,x)",
-    0x03: "SLO (,x)",
-    0x04: "NOP zp",
-    0x05: "ORA zp",
-    // skipping a few...
-    0xFD: "SBC abs,x",
-    0xFE: "INC abs,x",
-    0xFF: "ISB abs,x",
+  0x00: "BRK",
+  0x01: "ORA (,x)",
+  0x03: "SLO (,x)",
+  0x04: "NOP zp",
+  0x05: "ORA zp",
+  // skipping a few...
+  0xFD: "SBC abs,x",
+  0xFE: "INC abs,x",
+  0xFF: "ISB abs,x",
 };
                      </code></pre>
             </section>
@@ -574,41 +595,33 @@ var opcodes6502 = {
                 <h2>High-level code - 'op'</h2>
                          <pre><code class="javascript" data-trim>
 function getOp(op) {
-    switch (op) {
-        case "NOP": return { op: [] }
-        case "LDA": return { op: ["cpu.a = REG", "cpu.setzn(REG);"], read: true }
-        case "STA": return { op: ["REG = cpu.a"], write: true }
-        case "LDX": return { op: ["cpu.x = REG", "cpu.setzn(REG);"], read: true }
-        //...
-        case "INC": return {
-            op: ["REG = (REG + 1) &amp; 0xff;", "cpu.setzn(REG);" ],
-            read: true, write: true
-        };
-        //...
-    }
-}
+  switch (op) {
+    case "LDA": return {
+      op: ["cpu.a = REG", "cpu.setzn(REG);"],
+      read: true };
+    case "STA": return {
+       op: ["REG = cpu.a"], write: true };
+    case "INC": return {
+        op: ["REG = (REG + 1) &amp; 0xff;",
+             "cpu.setzn(REG);"],
+        read: true, write: true };
                          </code></pre>
             </section>
             <section>
                 <h2>High-level code - addressing mode</h2>
                          <pre><code class="javascript" data-trim>
-function gen(op, addrMode) {
-    var ig = InstructionGen();
-    var op = getOp(op);
-    switch (addrMode) {
-        case "abs":
-            ig.tick(3);
-            ig.append("var addr = cpu.getw();");
-            if (op.read) {
-                ig.readOp("addr", "REG");
-                if (op.write) ig.writeOp("addr", "REG"); // spurious write
-            }
-            ig.append(op.op);
-            if (op.write ig.writeOp("addr", "REG");
-            return ig.render();
-        //...
+switch (addrMode) {
+  case "abs":
+    ig.tick(3);
+    ig.append("var addr = cpu.getw();");
+    if (op.read) {
+      ig.readOp("addr", "REG");
+      // spurious write
+      if (op.write) ig.writeOp("addr", "REG");
     }
-}
+    ig.append(op.op);
+    if (op.write) ig.writeOp("addr", "REG");
+    return ig.render();
                          </code></pre>
             </section>
             <section>
@@ -623,17 +636,15 @@ function gen(op, addrMode) {
             <section>
                 <h2>INC abs</h2>
                          <pre><code class="javascript" data-trim>
-var REG = 0|0;
 var addr = cpu.getw();
 cpu.polltimeAddr(4, addr);
-REG = cpu.readmem(addr);
+var temp = cpu.readmem(addr);
 cpu.polltimeAddr(1, addr);
 cpu.checkInt();
-cpu.writemem(addr, REG);
-REG = (REG + 1) &amp; 0xff;
-cpu.setzn(REG);
+cpu.writemem(addr, temp); // spurious
+temp = cpu.setzn(temp + 1);
 cpu.polltimeAddr(1, addr);
-cpu.writemem(addr, REG);
+cpu.writemem(addr, temp);
                          </code></pre>
             </section>
         </section>
@@ -645,7 +656,7 @@ cpu.writemem(addr, REG);
                     <li>Every clock cycle:
                         <ul>
                             <li>reads one byte of RAM</li>
-                            <li>generate 8 TV pixels based on settings</li>
+                            <li>generate 8 TV pixels based on registers</li>
                         </ul>
                     </li>
                     <li>Generate IRQs at top of screen</li>
@@ -656,17 +667,15 @@ cpu.writemem(addr, REG);
                          <pre><code class="javascript" data-trim>
 scrx += 8;
 var b = readbyte(addr++);
-var offset = scry * 1280 + scrx;
-for (var i = 0; i &lt; 8; ++i) {
-    fb32[offset + i] = convertPixel(b, i);
-}
+for (var i = 0; i &lt; 8; ++i)
+  fb32[scry * 1280 + scrx + i] = convert(b, i);
 if (scrx &gt;= curEndPos) {
-    scrx = curStartPos;
-    scry ++;
-    if (scry &gt;= numLines) {
-        scry = 0;
-        generateIrq();
-    }
+  scrx = curStartPos;
+  scry ++;
+  if (scry &gt;= numLines) {
+    scry = 0;
+    generateIrq();
+  }
 }
                          </code></pre>
             </section>
@@ -682,17 +691,17 @@ if (scrx &gt;= curEndPos) {
         <section>
             <h2>Sound</h2>
             <ul>
-                <li>Same chip as in the Sega Master System</li>
+                <li>Eight registers</li>
+                <li>Four channels</li>
+                <li>500KHz audio</li>
                 <li>Another coroutine</li>
             </ul>
+            <aside class="notes">Same chip as in the Sega Master System</aside>
         </section>
         <section>
             <h2><a href="http://bbc.godbolt.org/?autoboot" target="_blank">Live demo!</a></h2>
         </section>
         <section>
-            <section>
-                <h2>Misc stuff</h2>
-            </section>
             <section>
                 <h2>Performance</h2>
                 <ul>
@@ -700,6 +709,8 @@ if (scrx &gt;= curEndPos) {
                     <li>Dynamic dispatch</li>
                     <li>Loop unrolling for video</li>
                     <li>Uint32Array for screen</li>
+                    <li>WebGL</li>
+                    <li>Deferred sound</li>
                 </ul>
             </section>
             <section>
@@ -739,13 +750,13 @@ if (scrx &gt;= curEndPos) {
     // Full list of configuration options available here:
     // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
-        controls: true,
-        progress: true,
+        controls: false,
+        progress: false,
         history: true,
         center: true,
 
         theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
-        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
 
         // Parallax scrolling
         // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
