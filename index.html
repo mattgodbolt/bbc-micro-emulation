@@ -70,6 +70,15 @@
             background-color: #222;
         }
 
+        table.computers {
+            width: 100%;
+        }
+
+        table.computers td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
         table.memmap {
             width: 100%;
         }
@@ -125,8 +134,7 @@
 
     <div class="slides">
         <section>
-            <h1>Emulating a BBC Micro</h1>
-
+            <h1>6502 emulation</h1>
             <h2>in Javascript</h2>
             <h5>Trying to recapture a lost youth</h5>
 
@@ -135,6 +143,29 @@
             </p>
         </section>
         <section>
+            <section>
+                <h2>The 6502</h2>
+                <img class="stretch" src="MOS_6502_layers_top.png">
+                <aside class="notes">3510 transistors, laid out by hand. First produced in 1975</aside>
+            </section>
+            <section>
+                <h2>The 6502</h2>
+                <table class="computers">
+                    <tr>
+                        <td><img src="120px-Apple_iieb.jpg"></td>
+                        <td><img src="120px-Atari_800.jpg"></td>
+                        <td><img src="120px-Atari-2600-Console.jpg"></td>
+                    </tr>
+                    <tr>
+                        <td><img src="120px-BBC_Micro_Front_Restored.jpg"></td>
+                        <td><img src="120px-Commodore_2001_Series-IMG_0448b.jpg"></td>
+                        <td><img src="Commodore-VIC-20-FL.jpg"></td>
+                    </tr>
+                </table>
+                <aside class="notes">Apple IIe, Atari 2600, Atari 800, Beeb, Commodore 64, VIC20. Brought about the
+                    1980s computer revolution
+                </aside>
+            </section>
             <section>
                 <h2>What's a BBC Micro?</h2>
                 <img class="stretch" src="Beeb.jpeg">
@@ -160,46 +191,65 @@
             <section>
                 <h2>Why me?</h2>
                 <img class="stretch" src="AcornUser2.png">
+                <aside class="notes">Why Javascript? Good question</aside>
             </section>
         </section>
         <section>
             <section>
                 <h2>What's in a BBC Micro?</h2>
-                <ul>
-                    <li>2MHz 6502 CPU</li>
-                    <li>32KB RAM / 32KB ROM</li>
-                    <li>Memory-mapped hardware
-                        <ul>
-                            <li>Video</li>
-                            <li>Sound</li>
-                            <li>Tape / floppy disc</li>
-                            <li>ADC / Econet / 2nd processor</li>
-                        </ul>
-                    </li>
-                </ul>
-                <aside class="notes">Amusingly the RAM ran at 4MHz</aside>
-            </section>
-            <section>
-                <h2>What's inside?</h2>
-                <img class="stretch" src="circuit-board.jpeg">
+                <table style="width: 100%">
+                    <tr>
+                        <td style="width: 60%"><img src="circuit-board.jpeg"></td>
+                        <td style="vertical-align: middle">
+                            <ul>
+                                <li>2MHz 6502 CPU</li>
+                                <li>32KB RAM / 32KB ROM</li>
+                                <li>Memory-mapped hardware</li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                </table>
+
+                <aside class="notes">
+                    Amusingly the RAM ran at 4MHz
+                    <ul>
+                        <li>Video</li>
+                        <li>Sound</li>
+                        <li>Timers / keyboard</li>
+                        <li>Tape / floppy disc</li>
+                        <li>ADC / Econet / 2nd processor</li>
+                    </ul>
+                </aside>
             </section>
         </section>
         <section>
             <h2>What's in a 6502</h2>
-            <ul>
-                <li>16-bit program counter</li>
-                <li>5 8-bit registers:
-                    <table class="horizontal">
-                        <tr>
-                            <td>A</td>
-                            <td>X</td>
-                            <td>Y</td>
-                            <td>P</td>
-                            <td>S</td>
-                        </tr>
-                    </table>
-                </li>
-            </ul>
+            <table style="margin: 0px auto;" class="horizontal">
+                <tr>
+                    <td colspan="2">PC</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>X</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Y</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>P</td>
+                </tr>
+                <tr>
+                    <td>01</td>
+                    <td>S</td>
+                </tr>
+            </table>
         </section>
         <section>
             <h2>Instructions</h2>
@@ -561,8 +611,10 @@ function runCpu(clocks) {
                 <aside class="notes">To save space on the chip, there was no memory enable.
                     So the 6502 accesses memory every cycle unconditionally. This leads to
                     spurious reads and writes while computations are happened.
-                    Carry for memory addresses takes another cycle and the uncarried address is read/written to in some cases.
-                    CPU is pipelined and fetches the next instruction on the last cycle; an IRQ at this point is "too late".
+                    Carry for memory addresses takes another cycle and the uncarried address is read/written to in some
+                    cases.
+                    CPU is pipelined and fetches the next instruction on the last cycle; an IRQ at this point is "too
+                    late".
                     Handy for IRQ handlers and still used on x86 today!
                     2MHz/1MHz cycle stretching for slow peripherals...
                     Amusing that the RAM ran at 4MHz!
@@ -679,14 +731,6 @@ if (scrx &gt;= curEndPos) {
 }
                          </code></pre>
             </section>
-            <section>
-                <h2>Image processing</h2>
-                <ul>
-                    <li>Real BBC usually hooked to a TV</li>
-                    <li>Blur image on blit to canvas</li>
-                    <li>Interlace</li>
-                </ul>
-            </section>
         </section>
         <section>
             <h2>Sound</h2>
@@ -736,6 +780,12 @@ if (scrx &gt;= curEndPos) {
                     <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
                     <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github</a></li>
                     <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
+                    <li>Special thanks to
+                        <ul>
+                            <li>Rich Talbot-Watkins</li>
+                            <li>Ed Spittles</li>
+                            <li>the people on the <a href="http://www.stardot.org.uk/forums/">STH forums</a></li>
+                        </ul>
                 </ul>
             </section>
         </section>
