@@ -369,19 +369,20 @@ case 0xa9: // LDA #imm
                 PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
                 output is 130 bits that enable various parts of the chip.
                 SAX enables both "A" and "X" parts
+                NMOS transistors drain? something?
             </aside>
-        </section>
-        <section>
-            <h2>So...done?</h2>
         </section>
         <section>
             <h2>Protection systems</h2>
             <ul>
                 <li>Decrypt game code</li>
-                <li>Keys include
-                    <ul>Decryption code itself</ul>
-                    <ul>Hardware timers</ul>
-                    <ul>Interrupt information</ul>
+                <li>Keys include:
+                    <ul>
+                        <li class="fragment">Magic values loaded from disc</li>
+                        <li class="fragment">Decryption code itself</li>
+                        <li class="fragment">Hardware timers &amp; registers</li>
+                        <li class="fragment">Interrupt information</li>
+                    </ul>
                 </li>
             </ul>
             <aside class="notes">
@@ -390,13 +391,12 @@ case 0xa9: // LDA #imm
             </aside>
         </section>
         <section>
-            <h2>Memory accesses</h2>
-            <img src="MOS6502.svg" class="stretch">
+            <h2>Accurate timing information</h2>
+            <h3><a href="http://localhost/6502/expert.html?a=0&d=2e48fe" target="_blank">Visual 6502</a></h3>
         </section>
         <section>
-            <h2>Visual 6502</h2>
-            What here? maybe not here?
-            http://localhost/6502/expert.html
+            <h2>Memory accesses</h2>
+            <img src="MOS6502.svg" class="stretch">
         </section>
         <section>
             <h2>ROL $fe48</h2>
@@ -435,7 +435,7 @@ case 0xa9: // LDA #imm
                     <td>4</td>
                     <td>Write</td>
                     <td>fe48</td>
-                    <td>Do rotate <span class="fragment">&mdash; writes unmodified value!</span></td>
+                    <td>Do rotate <span class="fragment" style="color: #ff2c2d;">&mdash; writes unmodified value!</span></td>
                 </tr>
                 <tr>
                     <td>5</td>
@@ -458,6 +458,7 @@ case 0xa9: // LDA #imm
   { name: "Case 2", wave: "N..hN..." }
 ],
 edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
+
                 </script>
             </div>
         </section>
@@ -480,7 +481,7 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
             <h2>Any questions?</h2>
             <ul>
                 <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
-                <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github</a></li>
+                <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a></li>
                 <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
                 <li>Special thanks to
                     <ul>
