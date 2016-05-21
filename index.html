@@ -16,6 +16,7 @@
 
     <link rel="stylesheet" href="css/reveal.min.css">
     <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="lib/css/fullscreen-img.css">
 
     <!-- For syntax highlighting -->
     <link rel="stylesheet" href="lib/css/zenburn.css">
@@ -76,6 +77,10 @@
 
         table.opcodes th {
             font-family: monospace;
+        }
+
+        div.credit {
+            font-size: small;
         }
 
         div.wavedrom {
@@ -140,10 +145,26 @@
             font-size: 22pt;
             line-height: 110%;
         }
+        .goto h1, .goto h2, .goto h3, .goto h4 {
+            font-family: "Helvetica";
+        }
+        .goto h1 {
+            font-size: 4em;
+            font-weight: bold;
+        }
+        .goto h2 {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .goto h3 {
+            font-size: 2em;
+            font-style: italic;
+        }
     </style>
     <!--[if lt IE 9]>
     <script src="lib/js/html5shiv.js"></script>
     <![endif]-->
+    <script src="default.js" type="text/javascript"></script>
 </head>
 
 <body>
@@ -151,22 +172,26 @@
 <div class="reveal">
 
     <div class="slides">
-        <section>
-            <h1>6502 emulation</h1>
-            <h2>in Javascript</h2>
-            <h5>Trying to recapture a lost youth</h5>
-
-            <p>
-                <small>Matt Godbolt &lt;<a href="mailto:matt@godbolt.org">matt@godbolt.org</a>&gt;</small>
-            </p>
+        <section fullscreen-img="goto-bg.png" class="goto">
+            <h1>Emulating a<br>6502 system</h1>
+            <h2>(in Javascript)</h2>
+            <h3>Matt Godbolt</h3>
             <aside class="notes">Who am I? Games coder turned C++ tools developer turned mobile programmer turned LL
-                trading systems coder.
+                trading systems coder. Will talk about what it is, why you should care, how to do it and the fun you can
+                have along the way. 5 years on and off.
             </aside>
+        </section>
+        <section>
+            <h1>Emulating a<br>6502 system</h1>
+            <h2>(in Javascript)</h2>
+            <h3>Matt Godbolt</h3>
         </section>
         <section>
             <h2>The 6502</h2>
             <img class="stretch" src="MOS_6502_layers_top.png">
-            <aside class="notes">3510 transistors, laid out by hand. First produced in 1975</aside>
+            <aside class="notes">8-bit microprocessor; 3510 transistors, laid out by hand. First produced in 1975.
+                Over 10 billion made so far
+            </aside>
         </section>
         <section>
             <h2>6502 Computers</h2>
@@ -187,7 +212,7 @@
                     <td><img src="Bender.jpg"></td>
                 </tr>
             </table>
-            <aside class="notes">Apple IIe, Atari 2600, Atari 800, Beeb, Commodore 64, VIC20. Brought about the
+            <aside class="notes">Apple IIe, Atari 2600, Atari 800, Beeb, Commodore PET & 64, VIC20. Brought about the
                 1980s computer revolution
             </aside>
         </section>
@@ -203,10 +228,6 @@
                     <li>Memory-mapped hardware</li>
                 </ul>
             </aside>
-        </section>
-        <section>
-            <h2>The Computer Programme</h2>
-            <img class="stretch" src="TheComputerProgramme.jpg">
         </section>
         <section>
             <h2>Why me?</h2>
@@ -300,8 +321,15 @@ while (true) {
             <h2>The outside world</h2>
             <ul>
                 <li>Memory-mapped I/O</li>
-                <li class="fragment">Pixel generator reads from RAM</li>
-                <li class="fragment">Simple character-mapped mode</li>
+                <li class="fragment">Video chip:
+                    <ul>
+                        <li>Pixel generator reads from RAM</li>
+                        <li>Simple character-mapped mode</li>
+                        <li>Bitmap modes with 2, 4, 16 colours</li>
+                    </ul>
+                </li>
+                <li class="fragment">Timers</li>
+                <li class="fragment">Sound, etc</li>
             </ul>
         </section>
         <section>
@@ -325,6 +353,7 @@ while (true) {
 case 0xa9: // LDA #imm
   a = readmem(pc++);
   video.run(2);
+  timers.run(2);
   break;
                      </code></pre>
 
@@ -337,7 +366,7 @@ case 0xa9: // LDA #imm
             <img src="Zalaga.png" class="stretch">
             <h3><a href="http://localhost/jsbeeb/?disc=Zalaga.ssd&autoboot&keyLayout=gaming&model=Master"
                    target="_blank">Zalaga</a></h3>
-            <aside class="notes">e.g. address $1114. SAX zp instruction.</aside>
+            <aside class="notes">Fun part of emulation! e.g. address $1114. SAX zp instruction. show debugger</aside>
         </section>
         <section>
             <h2>Inside the 6502</h2>
@@ -365,12 +394,41 @@ case 0xa9: // LDA #imm
         <section>
             <h2>Real decoding</h2>
             <img src="6502_pad_annot_07.png" class="stretch">
+            <div class="credit">&copy;2010 Visual6502.org, used with permission</div>
             <aside class="notes">
                 PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
                 output is 130 bits that enable various parts of the chip.
                 SAX enables both "A" and "X" parts
                 NMOS transistors drain? something?
             </aside>
+        </section>
+        <section>
+            <h2>Inside the 6502</h2>
+            <ul>
+                <table class="opcodes">
+                    <tr>
+                        <th>$84 10000100</th>
+                        <td>STY zp</td>
+                    </tr>
+                    <tr>
+                        <th>$85 10000101</th>
+                        <td>STA zp</td>
+                    </tr>
+                    <tr>
+                        <th>$86 10000110</th>
+                        <td>STX zp</td>
+                    </tr>
+                    <tr>
+                        <th>$87 10000111</th>
+                        <td><b>SAX zp</b></td>
+                    </tr>
+                </table>
+            </ul>
+        </section>
+        <section>
+            <h2>Even more games</h2>
+            <img src="Alien8.png" class="stretch">
+            <h4>An admission</h4>
         </section>
         <section>
             <h2>Protection systems</h2>
@@ -393,10 +451,6 @@ case 0xa9: // LDA #imm
         <section>
             <h2>Accurate timing information</h2>
             <h3><a href="http://localhost/6502/expert.html?a=0&d=2e48fe" target="_blank">Visual 6502</a></h3>
-        </section>
-        <section>
-            <h2>Memory accesses</h2>
-            <img src="MOS6502.svg" class="stretch">
         </section>
         <section>
             <h2>ROL $fe48</h2>
@@ -435,7 +489,8 @@ case 0xa9: // LDA #imm
                     <td>4</td>
                     <td>Write</td>
                     <td>fe48</td>
-                    <td>Do rotate <span class="fragment" style="color: #ff2c2d;">&mdash; writes unmodified value!</span></td>
+                    <td>Do rotate <span class="fragment" style="color: #ff2c2d;">&mdash; writes unmodified value!</span>
+                    </td>
                 </tr>
                 <tr>
                     <td>5</td>
@@ -446,6 +501,23 @@ case 0xa9: // LDA #imm
             </table>
         </section>
         <section>
+            <h2>Fixing it</h2>
+                 <pre><code class="fragment javascript" data-trim>
+case 0x2e: // ROL abs
+  addr = readword(pc); pc += 2;
+  hardware.run(3);
+  val = readbyte(addr);
+  hardware.run(1);
+  writebyte(addr, val); // unmodified value
+  hardware.run(1);
+  carry = val & 0x80;
+  val = (val << 1) & 0xff;
+  writebyte(addr, val); // modified value
+  hardware.run(1);
+  break;
+                     </code></pre>
+        </section>
+        <section>
             <h2>Cycle stretching</h2>
             <div class="wavedrom">
                 <script type="WaveDrom">
@@ -453,11 +525,12 @@ case 0xa9: // LDA #imm
   { name: "2 MHz",  wave: "N......." },
   { name: "1 MHz",  wave: "N...", period: 2 },
   {                 node: "..A.B...", phase: 0.5 },
-  { name: "Case 1", wave: "N.lhN..." },
+  { name: "Case 1", wave: "N.h.N..." },
   {                 node: "...CD...", phase: 0.5 },
   { name: "Case 2", wave: "N..hN..." }
 ],
 edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
+
 
                 </script>
             </div>
@@ -478,7 +551,7 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
             <img class="stretch" src="tt26.jpg">
         </section>
         <section>
-            <h2>Any questions?</h2>
+            <h2>Resources</h2>
             <ul>
                 <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
                 <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a></li>
@@ -486,18 +559,18 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
                 <li>Special thanks to
                     <ul>
                         <li>Rich Talbot-Watkins</li>
-                        <li>Ed Spittles</li>
-                        <li>the people on the <a href="http://www.stardot.org.uk/forums/">STH forums</a></li>
+                        <li>Ed Spittles &amp; the Visual6502 team</li>
+                        <li>the users on the <a href="http://www.stardot.org.uk/forums/">STH forums</a></li>
                     </ul>
                 </li>
             </ul>
         </section>
+        <section fullscreen-img="goto-last.png" class="goto"></section>
     </div>
 </div>
 
 <script src="lib/js/head.min.js"></script>
 <script src="js/reveal.min.js"></script>
-<script src="default.js" type="text/javascript"></script>
 
 <script>
 
@@ -560,7 +633,8 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
                 src: 'plugin/notes/notes.js', async: true, condition: function () {
                 return !!document.body.classList;
             }
-            }
+            },
+            {src: 'lib/js/fullscreen-img.js'}
         ]
     });
 
