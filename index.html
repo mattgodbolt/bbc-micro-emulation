@@ -396,6 +396,7 @@ case 0xa9: // LDA #imm
             <img src="6502_pad_annot_07.png" class="stretch">
             <div class="credit">&copy;2010 Visual6502.org, used with permission</div>
             <aside class="notes">
+                Thanks to Visual 6502 people!<br>
                 PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
                 output is 130 bits that enable various parts of the chip.
                 SAX enables both "A" and "X" parts
@@ -436,7 +437,7 @@ case 0xa9: // LDA #imm
                 <li>Decrypt game code</li>
                 <li>Keys include:
                     <ul>
-                        <li class="fragment">Magic values loaded from disc</li>
+                        <li class="fragment">Magic values loaded from tape (or disc)</li>
                         <li class="fragment">Decryption code itself</li>
                         <li class="fragment">Hardware timers &amp; registers</li>
                         <li class="fragment">Interrupt information</li>
@@ -510,9 +511,9 @@ case 0x2e: // ROL abs
   hardware.run(1);
   writebyte(addr, val); // unmodified value
   hardware.run(1);
-  carry = val & 0x80;
-  val = (val << 1) & 0xff;
-  writebyte(addr, val); // modified value
+  val = (val << 1) | (carry ? 1);
+  carry = val & 0x100;
+  writebyte(addr, val & 0xff); // modified value
   hardware.run(1);
   break;
                      </code></pre>
