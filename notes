@@ -1,0 +1,56 @@
+For GOTO:
+* much punchier
+    * drop keyboard stuff, maybe RAM/ROM paging?
+    * less code on screen? too small anyway
+      maybe?
+* focus on "cool"
+    * game protection systems?
+        * explains the why more
+    * video mode stuff (animation?)
+* more on browser performance?
+* disc drive sounds! (youtube video?)
+
+
+----
+
+What's a beeb?
+Why I love them?
+what's inside pic / rundown
+    (research apple 2e?)
+    maybe talk about hacking protection systems, allude to "one that got away"
+6502 & example ? (maybe change?)
+
+Emulating - simplify?
+
+memory turn sideways?
+maybe talk about timings test? protection systems?
+
+**** drop the keyboard and timer stuff?
+pimp up the video?
+cycle stretching?
+@ "But!" slide -- explain why it needs to be so accurate?
+  protection systems? games?
+  explain
+show debugger?
+
+move to memory is quite jarring?
+DEMO earlier on?
+
+--- since presentation
+* tests!
+  * lots of fixes to instruction correctness incl undef opcodes
+* benchmarks
+* firefox stuff
+  * circa Dec2014
+* master support
+* tape support
+* video overhaul
+* historical debugging
+  * maybe talk about debugging old games?
+* google drive
+* BASIC text loading
+* Video optimization: set vs array copy 154d577ab820d9a10e54f21bbb3fc686254f7d88
+* Instruction dispatch FF vs Chrome
+* WebGL
+* IRQ? http://stardot.org.uk/forums/viewtopic.php?f=4&t=9805 ?
+* embeddable (link?)
