@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <title>Emulating a BBC Micro in Javascript</title>
+
+    <meta name="description" content="Emulating a BBC Micro in Javascript">
+    <meta name="author" content="Matt Godbolt">
+
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"/>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/night.css" id="theme">
+    <link rel="stylesheet" href="lib/css/fullscreen-img.css">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', include the PDF print sheet -->
+    <script>
+        if (window.location.search.match(/print-pdf/gi)) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = 'css/print/pdf.css';
+            document.getElementsByTagName('head')[0].appendChild(link);
+        }
+    </script>
+    <style>
+        @font-face {
+            font-family: 'Teletext';
+            src: url('teletext.ttf');
+        }
+
+        .reveal h1, .reveal h2, .reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+            font-family: "Teletext", Impact, sans-serif;
+        }
+
+        .reveal .teletext {
+            font-family: "Teletext", Impact, sans-serif;
+        }
+
+        table.horizontal {
+            border-collapse: collapse;
+        }
+
+        table.horizontal th, table.horizontal td {
+            border: 1px solid grey;
+            text-align: center;
+            width: 6em;
+        }
+
+        table.horizontal th:nth-child(even) {
+            background-color: #444;
+        }
+
+        table.horizontal th:nth-child(odd) {
+            background-color: #222;
+        }
+
+        table.horizontal td:nth-child(even) {
+            background-color: #444;
+        }
+
+        table.horizontal td:nth-child(odd) {
+            background-color: #222;
+        }
+
+        table.computers {
+            width: 100%;
+        }
+
+        table.opcodes th {
+            font-family: monospace;
+        }
+
+        div.credit {
+            font-size: small;
+        }
+
+        div.wavedrom {
+            background: #ffffff;
+        }
+
+        table.computers td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        table.computers img {
+            border: 8px solid black;
+            width: 200px;
+            height: auto;
+        }
+
+        table.computers td.highlight-red.current-fragment img {
+            border: 8px solid red;
+        }
+
+        table.memmap {
+            width: 100%;
+        }
+
+        table.memmap th {
+            width: 6em;
+            font-family: monospace;
+            font-weight: normal;
+            text-align: center;
+        }
+
+        table.memmap .addr {
+            font-family: monospace;
+        }
+
+        table.memmap td {
+            vertical-align: middle;
+        }
+
+        table.memmap tr.osrom {
+            background-color: #222244;
+        }
+
+        table.memmap tr.hw {
+            background-color: #444433;
+        }
+
+        table.memmap tr.rom1 {
+            background-color: #222233;
+        }
+
+        table.memmap tr.ram1 {
+            background-color: #223322;
+        }
+
+        table.memmap tr.ram2 {
+            background-color: #283828;
+        }
+
+        code.asm6502, code.javascript {
+            font-size: 22pt;
+            line-height: 110%;
+        }
+        .goto h1, .goto h2, .goto h3, .goto h4 {
+            font-family: "Helvetica";
+        }
+        .goto h1 {
+            font-size: 4em;
+            font-weight: bold;
+        }
+        .goto h2 {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .goto h3 {
+            font-size: 2em;
+            font-style: italic;
+        }
+    </style>
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="default.js" type="text/javascript"></script>
+</head>
+
+<body>
+
+<div class="reveal">
+
+    <div class="slides">
+        <section fullscreen-img="goto-bg.png" class="goto">
+            <h1>Emulating a<br>6502 system</h1>
+            <h2>(in Javascript)</h2>
+            <h3>Matt Godbolt</h3>
+            <aside class="notes">Who am I? Games coder turned C++ tools developer turned mobile programmer turned LL
+                trading systems coder. Will talk about what it is, why you should care, how to do it and the fun you can
+                have along the way. 5 years on and off.
+            </aside>
+        </section>
+        <section>
+            <h1>Emulating a<br>6502 system</h1>
+            <h2>(in Javascript)</h2>
+            <h3>Matt Godbolt</h3>
+        </section>
+        <section>
+            <h2>The 6502</h2>
+            <img class="stretch" src="MOS_6502_layers_top.png">
+            <aside class="notes">8-bit microprocessor; 3510 transistors, laid out by hand. First produced in 1975.
+                Over 10 billion made so far
+            </aside>
+        </section>
+        <section>
+            <h2>6502 Computers</h2>
+            <table class="computers">
+                <tr>
+                    <td><img src="120px-Apple_iieb.jpg"></td>
+                    <td><img src="120px-Atari-2600-Console.jpg"></td>
+                    <td><img src="120px-Atari_800.jpg"></td>
+                </tr>
+                <tr>
+                    <td class="fragment highlight-red" data-fragment-index="2"><img
+                            src="120px-BBC_Micro_Front_Restored.jpg"></td>
+                    <td><img src="120px-Commodore_2001_Series-IMG_0448b.jpg"></td>
+                    <td><img src="Commodore-VIC-20-FL.jpg"></td>
+                </tr>
+                <tr class="fragment" data-fragment-index="1">
+                    <td><img src="TheTerminator.jpg"></td>
+                    <td><img src="Bender.jpg"></td>
+                </tr>
+            </table>
+            <aside class="notes">Apple IIe, Atari 2600, Atari 800, Beeb, Commodore PET & 64, VIC20. Brought about the
+                1980s computer revolution
+            </aside>
+        </section>
+        <section>
+            <h2>What's a BBC Micro?</h2>
+            <img class="stretch" src="Beeb.jpeg">
+            <aside class="notes">
+                <ul>
+                    <li>Made by Acorn in 1981 as part of BBC Computer Literacy</li>
+                    <li>Acorn being the original A in ARM.</li>
+                    <li>2MHz 6502 CPU</li>
+                    <li>32KB RAM / 32KB ROM</li>
+                    <li>Memory-mapped hardware</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>Why me?</h2>
+            <img class="stretch" src="AcornUser1.png">
+        </section>
+        <section>
+            <h2>Why me?</h2>
+            <img class="stretch" src="AcornUser2.png">
+        </section>
+        <section>
+            <img class="stretch" src="BBC_Micro_Elite_screenshot.png">
+            <aside class="notes">Released in 1984, 100k copies for the BBC</aside>
+        </section>
+        <section>
+            <img class="stretch" src="474053-exile-bbc-micro-screenshot-just-three-of-the-many-different.gif">
+            <aside class="notes">Released in 1988</aside>
+        </section>
+        <section>
+            <h2>Why Javascript?</h2>
+        </section>
+        <section>
+            <h2>6502 101</h2>
+            <aside class="notes">8-bit, 3 registers A X Y, 256-byte stack, ZP, PC. Ran at 2MHz on beeb</aside>
+        </section>
+        <section>
+            <h2>Instructions</h2>
+                     <pre><code class="asm6502" data-trim>
+LDA STA LDX ... ; load / store A, X, Y
+TAX TXA ...     ; transfer A to X
+PHA PLA         ; push A / pull A
+CMP             ; compare with A
+ADC SBC         ; add/subtract with carry
+CLC SEC         ; clear / set carry
+JMP             ; jump
+BEQ BNE BCC BCS ; branch ==, !=, carry set/clear
+BMI BPL ...     ; &lt;0, &gt;=0
+JSR             ; jump to subroutine
+RTS             ; return from subroutine
+                     </code></pre>
+        </section>
+        <section>
+            <h2>Addressing modes</h2>
+                     <pre><code class="asm6502" data-trim>
+a9 20     LDA #$20     ; A = 0x20
+
+a5 70     LDA $70      ; A = readmem(0x70)
+
+ad 34 12  LDA $1234    ; A = readmem(0x1234)
+                     </code></pre>
+        </section>
+        <section>
+            <h2>Addressing modes</h2>
+                     <pre><code class="asm6502" data-trim>
+bd 34 12  LDA $1234, X ; A = readmem(0x1234 + X)
+b9 34 12  LDA $1234, Y ; A = readmem(0x1234 + Y)
+
+b1 70     LDA ($70), Y ; t1 = readmem(0x70)
+                       ; t2 = readmem(0x71)
+                       ; addr = t1 | (t2&lt;&lt;8)
+                       ; A = readmem(addr + Y)
+
+b5 70     LDA $70, X   ; A = readmem(0x70 + X)
+                     </code></pre>
+        </section>
+        <section>
+            <h2>Emulating a 6502</h2>
+            <ul class="fragment">
+                <li>Fetch next instruction</li>
+                <li>Decode it</li>
+                <li>Execute it</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Emulation</h2>
+<pre><code class="javascript" data-trim>
+var a = 0, x = 0, y = 0;
+var pc = readword(0xfffe);
+while (true) {
+  switch (readmem(pc++)) {
+  case 0xa9: a = readmem(pc++); break; // LDA #imm
+  case 0xa3: // LDA $addr
+    var addr = readword(pc); pc += 2;
+    a = readmem(addr);
+    break;
+  // and so on for all other instructions...
+  }
+}
+</code></pre>
+        </section>
+        <section>
+            <h2>The outside world</h2>
+            <ul>
+                <li>Memory-mapped I/O</li>
+                <li class="fragment">Video chip:
+                    <ul>
+                        <li>Pixel generator reads from RAM</li>
+                        <li>Simple character-mapped mode</li>
+                        <li>Bitmap modes with 2, 4, 16 colours</li>
+                    </ul>
+                </li>
+                <li class="fragment">Timers</li>
+                <li class="fragment">Sound, etc</li>
+            </ul>
+        </section>
+        <section>
+            <h2><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&disc=Welcome.ssd&keyLayout=physical" target="_blank">Demo</a></h2>
+            <aside class="notes">
+                <ul>
+                    <li>Show MODE 7, another video mode.</li>
+                    <li>Show "hello world"</li>
+                    <li>Load up welcome, run kingdom?</li>
+                    <li>Run Elite...oh noes</li>
+                </ul>
+            </aside>
+        </section>
+        <section>
+            <h2>What happened?</h2>
+            <img src="BrokenElite.png" class="stretch">
+        </section>
+        <section>
+            <h2>Fixing it</h2>
+                 <pre><code class="fragment javascript" data-trim>
+case 0xa9: // LDA #imm
+  a = readmem(pc++);
+  video.run(2);
+  timers.run(2);
+  break;
+                     </code></pre>
+
+            <h3 class="fragment"><a href="https://bbc.godbolt.org/?disc=elite.ssd&autoboot&keyLayout=physical" target="_blank">Demo</a>
+            </h3>
+        </section>
+
+        <section>
+            <h2>More games</h2>
+            <img src="Zalaga.png" class="stretch">
+            <h3><a href="https://bbc.godbolt.org/?disc=sth%3AAardvark%2FZalaga.zip&autoboot&keyLayout=gaming&model=Master"
+                   target="_blank">Zalaga</a></h3>
+            <aside class="notes">Fun part of emulation! e.g. address $1114. SAX zp instruction. show debugger</aside>
+        </section>
+        <section>
+            <h2>Inside the 6502</h2>
+            <ul>
+                <table class="opcodes">
+                    <tr>
+                        <th>$84 10000100</th>
+                        <td>STY zp</td>
+                    </tr>
+                    <tr>
+                        <th>$85 10000101</th>
+                        <td>STA zp</td>
+                    </tr>
+                    <tr>
+                        <th>$86 10000110</th>
+                        <td>STX zp</td>
+                    </tr>
+                    <tr>
+                        <th>$87 10000111</th>
+                        <td>???</td>
+                    </tr>
+                </table>
+            </ul>
+        </section>
+        <section>
+            <h2>Real decoding</h2>
+            <img src="6502_pad_annot_07.png" class="stretch">
+            <div class="credit">&copy;2010 Visual6502.org, used with permission</div>
+            <aside class="notes">
+                Thanks to Visual 6502 people!<br>
+                PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
+                output is 130 bits that enable various parts of the chip.
+                SAX enables both "A" and "X" parts
+                NMOS transistors drain? something?
+            </aside>
+        </section>
+        <section>
+            <h2>Inside the 6502</h2>
+            <ul>
+                <table class="opcodes">
+                    <tr>
+                        <th>$84 10000100</th>
+                        <td>STY zp</td>
+                    </tr>
+                    <tr>
+                        <th>$85 10000101</th>
+                        <td>STA zp</td>
+                    </tr>
+                    <tr>
+                        <th>$86 10000110</th>
+                        <td>STX zp</td>
+                    </tr>
+                    <tr>
+                        <th>$87 10000111</th>
+                        <td><b>SAX zp</b></td>
+                    </tr>
+                </table>
+            </ul>
+        </section>
+        <section>
+            <h2>Even more games</h2>
+            <img src="Alien8.png" class="stretch">
+            <h4>An admission</h4>
+        </section>
+        <section>
+            <h2>Protection systems</h2>
+            <ul>
+                <li>Decrypt game code</li>
+                <li>Keys include:
+                    <ul>
+                        <li class="fragment">Magic values loaded from tape (or disc)</li>
+                        <li class="fragment">Decryption code itself</li>
+                        <li class="fragment">Hardware timers &amp; registers</li>
+                        <li class="fragment">Interrupt information</li>
+                    </ul>
+                </li>
+            </ul>
+            <aside class="notes">
+                Disc images mostly hacked
+                Doing tape support -> oh noes
+            </aside>
+        </section>
+        <section>
+            <h2>Accurate timing information</h2>
+            <h3><a href="http://visual6502.org/JSSim/expert.html?a=0&d=2e48fe" target="_blank">Visual 6502</a></h3>
+        </section>
+        <section>
+            <h2>ROL $fe48</h2>
+            <table>
+                <tr>
+                    <th>Cycle</th>
+                    <th>Read / Write</th>
+                    <th>Address</th>
+                    <th>Description</th>
+                </tr>
+                <tr>
+                    <td>0</td>
+                    <td>Read</td>
+                    <td>0d2d</td>
+                    <td>Read opcode (2e)</td>
+                </tr>
+                <tr>
+                    <td>1</td>
+                    <td>Read</td>
+                    <td>0d2e</td>
+                    <td>Read low byte of address (48)</td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Read</td>
+                    <td>0d2f</td>
+                    <td>Read high byte of address (fe)</td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Read</td>
+                    <td>fe48</td>
+                    <td>Read memory at $fe48</td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Write</td>
+                    <td>fe48</td>
+                    <td>Do rotate <span class="fragment" style="color: #ff2c2d;">&mdash; writes unmodified value!</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Write</td>
+                    <td>fe48</td>
+                    <td>Store to $fe48</td>
+                </tr>
+            </table>
+        </section>
+        <section>
+            <h2>Fixing it</h2>
+                 <pre><code class="fragment javascript" data-trim>
+case 0x2e: // ROL abs
+  addr = readword(pc); pc += 2;
+  hardware.run(3);
+  val = readbyte(addr);
+  hardware.run(1);
+  writebyte(addr, val); // unmodified value
+  hardware.run(1);
+  val = (val << 1) | (carry ? 1);
+  carry = val & 0x100;
+  writebyte(addr, val & 0xff); // modified value
+  hardware.run(1);
+  break;
+                     </code></pre>
+        </section>
+        <section>
+            <h2>Cycle stretching</h2>
+            <div class="wavedrom">
+                <script type="WaveDrom">
+{ signal : [
+  { name: "2 MHz",  wave: "N......." },
+  { name: "1 MHz",  wave: "N...", period: 2 },
+  {                 node: "..A.B...", phase: 0.5 },
+  { name: "Case 1", wave: "N.h.N..." },
+  {                 node: "...CD...", phase: 0.5 },
+  { name: "Case 2", wave: "N..hN..." }
+],
+edge: ['A-&gt;B stretch', 'C-&gt;D stretch']}
+
+
+                </script>
+            </div>
+        </section>
+        <section>
+            <h2>Performance</h2>
+            <ul>
+                <li class="fragment"><code>switch</code> statements</li>
+                <li class="fragment">Dynamic dispatch</li>
+                <li class="fragment">Loop unrolling for video</li>
+                <li class="fragment">Uint32Array for screen</li>
+                <li class="fragment">WebGL</li>
+                <li class="fragment">Deferred sound</li>
+            </ul>
+        </section>
+        <section>
+            <h2>Conclusion</h2>
+            <img class="stretch" src="tt26.jpg">
+        </section>
+        <section>
+            <h2>Resources</h2>
+            <ul>
+                <li><a href="http://bbc.godbolt.org/">http://bbc.godbolt.org/</a></li>
+                <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a></li>
+                <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
+                <li>Special thanks to
+                    <ul>
+                        <li>Rich Talbot-Watkins</li>
+                        <li>Ed Spittles &amp; the Visual6502 team</li>
+                        <li>Ian Bell</li>
+                        <li>Kevin Edwards</li>
+                        <li>the users on the <a href="http://www.stardot.org.uk/forums/">STH forums</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+        <section fullscreen-img="goto-last.png" class="goto"></section>
+    </div>
+</div>
+
+<script src="lib/js/head.min.js"></script>
+<script src="js/reveal.min.js"></script>
+
+<script>
+
+    // Full list of configuration options available here:
+    // https://github.com/hakimel/reveal.js#configuration
+    Reveal.initialize({
+        controls: false,
+        progress: false,
+        history: true,
+        center: true,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+            {
+                src: 'lib/js/classList.js', condition: function () {
+                return !document.body.classList;
+            }
+            },
+            {
+                src: 'plugin/markdown/marked.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            },
+            {
+                src: 'WaveDrom.js', async: true, callback: function () {
+                WaveDrom.ProcessAll();
+            }
+            },
+            {
+                src: 'plugin/markdown/markdown.js', condition: function () {
+                return !!document.querySelector('[data-markdown]');
+            }
+            }
+            ,
+            {
+                src: 'plugin/highlight/highlight.js', async: true, callback: function () {
+                hljs.initHighlightingOnLoad();
+            }
+            }
+            ,
+            {
+                src: 'plugin/zoom-js/zoom.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            }
+            ,
+            {
+                src: 'plugin/notes/notes.js', async: true, condition: function () {
+                return !!document.body.classList;
+            }
+            },
+            {src: 'lib/js/fullscreen-img.js'}
+        ]
+    });
+
+</script>
+
+</body>
+</html>
