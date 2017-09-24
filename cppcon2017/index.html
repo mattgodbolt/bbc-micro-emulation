@@ -308,7 +308,7 @@ while (true) {
   switch (readmem(pc++)) {
   case 0xa9: // LDA #imm
     a = readmem(pc++); break;
-  case 0xa3: // LDA $addr
+  case 0xad: // LDA $addr
     var addr = readword(pc); pc += 2;
     a = readmem(addr);
     break;
