@@ -1,3 +1,3 @@
-[submodule "cppcon2017/reveal.js"]
-	path = cppcon2017/reveal.js
+[submodule "reveal.js"]
+	path = reveal.js
 	url = https://github.com/hakimel/reveal.js.git
