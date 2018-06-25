@@ -250,7 +250,7 @@ LDA STA LDX ... ; load / store A, X, Y
 TAX TXA ...     ; transfer A to X
 PHA PLA         ; push A / pull A
 CMP             ; compare with A
-ADC SBC         ; add/subtract with carry
+ADC SBC         ; add / subtract with carry
 CLC SEC         ; clear / set carry
 JMP             ; jump
 BEQ BNE BCS BCC ; branch ==, !=, carry set/clear
@@ -583,6 +583,8 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
         progress: false,
         history: true,
         slideNumber: true,
+        width: 1280,
+        height: 720,
 
         transition: 'fade', // default/cube/page/concave/zoom/linear/fade/none
 
