@@ -119,7 +119,8 @@
         }
 
         table.memmap {
-            width: 100%;
+            width: 50%;
+            font-size: 0.6em;
         }
 
         table.memmap th {
@@ -309,9 +310,134 @@ b5 70     LDA $70, X   ; A = readmem(0x70 + X)
 </code></pre>
         </section>
         <section>
+            <h2>Except...</h2>
+            <ul>
+                <li>Setting flags</li>
+                <li>Memory access</li>
+                <li>Hardware</li>
+                <li>Interrupts</li>
+                <li>Handling time</li>
+            </ul>
+        </section>
+        <section>
+            <section>
+                <h2>Flags</h2>
+                <table class="horizontal">
+                    <thead>
+                    <tr>
+                        <th>7</th>
+                        <th>6</th>
+                        <th>5</th>
+                        <th>4</th>
+                        <th>3</th>
+                        <th>2</th>
+                        <th>1</th>
+                        <th>0</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>Negative</td>
+                        <td>oVerflow</td>
+                        <td>-</td>
+                        <td>-</td>
+                        <td>Decimal</td>
+                        <td>Interrupt<br>disable</td>
+                        <td>Zero</td>
+                        <td>Carry
+                    </tr>
+                    </tbody>
+                </table>
+                <br>
+                <ul class="fragment">
+                    <li>Z &amp; N set on ALU/load instruction</li>
+                    <li>C set by shifts &amp; arithmetic</li>
+                    <li>V set by arithmetic</li>
+                    <li>D, V, C and I controlled by special instructions</li>
+                </ul>
+            </section>
+            <section>
+                <h2>So now we have:</h2>
+                <pre><code class="javascript" data-trim>
+case 0xa9: // LDA #imm
+  a = readmem(pc++);
+  p.z = !!a;
+  p.n = !!(a &amp; 0x80);
+  break;             </code></pre>
+            </section>
+        </section>
+        <section>
+            <section>
+                <h2>Memory</h2>
+                <table class="fragment memmap">
+                    <tbody>
+                    <tr>
+                        <th>0x10000</th>
+                    </tr>
+                    <tr class="osrom">
+                        <th>&uarr;<br>0xff00</th>
+                        <td>256 bytes OS ROM</td>
+                    </tr>
+                    <tr class="hw">
+                        <th>&uarr;<br>0xfe00</th>
+                        <td>256 bytes hardware</td>
+                    </tr>
+                    <tr class="osrom">
+                        <th>&uarr;<br>0xfd00</th>
+                        <td>256 bytes ROM</td>
+                    </tr>
+                    <tr class="hw">
+                        <th>&uarr;<br>0xfc00</th>
+                        <td>256 bytes hardware</td>
+                    </tr>
+                    <tr class="osrom">
+                        <th>&uarr;<br>&uarr;<br>0xc000</th>
+                        <td>15.5KB OS ROM</td>
+                    </tr>
+                    <tr class="rom1">
+                        <th>&uarr;<br>&uarr;<br>0x8000</th>
+                        <td>16KB Paged ROM</td>
+                    </tr>
+                    <tr class="ram2">
+                        <th>&uarr;<br>&uarr;<br>0x4000</th>
+                        <td>16KB RAM</td>
+                    </tr>
+                    <tr class="ram1">
+                        <th>&uarr;<br>&uarr;<br>0x0000</th>
+                        <td>16KB RAM</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </section>
+            <section>
+                         <pre><code class="javascript" data-trim>
+var ram = new Uint8Array(0x8000), romsel = 0, roms = [];
+var os = load("OS");
+roms[15] = load("BASIC");
+
+function readmem(addr) {
+  if (addr &lt; 0x8000) return ram[addr];
+  if (addr &lt; 0xc000) return roms[romsel][addr - 0x8000];
+  if ((addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00)
+      || (addr &gt;= 0xfc00 &amp;&amp; addr &lt; 0xfd00))
+    return readhw(addr);
+  return os[addr - 0xc000];
+}
+                         </code></pre>
+            </section>
+            <section>
+                         <pre><code class="javascript" data-trim>
+function writemem(addr, b) {
+    if (addr &lt; 0x8000) ram[addr] = b;
+    if (addr &gt;= 0xfe00 &amp;&amp; addr &lt; 0xff00) writehw(addr, b);
+    // else does nothing - it's ROM
+}
+                         </code></pre>
+            </section>
+        </section>
+        <section>
             <h2>The outside world</h2>
             <ul>
-                <li>Memory-mapped I/O</li>
                 <li class="fragment">Video chip:
                     <ul>
                         <li>Pixel generator reads from RAM</li>
@@ -529,6 +655,12 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
 }
 
 
+
+
+
+
+
+
                 </script>
             </div>
         </section>
@@ -607,7 +739,7 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
                 src: 'reveal.js/plugin/highlight/highlight.js',
                 async: true,
                 callback: function () {
-                    function asm6502(hljs) {
+                    function asm6502() {
                         return {
                             k: {
                                 keyword: 'LDA LDX LDY STA STX STY INC INX INY DEC DEX DEY CMP CPX CPY BEQ BNE BMI BPL BCS BCC BVS BVC ' +
