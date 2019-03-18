@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="7c1acfc4-6224-45b2-b751-9e56ca52604d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/nng.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/120px-Apple_iieb.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/120px-Atari-2600-Console.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/120px-Atari_800.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/120px-BBC_Micro_Front_Restored.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/120px-Commodore_2001_Series-IMG_0448b.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/215px-MOS6502.svg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/474053-exile-bbc-micro-screenshot-just-three-of-the-many-different.gif" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/6502_pad_annot_07.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/6522BlockDiagram.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AcornUser1.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AcornUser2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Alien8.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BBC_Micro_Elite_screenshot.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Beeb.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Bender.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/BrokenElite.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Commodore-VIC-20-FL.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/KeyboardCircuitDiagram.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MOS6502.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MOS_6502_layers_top.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/StIsidore.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheComputerProgramme.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TheTerminator.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/WaveDrom.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Zalaga.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/blink.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/circuit-board.jpeg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/default.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goto-bg.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/goto-last.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/js/reveal.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/css/fullscreen-img.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/css/zenburn.css" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/font/league_gothic-webfont.eot" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/font/league_gothic-webfont.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/font/league_gothic-webfont.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/font/league_gothic-webfont.woff" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/js/fullscreen-img.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/js/head.min.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/narrow.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/reveal.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/teletext.ttf" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tt26.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../reveal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/.travis.yml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/CONTRIBUTING.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/Gruntfile.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/bower.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/print/paper.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/print/pdf.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/reveal.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/reveal.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/beige.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/black.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/blood.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/league.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/moon.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/night.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/serif.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/simple.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/sky.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/solarized.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/beige.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/black.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/blood.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/league.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/moon.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/night.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/serif.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/simple.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/sky.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/solarized.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/source/white.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/template/mixins.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/template/settings.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/template/theme.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/css/theme/white.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/demo.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/js/reveal.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/css/zenburn.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/league-gothic/LICENSE" beforeDir="false" afterPath="$PROJECT_DIR$/lib/font/league_gothic_license" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/league-gothic/league-gothic.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/league-gothic/league-gothic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/league-gothic/league-gothic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/league-gothic/league-gothic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/LICENSE" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-italic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-italic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-italic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-regular.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-regular.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-regular.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibold.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibold.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibold.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibolditalic.eot" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibolditalic.ttf" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro-semibolditalic.woff" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/font/source-sans-pro/source-sans-pro.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/js/classList.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/js/classList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/js/head.min.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/lib/js/html5shiv.js" beforeDir="false" afterPath="$PROJECT_DIR$/lib/js/html5shiv.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/highlight/highlight.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/markdown/example.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/markdown/example.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/markdown/markdown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/markdown/marked.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/math/math.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/multiplex/client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/multiplex/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/multiplex/master.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/multiplex/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/notes-server/client.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/notes-server/index.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/notes-server/notes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/notes/notes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/notes/notes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/print-pdf/print-pdf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/search/search.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/plugin/zoom-js/zoom.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/assets/image1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/assets/image2.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/barebones.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/embedded-media.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/math.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/slide-backgrounds.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/examples/slide-transitions.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/qunit-1.12.0.css" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/qunit-1.12.0.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/simple.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-element-attributes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-element-attributes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-external.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-external.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-options.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-options.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-slide-attributes.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown-slide-attributes.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-markdown.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-pdf.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test-pdf.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../reveal.js/test/test.js" beforeDir="false" />
+    </list>
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="nng" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="722">
+              <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/blink.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="594">
+              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="656">
+              <caret line="692" column="4" selection-start-line="692" selection-start-column="4" selection-end-line="692" selection-end-column="4" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>trying to recapture a lost youth</find>
+      <find>emulating</find>
+      <find>Javasc</find>
+      <find>h4</find>
+      <find>avast</find>
+      <find>fragment</find>
+      <find>cursor</find>
+      <find>type-in</find>
+      <find>data</find>
+      <find>emulat</find>
+      <find>no-bor</find>
+      <find>Matt Godbolt</find>
+      <find>6502 computer</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>nng</replace>
+    </replaceStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/blink.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="4">
+    <option name="x" value="67" />
+    <option name="y" value="27" />
+    <option name="width" value="1247" />
+    <option name="height" value="1413" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="nng" type="b2602c69:ProjectViewProjectNode" />
+              <item name="nng" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552947754410" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7c1acfc4-6224-45b2-b751-9e56ca52604d" name="Default Changelist" comment="" />
+      <created>1552758850838</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1552758850838</updated>
+      <workItem from="1552758852426" duration="7661000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="7661000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="67" y="27" width="1247" height="1413" extended-state="4" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Designer" />
+      <window_info id="Image Layers" />
+      <window_info id="Capture Tool" />
+      <window_info id="UI Designer" />
+      <window_info id="Favorites" sideWeight="0.50039154" side_tool="true" visible="true" weight="0.24729392" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49960846" visible="true" weight="0.24729392" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Database Changes" />
+      <window_info anchor="bottom" id="Version Control" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="right" id="Maven" />
+      <window_info anchor="right" id="Cargo" />
+      <window_info anchor="right" id="Palette" />
+      <window_info anchor="right" id="Capture Analysis" />
+      <window_info anchor="right" id="SciView" />
+      <window_info anchor="right" id="Database" />
+      <window_info anchor="right" id="Palette&#9;" />
+      <window_info anchor="right" id="Theme Preview" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="692" column="4" selection-start-line="692" selection-start-column="4" selection-end-line="692" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/blink.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="594">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="722">
+          <caret line="262" column="27" selection-start-line="262" selection-start-column="27" selection-end-line="262" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
