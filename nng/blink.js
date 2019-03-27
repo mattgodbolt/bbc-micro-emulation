@@ -1,7 +1,4 @@
 (() => {
-    for (let cursor of document.querySelectorAll("span.cursor")) {
-        // cursor.innerHTML = "&#x2588;"
-    }
     setInterval(() => {
         for (let cursor of document.querySelectorAll("span.cursor")) {
             cursor.classList.toggle("blink");
@@ -32,7 +29,7 @@
             if (!toReveal.length) return;
             toReveal[0]();
             toReveal.shift();
-            setTimeout(next, 50 + 150 * Math.random());
+            setTimeout(next, 50 + 120 * Math.random());
         };
         setTimeout(next, 200);
     }

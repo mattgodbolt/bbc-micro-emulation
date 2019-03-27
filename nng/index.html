@@ -508,7 +508,9 @@ function writemem(addr, b) {
             <pre><code class="javascript" data-trim data-noescape>
 case 0xa9: // LDA #imm
 <div class="fragment highlight-current-code">  a = readmem(pc++);
-</div><div class="fragment highlight-current-code">  video.run(2);
+</div>  p.z = !!a;
+  p.n = !!(a &amp; 0x80);
+<div class="fragment highlight-current-code">  video.run(2);
 </div><div class="fragment highlight-current-code">  timers.run(2);
 </div>  break;
                      </code></pre>
@@ -560,6 +562,78 @@ case 0xa9: // LDA #imm
                 SAX enables both "A" and "X" parts
                 NMOS transistors drain? something?
             </aside>
+        </section>
+        <section>
+            <h2>Inside the 6502</h2>
+            <pre style="width:40%">
+                 <span class="fragment highlight-current-red" data-fragment-index="2">+-----+</span><span
+                         class="fragment highlight-current-red" data-fragment-index="3">-----</span><span
+                         class="fragment highlight-current-red" data-fragment-index="1">+-----+</span>
+                 <span class="fragment highlight-current-red" data-fragment-index="2">|  A  |</span><span
+                         class="fragment highlight-current-red" data-fragment-index="3">  X  </span><span
+                         class="fragment highlight-current-red" data-fragment-index="1">|  Y  |</span>
+                 <span class="fragment highlight-current-red" data-fragment-index="2">+-----+</span><span
+                         class="fragment highlight-current-red" data-fragment-index="3">-----</span><span
+                         class="fragment highlight-current-red" data-fragment-index="1">+-----+</span>
+                    <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
+        /+--------- <span class="fragment highlight-current-red" data-fragment-index="2">|</span> --- <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span> <span
+                         class="fragment highlight-current-red" data-fragment-index="1">(!s && !t)</span>
+        ||          <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
++----------+        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
+| opcode|| |        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
+| 100001<span class="fragment highlight-current-red" data-fragment-index="3">s</span><span
+                         class="fragment highlight-current-red" data-fragment-index="2">t</span> |<span
+                         class="fragment highlight-current-red"
+                         data-fragment-index="2">------->t</span>     <span class="fragment highlight-current-red"
+                                                                            data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
++----------+        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
+     ^  <span class="fragment highlight-current-red" data-fragment-index="3">\----------</span> <span
+                         class="fragment highlight-current-red" data-fragment-index="2">|</span> <span
+                         class="fragment highlight-current-red" data-fragment-index="3">--->s</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
+     |              <span class="fragment highlight-current-red" data-fragment-index="2">\</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
+                         class="fragment highlight-current-red" data-fragment-index="1">/</span>
+     |               <span class="fragment highlight-current-red" data-fragment-index="2">\</span>    <span
+                         class="fragment highlight-current-red" data-fragment-index="3">|</span>    <span
+                         class="fragment highlight-current-red" data-fragment-index="1">/</span>
+  select              write bus
+   store
+            </pre>
+        </section>
+        <section>
+            <h2>Inside the 6502</h2>
+            <pre style="width:40%">
+                 <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
+                 <span class="fragment highlight-current-red" data-fragment-index="1">|  A  |  X  |</span>  Y  |
+                 <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
+                    <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
+        /+--------- <span class="fragment highlight-current-red" data-fragment-index="1">|</span> --- <span
+                         class="fragment highlight-current-red" data-fragment-index="1">|</span> (!s && !t)
+        ||          <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
++----------+        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
+| opcode|| |        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
+| 100001<span class="fragment highlight-current-red" data-fragment-index="1">st</span> |<span
+                         class="fragment highlight-current-red" data-fragment-index="1">------->t     |</span>     |
++----------+        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
+     ^  <span class="fragment highlight-current-red" data-fragment-index="1">\---------- | --->s</span>     |
+     |              <span class="fragment highlight-current-red" data-fragment-index="1">\     |</span>     /
+     |               <span class="fragment highlight-current-red" data-fragment-index="1">\    |</span>    /
+  select              write bus
+   store
+            </pre>
         </section>
         <section>
             <h2>Inside the 6502</h2>
@@ -703,6 +777,15 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
 
 
 
+
+
+
+
+
+
+
+
+
                 </script>
             </div>
         </section>
@@ -732,10 +815,14 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
             <h2>Some Demos</h2>
             <ul>
                 <li>
-                    <a href="https://bitshifters.github.io/jsbeeb/?disc=https://bitshifters.github.io/content/crtc-somenastyeffects.ssd&autoboot&model=Master">Some
+                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/bs-scr-beeb.ssd&autoboot&model=Master">
+                        Stunt Car Racer
+                    </a></li>
+                <li>
+                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/crtc-somenastyeffects.ssd&autoboot&model=Master">Some
                         Nasty Effects</a></li>
                 <li>
-                    <a href="https://bitshifters.github.io/jsbeeb/?disc=https://bitshifters.github.io/content/TheMaster-Demo128.ssd&autoboot&model=Master">The
+                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/TheMaster-Demo128.ssd&autoboot&model=Master">The
                         Master</a></li>
                 <!--<li><a href="http://localhost/jsbeeb/?disc=Blurp.ssd&autoboot&keyLayout=physical">Blurp</a></li>-->
                 <li><a href="https://bitshifters.github.io/">Bitshifters</a></li>
