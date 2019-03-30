@@ -63,6 +63,15 @@
             display: none !important;
         }
 
+        div.flex {
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .w40 {
+            width: 40%;
+        }
+
         div.footer img {
             margin-top: 30px;
         }
@@ -87,6 +96,18 @@
         .reveal .slides section .fragment.highlight-current-code.current-fragment {
             background: #555a5f;
             color: #ffffff;
+        }
+
+        .registers code {
+            text-decoration: underline;
+        }
+
+        div.computers img {
+            height: 150px;
+        }
+
+        div.computers img.big {
+            height: 300px;
         }
 
         table.rol {
@@ -119,10 +140,6 @@
             background-color: #222;
         }
 
-        table.computers {
-            width: 100%;
-        }
-
         table.opcodes th {
             font-family: monospace;
         }
@@ -133,23 +150,6 @@
 
         div.wavedrom {
             background: #ffffff;
-        }
-
-        table.computers td {
-            text-align: center;
-            vertical-align: middle;
-            width: 120px;
-            height: 120px;
-        }
-
-        table.computers img {
-            border: 8px solid black;
-            max-width: 100%;
-            max-height: 100%;
-        }
-
-        table.computers td.highlight-red.current-fragment img {
-            border: 8px solid red;
         }
 
         table.memmap {
@@ -224,67 +224,108 @@
 <div class="reveal">
 
     <section class="slides">
-        <section class="nng" data-background-color="#008dd4">
-            <h1>Emulating the<br>BBC&nbsp;Micro<br>in Javascript</h1>
-            <h3><a href="https://twitter.com/mattgodbolt/">Matt Godbolt</a></h3>
-            <h3>NNG | <a href="https://www.nng.com/stisidore/">St Isidore's Day</a> | 4<sup>th</sup> April 2019</h3>
-            <img src="StIsidore.png" class="no-border stis" height="200px">
-        </section>
+        <!---------------------------------------------------------------------->
         <section>
-            <h2 class="type-in">
-                <span>Emulating the</span><br><span>BBC&nbsp;Micro</span><br><span>in Javascript</span></h2>
-            <h4 class="type-in"><span>Matt Godbolt</span></h4>
-            <h4 class="type-in"><span>Trying to recapture a lost youth</span></h4>
+            <section class="nng" data-background-color="#008dd4">
+                <h1>Emulating the<br>BBC&nbsp;Micro<br>in Javascript</h1>
+                <h3><a href="https://twitter.com/mattgodbolt/">Matt Godbolt</a></h3>
+                <h3>NNG | <a href="https://www.nng.com/stisidore/">St Isidore's Day</a> | 4<sup>th</sup> April 2019</h3>
+                <img src="StIsidore.png" class="no-border stis" height="200px">
+            </section>
+            <section>
+                <h2 class="type-in">
+                    <span>Emulating the</span><br><span>BBC&nbsp;Micro</span><br><span>in Javascript</span></h2>
+                <h4 class="type-in"><span>Matt Godbolt</span></h4>
+                <h4 class="type-in"><span>Trying to recapture a lost youth</span></h4>
+            </section>
         </section>
+
+        <!---------------------------------------------------------------------->
         <section>
-            <h2>What's a BBC Micro?</h2>
-            <img class="stretch" src="Beeb.jpeg">
-            <aside class="notes">
-                <ul>
-                    <li>Made by Acorn in 1981 as part of BBC Computer Literacy</li>
-                    <li>Acorn being the original A in ARM.</li>
-                    <li>2MHz 6502 CPU</li>
-                    <li>32KB RAM / 32KB ROM</li>
-                    <li>Memory-mapped hardware</li>
+            <section>
+                <h2>What's a BBC Micro?</h2>
+                <img class="stretch" src="Beeb.jpeg">
+                <aside class="notes">
+                    <ul>
+                        <li>Made by Acorn in 1981 as part of BBC Computer Literacy Project</li>
+                        <li>Acorn being the original A in ARM.</li>
+                        <li>2MHz 6502 CPU</li>
+                        <li>32KB RAM / 32KB ROM</li>
+                        <li>Memory-mapped hardware</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>Why BBC Micro?</h2>
+                <img class="fragment" src="AcornUser1.png">
+            </section>
+            <section>
+                <h2>Why BBC Micro?</h2>
+                <img src="AcornUser2.png">
+            </section>
+            <section>
+                <h2>Why Javascript?</h2>
+                <div class="flex">
+                    <div class="">
+                        <ul class="fragment" data-fragment-index="1">
+                            <li>Surely it'd be too slow?</li>
+                            <li>"Worse" than C++?</li>
+                            <li>Why not?</li>
+                            <li class="fragment" data-fragment-index="2">Runs in browser</li>
+                        </ul>
+                    </div>
+                    <div class="">
+                        <img class="no-border fragment" data-fragment-index="2" src="Exile.png">
+                    </div>
+                </div>
+            </section>
+        </section>
+
+        <!---------------------------------------------------------------------->
+        <section>
+            <section>
+                <h2>The 6502</h2>
+                <img class="stretch" src="MOS_6502_layers_top.png">
+                <aside class="notes">8-bit microprocessor; 3510 transistors, laid out by hand. First produced in 1975.
+                    Over 10 billion made so far
+                </aside>
+            </section>
+            <section>
+                <h2>6502 Computers</h2>
+                <div class="flex computers">
+                    <img class="no-border" src="120px-Apple_iieb.jpg">
+                    <img class="no-border" src="120px-Atari-2600-Console.jpg">
+                    <img class="no-border" src="120px-Atari_800.jpg">
+                    <img class="no-border" src="120px-BBC_Micro_Front_Restored.jpg">
+                    <img class="no-border" src="120px-Commodore_2001_Series-IMG_0448b.jpg">
+                    <img class="no-border" src="Commodore-VIC-20-FL.jpg">
+                </div>
+                <div class="flex fragment computers">
+                    <img class="no-border big" src="TheTerminator.jpg">
+                    <img class="no-border big" src="Bender.jpg">
+                </div>
+                <aside class="notes">
+                    Apple IIe, Atari 2600, Atari 800, Beeb, Commodore PET & 64, VIC20. Brought about
+                    the 1980s computer revolution
+                </aside>
+            </section>
+            <section>
+                <h2>6502 101</h2>
+                <aside class="notes">8-bit, 3 registers A X Y, 256-byte stack, ZP, PC. Ran at 2MHz on beeb</aside>
+            </section>
+            <section>
+                <h2>Registers</h2>
+                <ul class="registers">
+                    <li>8-bit <code>A</code>ccumulator</li>
+                    <li>8-bit <code>X</code>, <code>Y</code> index</li>
+                    <li><code>P</code>rocessor status</li>
+                    <li><code>S</code>tack pointer</li>
+                    <li>Program counter</li>
                 </ul>
-            </aside>
-        </section>
-        <section>
-            <h2>The 6502</h2>
-            <img class="stretch" src="MOS_6502_layers_top.png">
-            <aside class="notes">8-bit microprocessor; 3510 transistors, laid out by hand. First produced in 1975.
-                Over 10 billion made so far
-            </aside>
-        </section>
-        <section>
-            <h2>6502 Computers</h2>
-            <table class="computers">
-                <tr>
-                    <td><img src="120px-Apple_iieb.jpg"></td>
-                    <td><img src="120px-Atari-2600-Console.jpg"></td>
-                    <td><img src="120px-Atari_800.jpg"></td>
-                </tr>
-                <tr>
-                    <td><img src="120px-BBC_Micro_Front_Restored.jpg"></td>
-                    <td><img src="120px-Commodore_2001_Series-IMG_0448b.jpg"></td>
-                    <td><img src="Commodore-VIC-20-FL.jpg"></td>
-                </tr>
-                <tr class="fragment">
-                    <td><img src="TheTerminator.jpg"></td>
-                    <td><img src="Bender.jpg"></td>
-                </tr>
-            </table>
-            <aside class="notes">Apple IIe, Atari 2600, Atari 800, Beeb, Commodore PET & 64, VIC20. Brought about the
-                1980s computer revolution
-            </aside>
-        </section>
-        <section>
-            <h2>6502 101</h2>
-            <aside class="notes">8-bit, 3 registers A X Y, 256-byte stack, ZP, PC. Ran at 2MHz on beeb</aside>
-        </section>
-        <section>
-            <h2>Instructions</h2>
-            <pre><code class="asm6502" data-trim>
+            </section>
+            <section>
+                <h2>Instructions</h2>
+                <pre><code class="asm6502" data-trim>
 LDA STA LDX ... ; load / store A, X, Y
 TAX TXA ...     ; transfer A to X
 PHA PLA         ; push A / pull A
@@ -297,20 +338,20 @@ BMI BPL ...     ; &lt;0, &gt;=0
 JSR             ; jump to subroutine
 RTS             ; return from subroutine
                      </code></pre>
-        </section>
-        <section>
-            <h2>Addressing modes</h2>
-            <pre><code class="asm6502" data-trim>
+            </section>
+            <section>
+                <h2>Addressing modes</h2>
+                <pre><code class="asm6502" data-trim>
 a9 20     LDA #$20     ; A = 0x20
 
 a5 70     LDA $70      ; A = readmem(0x70)
 
 ad 34 12  LDA $1234    ; A = readmem(0x1234)
                      </code></pre>
-        </section>
-        <section>
-            <h2>Addressing modes</h2>
-            <pre><code class="asm6502" data-trim>
+            </section>
+            <section>
+                <h2>Addressing modes</h2>
+                <pre><code class="asm6502" data-trim>
 bd 34 12  LDA $1234, X ; A = readmem(0x1234 + X)
 b9 34 12  LDA $1234, Y ; A = readmem(0x1234 + Y)
 
@@ -321,18 +362,22 @@ b1 70     LDA ($70), Y ; t1 = readmem(0x70)
 
 b5 70     LDA $70, X   ; A = readmem(0x70 + X)
                      </code></pre>
+            </section>
         </section>
+
+        <!---------------------------------------------------------------------->
         <section>
-            <h2>Emulating a 6502</h2>
-            <ul class="fragment">
-                <li>Fetch next instruction</li>
-                <li>Decode it</li>
-                <li>Execute it</li>
-            </ul>
-        </section>
-        <section>
-            <h2>Emulation</h2>
-            <pre><code class="javascript" data-trim data-noescape>
+            <section>
+                <h2>Emulating a 6502</h2>
+                <ul class="fragment">
+                    <li>Fetch next instruction</li>
+                    <li>Decode it</li>
+                    <li>Execute it</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Emulation</h2>
+                <pre><code class="javascript" data-trim data-noescape>
 <span class="fragment highlight-current-code">var a = 0, x = 0, y = 0, pc = readword(0xfffe);
 </span>while (true) {
   switch (<span class="fragment highlight-current-code">readmem(pc++)</span>) {
@@ -346,20 +391,19 @@ b5 70     LDA $70, X   ; A = readmem(0x70 + X)
   }
 }
 </code></pre>
-        </section>
-        <section>
-            <h2>Except...</h2>
-            <ul>
-                <li>Setting flags</li>
-                <li>Memory access</li>
-                <li>Hardware</li>
-                <li>Interrupts</li>
-                <li>Handling time</li>
-            </ul>
-        </section>
-        <section>
+            </section>
             <section>
-                <h2>Flags</h2>
+                <h2>Except...</h2>
+                <ul>
+                    <li>Setting flags</li>
+                    <li>Memory access</li>
+                    <li>Hardware</li>
+                    <li>Interrupts</li>
+                    <li>Handling time</li>
+                </ul>
+            </section>
+            <section>
+                <h2>Processor status: Flags</h2>
                 <table class="horizontal">
                     <thead>
                     <tr>
@@ -404,6 +448,8 @@ case 0xa9: // LDA #imm
   break;             </code></pre>
             </section>
         </section>
+
+        <!---------------------------------------------------------------------->
         <section>
             <section>
                 <h2>Memory</h2>
@@ -473,39 +519,42 @@ function writemem(addr, b) {
                          </code></pre>
             </section>
         </section>
+
+        <!---------------------------------------------------------------------->
         <section>
-            <h2>The outside world</h2>
-            <ul>
-                <li class="fragment">Video chip:
-                    <ul>
-                        <li>Pixel generator reads from RAM</li>
-                        <li>Simple character-mapped mode</li>
-                        <li>Bitmap modes with 2, 4, 16 colours</li>
-                    </ul>
-                </li>
-                <li class="fragment">Sound (SN76489)</li>
-                <li class="fragment">Timers (6522 VIA)</li>
-            </ul>
-        </section>
-        <section>
-            <h2><a href="http://bbc.godbolt.org/?videoCyclesBatch=8000&disc=Welcome.ssd&keyLayout=physical"
-                   target="_blank">Demo</a></h2>
-            <aside class="notes">
+            <section>
+                <h2>The outside world</h2>
                 <ul>
-                    <li>Show MODE 7, another video mode.</li>
-                    <li>Show "hello world"</li>
-                    <li>Load up welcome, run kingdom?</li>
-                    <li>Run Elite...oh noes</li>
+                    <li class="fragment">Video chip:
+                        <ul>
+                            <li>Pixel generator reads from RAM</li>
+                            <li>Simple character-mapped mode</li>
+                            <li>Bitmap modes with 2, 4, 16 colours</li>
+                        </ul>
+                    </li>
+                    <li class="fragment">Sound (SN76489)</li>
+                    <li class="fragment">Timers (6522 VIA)</li>
                 </ul>
-            </aside>
-        </section>
-        <section>
-            <h2>What happened?</h2>
-            <img src="BrokenElite.png" class="stretch">
-        </section>
-        <section>
-            <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-noescape>
+            </section>
+            <section>
+                <h2><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&disc=Welcome.ssd&keyLayout=physical"
+                       target="_blank">Demo</a></h2>
+                <aside class="notes">
+                    <ul>
+                        <li>Show MODE 7, another video mode.</li>
+                        <li>Show "hello world"</li>
+                        <li>Load up welcome, run kingdom?</li>
+                        <li>Run Elite...oh noes</li>
+                    </ul>
+                </aside>
+            </section>
+            <section>
+                <h2>What happened?</h2>
+                <img src="BrokenElite.png" class="stretch">
+            </section>
+            <section>
+                <h2>Fixing it</h2>
+                <pre><code class="javascript" data-trim data-noescape>
 case 0xa9: // LDA #imm
 <div class="fragment highlight-current-code">  a = readmem(pc++);
 </div>  p.z = !!a;
@@ -515,57 +564,65 @@ case 0xa9: // LDA #imm
 </div>  break;
                      </code></pre>
 
-            <h3 class="fragment"><a href="http://bbc.godbolt.org/?disc=elite.ssd&autoboot&keyLayout=physical"
-                                    target="_blank">Demo</a>
-            </h3>
+                <h3 class="fragment"><a href="https://bbc.godbolt.org/?disc=elite.ssd&autoboot&keyLayout=physical"
+                                        target="_blank">Demo</a>
+                </h3>
+            </section>
         </section>
 
+        <!---------------------------------------------------------------------->
         <section>
-            <h2>More games</h2>
-            <img src="Zalaga.png" class="stretch">
-            <h3>
-                <a href="http://bbc.godbolt.org/?disc=Zalaga.ssd&autoboot&keyLayout=gaming&model=Master"
-                   target="_blank">Zalaga</a></h3>
-            <aside class="notes">Fun part of emulation! e.g. address $1114. SAX zp instruction. show debugger</aside>
-        </section>
-        <section>
-            <h2>Inside the 6502</h2>
-            <ul>
-                <table class="opcodes">
-                    <tr>
-                        <th>$84 100001<span class="fragment highlight-current-red" data-fragment-index=1>00</span></th>
-                        <td>STY zp</td>
-                    </tr>
-                    <tr>
-                        <th>$85 100001<span class="fragment highlight-current-red" data-fragment-index=1>01</span></th>
-                        <td>STA zp</td>
-                    </tr>
-                    <tr>
-                        <th>$86 100001<span class="fragment highlight-current-red" data-fragment-index=1>10</span></th>
-                        <td>STX zp</td>
-                    </tr>
-                    <tr>
-                        <th>$87 100001<span class="fragment highlight-current-red" data-fragment-index=1>11</span></th>
-                        <td>???</td>
-                    </tr>
-                </table>
-            </ul>
-        </section>
-        <section>
-            <h2>Real decoding</h2>
-            <img src="6502_pad_annot_07.png" class="stretch">
-            <div class="credit">&copy;2010 Visual6502.org, used with permission</div>
-            <aside class="notes">
-                Thanks to Visual 6502 people!<br>
-                PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
-                output is 130 bits that enable various parts of the chip.
-                SAX enables both "A" and "X" parts
-                NMOS transistors drain? something?
-            </aside>
-        </section>
-        <section>
-            <h2>Inside the 6502</h2>
-            <pre style="width:40%">
+            <section>
+                <h2>More games</h2>
+                <img src="Zalaga.png" class="stretch">
+                <h3>
+                    <a href="https://bbc.godbolt.org/?disc=Zalaga.ssd&autoboot&keyLayout=gaming&model=Master"
+                       target="_blank">Zalaga</a></h3>
+                <aside class="notes">Fun part of emulation! e.g. address $1114. SAX zp instruction. show debugger
+                </aside>
+            </section>
+            <section>
+                <h2>Inside the 6502</h2>
+                <ul>
+                    <table class="opcodes">
+                        <tr>
+                            <th>$84 100001<span class="fragment highlight-current-red" data-fragment-index=1>00</span>
+                            </th>
+                            <td>STY zp</td>
+                        </tr>
+                        <tr>
+                            <th>$85 100001<span class="fragment highlight-current-red" data-fragment-index=1>01</span>
+                            </th>
+                            <td>STA zp</td>
+                        </tr>
+                        <tr>
+                            <th>$86 100001<span class="fragment highlight-current-red" data-fragment-index=1>10</span>
+                            </th>
+                            <td>STX zp</td>
+                        </tr>
+                        <tr>
+                            <th>$87 100001<span class="fragment highlight-current-red" data-fragment-index=1>11</span>
+                            </th>
+                            <td>???</td>
+                        </tr>
+                    </table>
+                </ul>
+            </section>
+            <section>
+                <h2>Real decoding</h2>
+                <img src="6502_pad_annot_07.png" class="stretch">
+                <div class="credit">&copy;2010 Visual6502.org, used with permission</div>
+                <aside class="notes">
+                    Thanks to Visual 6502 people!<br>
+                    PLA is a 130x21 ROM, indexed by 8 instr bits + ~bits (minus one), and 6 bits of T-state..
+                    output is 130 bits that enable various parts of the chip.
+                    SAX enables both "A" and "X" parts
+                    NMOS transistors drain? something?
+                </aside>
+            </section>
+            <section>
+                <h2>Inside the 6502</h2>
+                <pre style="width:40%">
                  <span class="fragment highlight-current-red" data-fragment-index="2">+-----+</span><span
                          class="fragment highlight-current-red" data-fragment-index="3">-----</span><span
                          class="fragment highlight-current-red" data-fragment-index="1">+-----+</span>
@@ -612,10 +669,10 @@ case 0xa9: // LDA #imm
   select              write bus
    store
             </pre>
-        </section>
-        <section>
-            <h2>Inside the 6502</h2>
-            <pre style="width:40%">
+            </section>
+            <section>
+                <h2>Inside the 6502</h2>
+                <pre style="width:40%">
                  <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
                  <span class="fragment highlight-current-red" data-fragment-index="1">|  A  |  X  |</span>  Y  |
                  <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
@@ -634,10 +691,9 @@ case 0xa9: // LDA #imm
   select              write bus
    store
             </pre>
-        </section>
-        <section>
-            <h2>Inside the 6502</h2>
-            <ul>
+            </section>
+            <section>
+                <h2>Inside the 6502</h2>
                 <table class="opcodes">
                     <tr>
                         <th>$84 10000100</th>
@@ -656,87 +712,91 @@ case 0xa9: // LDA #imm
                         <td><b>SAX zp</b></td>
                     </tr>
                 </table>
-            </ul>
+            </section>
         </section>
+
+        <!---------------------------------------------------------------------->
         <section>
-            <h2>Even more games</h2>
-            <img src="Alien8.png" class="stretch">
-            <h4>An admission</h4>
-        </section>
-        <section>
-            <h2>Protection systems</h2>
-            <ul>
-                <li>Decrypt game code</li>
-                <li>Keys include:
-                    <ul>
-                        <li>Magic values loaded from tape (or disc)</li>
-                        <li class="fragment">Decryption code itself</li>
-                        <li class="fragment">Hardware timers &amp; registers</li>
-                        <li class="fragment">Interrupt information</li>
-                        <li class="fragment">Read-modify-write</li>
-                    </ul>
-                </li>
-            </ul>
-            <aside class="notes">
-                Disc images mostly hacked
-                Doing tape support -> oh noes
-            </aside>
-        </section>
-        <section>
-            <h2>Accurate timing information</h2>
-            <h3><a href="http://visual6502.org/JSSim/expert.html?a=0&d=2e48fe" target="_blank">Visual 6502</a></h3>
-        </section>
-        <section>
-            <h2>ROL $fe48</h2>
-            <table class="rol">
-                <tr>
-                    <th>Cycle</th>
-                    <th>Read / Write</th>
-                    <th>Address</th>
-                    <th>Description</th>
-                </tr>
-                <tr>
-                    <td>0</td>
-                    <td>Read</td>
-                    <td>0d2d</td>
-                    <td>Read opcode (2e)</td>
-                </tr>
-                <tr>
-                    <td>1</td>
-                    <td>Read</td>
-                    <td>0d2e</td>
-                    <td>Read low byte of address (48)</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Read</td>
-                    <td>0d2f</td>
-                    <td>Read high byte of address (fe)</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Read</td>
-                    <td>fe48</td>
-                    <td>Read memory at $fe48</td>
-                </tr>
-                <tr>
-                    <td>4</td>
-                    <td>Write</td>
-                    <td>fe48</td>
-                    <td>Do rotate <span class="fragment" style="color: #ff2c2d;">&mdash; writes unmodified value!</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td>5</td>
-                    <td>Write</td>
-                    <td>fe48</td>
-                    <td>Store to $fe48</td>
-                </tr>
-            </table>
-        </section>
-        <section>
-            <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-noescape>
+            <section>
+                <h2>Even more games</h2>
+                <img src="Alien8.png" class="stretch">
+                <h4>An admission</h4>
+            </section>
+            <section>
+                <h2>Protection systems</h2>
+                <ul>
+                    <li>Decrypt game code</li>
+                    <li>Keys include:
+                        <ul>
+                            <li>Magic values loaded from tape (or disc)</li>
+                            <li class="fragment">Decryption code itself</li>
+                            <li class="fragment">Hardware timers &amp; registers</li>
+                            <li class="fragment">Interrupt information</li>
+                            <li class="fragment">Read-modify-write</li>
+                        </ul>
+                    </li>
+                </ul>
+                <aside class="notes">
+                    Disc images mostly hacked
+                    Doing tape support -> oh noes
+                </aside>
+            </section>
+            <section>
+                <h2>Accurate timing information</h2>
+                <h3><a href="http://visual6502.org/JSSim/expert.html?a=0&d=2e48fe" target="_blank">Visual 6502</a></h3>
+            </section>
+            <section>
+                <h2>ROL $fe48</h2>
+                <table class="rol">
+                    <tr>
+                        <th>Cycle</th>
+                        <th>Read / Write</th>
+                        <th>Address</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>0</td>
+                        <td>Read</td>
+                        <td>0d2d</td>
+                        <td>Read opcode (2e)</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Read</td>
+                        <td>0d2e</td>
+                        <td>Read low byte of address (48)</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Read</td>
+                        <td>0d2f</td>
+                        <td>Read high byte of address (fe)</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Read</td>
+                        <td>fe48</td>
+                        <td>Read memory at $fe48</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Write</td>
+                        <td>fe48</td>
+                        <td>Do rotate <span class="fragment"
+                                            style="color: #ff2c2d;">&mdash; writes unmodified value!</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Write</td>
+                        <td>fe48</td>
+                        <td>Store to $fe48</td>
+                    </tr>
+                </table>
+            </section>
+            <section>
+                <h2>Fixing it</h2>
+                <pre><code class="javascript" data-trim data-noescape>
 case 0x2e: // ROL abs
 <div class="fragment highlight-current-code">  addr = readword(pc); pc += 2;
   hardware.run(3);
@@ -750,11 +810,11 @@ case 0x2e: // ROL abs
   hardware.run(1);
 </div>  break;
                      </code></pre>
-        </section>
-        <section>
-            <h2>Cycle stretching</h2>
-            <div class="wavedrom">
-                <script type="WaveDrom">
+            </section>
+            <section>
+                <h2>Cycle stretching</h2>
+                <div class="wavedrom">
+                    <script type="WaveDrom">
 { signal : [
   { name: "CPU @ 2 MHz",  wave: "N......." },
   { name: "H/W @ 1 MHz",  wave: "N...", period: 2 },
@@ -781,53 +841,54 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
 
 
 
-
-
-
-
-
-                </script>
-            </div>
+                    </script>
+                </div>
+            </section>
         </section>
-        <section>
-            <h2>Conclusion</h2>
-            <img class="stretch" src="tt26.jpg">
-        </section>
-        <section>
-            <h2>Resources</h2>
-            <ul>
-                <li><a href="https://bbc.godbolt.org/">https://bbc.godbolt.org/</a></li>
-                <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a></li>
-                <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
-                <li>Special thanks to
-                    <ul>
-                        <li>Rich Talbot-Watkins</li>
-                        <li>Ed Spittles &amp; the Visual6502 team</li>
-                        <li>Ian Bell</li>
-                        <li>Kevin Edwards</li>
-                        <li>Kieran Connell</li>
-                        <li>the users on the <a href="http://www.stardot.org.uk/forums/">*. forums</a></li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-        <section>
-            <h2>Some Demos</h2>
-            <ul>
-                <li>
-                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/bs-scr-beeb.ssd&autoboot&model=Master">
-                        Stunt Car Racer
-                    </a></li>
-                <li>
-                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/crtc-somenastyeffects.ssd&autoboot&model=Master">Some
-                        Nasty Effects</a></li>
-                <li>
-                    <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/TheMaster-Demo128.ssd&autoboot&model=Master">The
-                        Master</a></li>
-                <!--<li><a href="http://localhost/jsbeeb/?disc=Blurp.ssd&autoboot&keyLayout=physical">Blurp</a></li>-->
-                <li><a href="https://bitshifters.github.io/">Bitshifters</a></li>
-            </ul>
 
+        <!---------------------------------------------------------------------->
+        <section>
+
+            <section>
+                <h2>Conclusion</h2>
+                <img class="stretch" src="tt26.jpg">
+            </section>
+            <section>
+                <h2>Resources</h2>
+                <ul>
+                    <li><a href="https://bbc.godbolt.org/">https://bbc.godbolt.org/</a></li>
+                    <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a></li>
+                    <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
+                    <li>Special thanks to
+                        <ul>
+                            <li>Rich Talbot-Watkins</li>
+                            <li>Ed Spittles &amp; the Visual6502 team</li>
+                            <li>Ian Bell</li>
+                            <li>Kevin Edwards</li>
+                            <li>Kieran Connell</li>
+                            <li>the users on the <a href="http://www.stardot.org.uk/forums/">*. forums</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </section>
+            <section>
+                <h2>Some Demos</h2>
+                <ul>
+                    <li>
+                        <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/bs-scr-beeb.ssd&autoboot&model=Master">
+                            Stunt Car Racer
+                        </a></li>
+                    <li>
+                        <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/crtc-somenastyeffects.ssd&autoboot&model=Master">Some
+                            Nasty Effects</a></li>
+                    <li>
+                        <a href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/TheMaster-Demo128.ssd&autoboot&model=Master">The
+                            Master</a></li>
+                    <!--<li><a href="http://localhost/jsbeeb/?disc=Blurp.ssd&autoboot&keyLayout=physical">Blurp</a></li>-->
+                    <li><a href="https://bitshifters.github.io/">Bitshifters</a></li>
+                </ul>
+
+            </section>
         </section>
     </section>
 
