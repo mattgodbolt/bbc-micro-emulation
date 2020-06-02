@@ -503,16 +503,8 @@ function writemem(addr, b) {
                     </ul>
                 </section>
                 <section>
-                    <h2><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&disc=Welcome.ssd&keyLayout=physical"
+                    <h2><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&keyLayout=physical"
                             target="_blank">Demo</a></h2>
-                    <aside class="notes">
-                        <ul>
-                            <li>Show MODE 7, another video mode.</li>
-                            <li>Show "hello world"</li>
-                            <li>Load up welcome, run kingdom?</li>
-                            <li>Run Elite...oh noes</li>
-                        </ul>
-                    </aside>
                 </section>
                 <section>
                     <h2>What happened?</h2>
@@ -807,19 +799,36 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
                     <h2>jsbeeb extras</h2>
                 </section>
                 <section>
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Fullscreen</li>
+                        <li>Debugger</li>
+                        <li>Printer</li>
+                    </ul>
+                </section>
+                <section>
                     <h2>Debugging</h2>
                     <ul>
+                        <li>Registers</li>
                         <li>Breakpoints</li>
                         <li>Watchpoints</li>
                         <li>Traces</li>
                     </ul>
                 </section>
                 <section>
+                    <h2>Debugging</h2>
+                    <ul>
+                        <li>j/k; u/i; U/I</li>
+                        <li>n/m/o</li>
+                        <li>t - breakpoint</li>
+                    </ul>
+                </section>
+                <section>
                     <h2>URLs</h2>
                     <ul>
-                        <li>Loading</li>
-                        <li>Loading BASIC</li>
-                        <li>Booting</li>
+                        <li>Loading <code>?disc=XX</code></li>
+                        <li>Loading BASIC <code>?loadBasic=XX</code></li>
+                        <li>Booting <code>?autoboot</code></li>
                         <li><a href="http://bbc.godbolt.org/?patch=@31ac,0769:6e6c6d68667a">Patching</a> (<a href="https://xania.org/201406/elites-crazy-string-format">blog</a>)</li>
                     </ul>
                 </section>
