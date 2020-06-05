@@ -241,12 +241,12 @@
             <!---------------------------------------------------------------------->
             <section>
                 <section class="non-retro">
-                    <h1>jsbeeb<br>A Beeb in your browser</h1>
+                    <h1>A Beeb in your browser</h1>
                     <h3><a href="https://twitter.com/mattgodbolt/">Matt Godbolt</a></h3>
                     <h3>ABUG 6<sup>th</sup> June 2020 </h3>
                 </section>
                 <section>
-                    <h2 class="type-in"><span>jsbeeb</span><br><span>a Beeb in your browser</span></h2>
+                    <h2 class="type-in"><span>A Beeb in your browser</span></h2>
                     <h4 class="type-in"><span>Matt Godbolt</span></h4>
                     <h4 class="type-in"><span>Trying to recapture a lost youth</span></h4>
                 </section>
@@ -256,6 +256,7 @@
             <section>
                 <section>
                     <h2>Who am I?</h2>
+                    <img class="fragment no-border" src="ce.svg" height="400px">
                 </section>
                 <section>
                     <h2>Why the Beeb?</h2>
@@ -267,33 +268,73 @@
                 </section>
                 <section>
                     <h2>Why a Browser?</h2>
-                    <img class="no-border fragment" data-fragment-index="2" src="Exile.png">
+                    <img class="no-border fragment" src="Exile.png">
                 </section>
             </section>
 
             <!---------------------------------------------------------------------->
             <section>
                 <section>
-                    <h2>The 6502</h2>
+                    <h2>jsbeeb</h2>
+                    <ul>
+                        <li>Live at <a href="https://bbc.godbolt.org" target="_blank">bbc.godbolt.org</a></li>
+                        <li>Powers <a href="https://www.bbcmicro.co.uk">bbcmicro.co.uk</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Features</h2>
+                    <ul>
+                        <li>Fullscreen</li>
+                        <li>Printer</li>
+                        <li>Freeze / Speedy</li>
+                        <li>Debugger</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Debugging</h2>
+                    <ul>
+                        <li>Registers</li>
+                        <li>Breakpoints</li>
+                        <li>Watchpoints</li>
+                        <li>Traces</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Debugging</h2>
+                    <ul>
+                        <li>j/k; u/i; U/I</li>
+                        <li>n/m/o</li>
+                        <li>t - breakpoint</li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>URLs</h2>
+                    <ul>
+                        <li>Loading <code>?disc=XX</code></li>
+                        <li>Loading BASIC <code>?loadBasic=XX</code></li>
+                        <li>Booting <code>?autoboot</code></li>
+                        <li><a href="http://bbc.godbolt.org/?patch=@31ac,0769:6e6c6d68667a">Patching</a> (<a
+                                href="https://xania.org/201406/elites-crazy-string-format">blog</a>)</li>
+                        <li><a href="https://github.com/mattgodbolt/jsbeeb#url-parameters">Many more</a></li>
+                    </ul>
+                </section>
+                <section>
+                    <h2>Just in!</h2>
+                    <a href="https://github.com/mattgodbolt/jsbeeb/releases/tag/v0.0.6" target="_blank">"Native"
+                        jsbeeb</a>
+                </section>
+            </section>
+
+
+            <!---------------------------------------------------------------------->
+            <section>
+                <section>
+                    <h2>Emulating!</h2>
                     <img class="stretch" src="MOS_6502_layers_top.png">
                     <aside class="notes">8-bit microprocessor; 3510 transistors, laid out by hand. First produced in
                         1975.
                         Over 10 billion made so far
                     </aside>
-                </section>
-                <section>
-                    <h2>6502 recap</h2>
-                    <aside class="notes">8-bit, 3 registers A X Y, 256-byte stack, ZP, PC. Ran at 2MHz on beeb</aside>
-                </section>
-                <section>
-                    <h2>Registers</h2>
-                    <ul class="registers">
-                        <li>8-bit <code>A</code>ccumulator</li>
-                        <li>8-bit <code>X</code>, <code>Y</code> index</li>
-                        <li><code>P</code>rocessor status</li>
-                        <li><code>S</code>tack pointer</li>
-                        <li>Program counter</li>
-                    </ul>
                 </section>
                 <section>
                     <h2>Instructions</h2>
@@ -503,8 +544,13 @@ function writemem(addr, b) {
                     </ul>
                 </section>
                 <section>
-                    <h2><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&keyLayout=physical"
-                            target="_blank">Demo</a></h2>
+                    <h2>Putting it together</h2>
+                    <ul>
+                        <li>Run CPU for 1/60th second</li>
+                        <li>Paint the screen!</li>
+                        <li><a href="https://bbc.godbolt.org/?videoCyclesBatch=8000&keyLayout=physical&autoboot"
+                                target="_blank">Demo</a> </li>
+                    </ul>
                 </section>
                 <section>
                     <h2>What happened?</h2>
@@ -795,54 +841,6 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
 
             <!---------------------------------------------------------------------->
             <section>
-                <section>
-                    <h2>jsbeeb extras</h2>
-                </section>
-                <section>
-                    <h2>Features</h2>
-                    <ul>
-                        <li>Fullscreen</li>
-                        <li>Freeze / Debugger</li>
-                        <li>Printer</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Debugging</h2>
-                    <ul>
-                        <li>Registers</li>
-                        <li>Breakpoints</li>
-                        <li>Watchpoints</li>
-                        <li>Traces</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Debugging</h2>
-                    <ul>
-                        <li>j/k; u/i; U/I</li>
-                        <li>n/m/o</li>
-                        <li>t - breakpoint</li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>URLs</h2>
-                    <ul>
-                        <li>Loading <code>?disc=XX</code></li>
-                        <li>Loading BASIC <code>?loadBasic=XX</code></li>
-                        <li>Booting <code>?autoboot</code></li>
-                        <li><a href="http://bbc.godbolt.org/?patch=@31ac,0769:6e6c6d68667a">Patching</a> (<a
-                                href="https://xania.org/201406/elites-crazy-string-format">blog</a>)</li>
-                        <li><a href="https://github.com/mattgodbolt/jsbeeb#url-parameters">Many more</a></li>
-                    </ul>
-                </section>
-                <section>
-                    <h2>Just in!</h2>
-                    <a href="https://github.com/mattgodbolt/jsbeeb/releases/tag/v0.0.5" target="_blank">"Native"
-                        jsbeeb</a>
-                </section>
-            </section>
-
-            <!---------------------------------------------------------------------->
-            <section>
 
                 <section>
                     <h2>Conclusion</h2>
@@ -851,44 +849,22 @@ edge: ['A-&gt;B stretch', 'C-&gt;D stretch']
                 <section>
                     <h2>Resources</h2>
                     <ul>
-                        <li><a href="https://bbc.godbolt.org/">https://bbc.godbolt.org/</a></li>
-                        <li>Source on <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a>
+                        <li>Play: <a href="https://bbc.godbolt.org/">bbc.godbolt.org</a></li>
+                        <li>Native client: <a
+                                href="https://github.com/mattgodbolt/jsbeeb/releases">github.com/mattgodbolt/jsbeeb/releases</a>
                         </li>
-                        <li><a href="http://visual6502.org">http://visual6502.org/</a></li>
+                        <li>Source: <a href="https://github.com/mattgodbolt/jsbeeb">github.com/mattgodbolt/jsbeeb</a> </li>
                         <li>Special thanks to
                             <ul>
-                                <li>Chris Evans</li>
-                                <li>Rich Talbot-Watkins</li>
+                                <li>Chris Evans, Rich Talbot-Watkins, Kieran Connell</li>
                                 <li>Sarah Walker</li>
                                 <li>Ed Spittles &amp; the Visual6502 team</li>
                                 <li>Ian Bell</li>
                                 <li>Kevin Edwards</li>
-                                <li>Kieran Connell</li>
                                 <li>the users on the <a href="http://www.stardot.org.uk/forums/">*. forums</a></li>
                             </ul>
                         </li>
                     </ul>
-                </section>
-                <section>
-                    <h2>Some Demos</h2>
-                    <ul>
-                        <li>
-                            <a
-                                href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/bs-scr-beeb.ssd&autoboot&model=Master">
-                                Stunt Car Racer
-                            </a></li>
-                        <li>
-                            <a
-                                href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/crtc-somenastyeffects.ssd&autoboot&model=Master">Some
-                                Nasty Effects</a></li>
-                        <li>
-                            <a
-                                href="https://bbc.godbolt.org/?disc=https://bitshifters.github.io/content/TheMaster-Demo128.ssd&autoboot&model=Master">The
-                                Master</a></li>
-                        <!--<li><a href="http://localhost/jsbeeb/?disc=Blurp.ssd&autoboot&keyLayout=physical">Blurp</a></li>-->
-                        <li><a href="https://bitshifters.github.io/">Bitshifters</a></li>
-                    </ul>
-
                 </section>
             </section>
         </section>
