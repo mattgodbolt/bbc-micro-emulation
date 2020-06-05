@@ -10,6 +10,10 @@ abug
     * Hacked on Acorn User stuff together
     * Original author of BeebAsm
     * now works at Epic on Unreal stuff
+
+* Demo it!
+  * Paste, printer
+  * ctrl-home, end, insert (fast as possible)
 ...
 
 
