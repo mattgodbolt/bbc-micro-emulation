@@ -50,6 +50,11 @@ Break on read (or write)
 processor.debugRead.add(addr => addr === 0xe00)
 ```
 
+... show `dumpTrace()`
+talk about `debugWrite()`
+
+talk about `debugInstruction()
+
 Crappy CPU profiler:
 ```js
 addrBits = 4
