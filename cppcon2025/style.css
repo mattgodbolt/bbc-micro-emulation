@@ -206,3 +206,8 @@ code.javascript {
   color: #569cd6;
   font-weight: bold;
 }
+
+/* Hide typing animation spans initially to prevent text flash */
+.type-in span {
+  visibility: hidden;
+}
