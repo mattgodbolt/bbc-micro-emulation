@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 12.0.0, SVG Export Plug-In  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd" [
+	<!ENTITY ns_flows "http://ns.adobe.com/Flows/1.0/">
+	<!ENTITY ns_svg "http://www.w3.org/2000/svg">
+	<!ENTITY ns_xlink "http://www.w3.org/1999/xlink">
+]>
+<svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" xmlns:a="http://ns.adobe.com/AdobeSVGViewerExtensions/3.0/"
+	 width="306" height="527" viewBox="0 0 306 527" enable-background="new 0 0 306 527" xml:space="preserve">
+<font horiz-adv-x="1000">
+<!-- Copyright 1987, 1988, 1990, 1991, 1995, 1998, 2001 , 2002Adobe Systems Incorporated. All Rights Reserved.  -->
+<font-face font-family="LetterGothicStd-Bold" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<missing-glyph horiz-adv-x="600" d="M50,0l500,0l0,700l-500,0M300,395l-170,255l340,0M330,350l170,255l0,-510M130,50l170,255l170,-255M100,605l170,-255l-170,-255z"/>
+<glyph unicode="A" horiz-adv-x="600" d="M301,780l-254,-780l81,0l64,212l219,0l64,-212l81,0M301,566l92,-291l-183,0z"/>
+<glyph unicode="C" horiz-adv-x="600" d="M505,564C499,664 424,734 324,734C121,734 88,514 88,356C88,203 117,-14 315,-14C435,-14 506,59 514,176l-75,0C438,105 393,49 318,49C174,49 163,249 163,354C163,465 173,671 325,671C386,671 429,624 430,564z"/>
+<glyph unicode="D" horiz-adv-x="600" d="M112,0l172,0C441,0 527,83 527,360C527,641 434,720 295,720l-183,0M187,657l90,0C373,657 452,636 452,360C452,92 383,63 279,63l-92,0z"/>
+<glyph unicode="E" horiz-adv-x="600" d="M513,720l-374,0l0,-720l381,0l0,63l-306,0l0,275l215,0l0,63l-215,0l0,256l299,0z"/>
+<glyph unicode="I" horiz-adv-x="600" d="M435,720l-270,0l0,-63l97,0l0,-594l-97,0l0,-63l270,0l0,63l-98,0l0,594l98,0z"/>
+<glyph unicode="M" horiz-adv-x="600" d="M300,361l-151,359l-73,0l0,-720l75,0l0,546l2,2l147,-353l148,353l2,0l0,-548l75,0l0,720l-74,0z"/>
+<glyph unicode="N" horiz-adv-x="600" d="M115,0l75,0l0,572l2,2l236,-581l71,0l0,727l-75,0l0,-538l-3,0l-219,538l-87,0z"/>
+<glyph unicode="O" horiz-adv-x="600" d="M79,360C79,258 78,-14 300,-14C528,-14 521,264 521,360C521,494 510,734 300,734C179,734 79,661 79,360M300,49C150,49 154,278 154,360C154,402 140,671 300,671C456,671 446,426 446,360C446,99 375,49 300,49z"/>
+<glyph unicode="Q" horiz-adv-x="600" d="M300,-14C333,-14 367,-6 396,10l50,-70l92,0l-88,114C512,124 522,227 522,360C522,432 536,734 300,734C179,734 78,662 78,360C78,268 72,-14 300,-14M153,360C153,390 136,671 300,671C376,671 447,616 447,360C447,124 388,49 300,49C225,49 153,104 153,360z"/>
+<glyph unicode="R" horiz-adv-x="600" d="M131,0l75,0l0,298C242,299 278,299 314,300l175,-300l91,0l-194,317C486,374 514,442 514,516C514,558 498,720 318,720l-187,0M206,362l0,295l74,0C399,657 439,616 439,520C439,414 379,362 277,362z"/>
+<glyph unicode="S" horiz-adv-x="600" d="M502,644C448,694 379,734 304,734C196,734 110,669 110,556C110,466 172,417 243,375l65,-39C435,260 439,240 439,182C439,105 377,49 302,49C233,49 177,93 142,149l-58,-46C140,31 209,-14 302,-14C428,-14 514,63 514,192C514,276 478,314 346,395l-57,35C192,489 185,523 185,561C185,627 237,671 301,671C363,671 413,629 457,590z"/>
+<glyph unicode="T" horiz-adv-x="600" d="M541,720l-481,0l0,-63l201,0l0,-657l75,0l0,657l205,0z"/>
+<glyph unicode="U" horiz-adv-x="600" d="M424,720l0,-522C424,117 392,49 300,49C242,49 175,85 175,189l0,531l-75,0l0,-491C100,30 222,-14 300,-14C397,-14 499,53 499,189l0,531z"/>
+<glyph unicode="V" horiz-adv-x="600" d="M297,109l-2,0l-130,611l-82,0l160,-727l103,0l163,727l-83,0z"/>
+<glyph unicode="W" horiz-adv-x="600" d="M297,519l-114,-361l-2,0l-38,562l-81,0l60,-727l83,0l92,312l91,-312l86,0l55,727l-81,0l-36,-562l-2,0z"/>
+<glyph unicode="Y" horiz-adv-x="600" d="M282,394l-139,326l-83,0l184,-416l0,-304l75,0l0,304l184,416l-83,0z"/>
+<glyph unicode="8" horiz-adv-x="600" d="M145,196C145,289 210,343 300,343C390,343 455,289 455,196C455,102 391,49 300,49C209,49 145,102 145,196M430,539C430,458 381,406 300,406C225,406 169,454 169,531C169,615 214,671 300,671C382,671 430,619 430,539M422,377C477,424 505,463 505,538C505,661 419,734 300,734C187,734 94,663 94,545C94,466 120,427 178,377C105,349 70,270 70,196C70,86 140,-14 300,-14C452,-14 530,79 530,196C530,270 495,349 422,377z"/>
+<glyph unicode="5" horiz-adv-x="600" d="M460,720l-322,0l-30,-399l76,-15C212,352 250,388 307,388C362,388 430,336 430,215C430,139 385,49 299,49C236,49 185,95 158,149l-58,-43C145,38 208,-14 294,-14C426,-14 505,97 505,221C505,365 416,451 305,451C259,451 219,436 185,405l20,252l255,0z"/>
+<glyph unicode="4" horiz-adv-x="600" d="M423,734l-97,0l-265,-499l0,-49l287,0l0,-186l75,0l0,186l103,0l0,63l-103,0M348,249l-201,0l199,383l2,0z"/>
+<glyph unicode="9" horiz-adv-x="600" d="M163,486C163,572 200,671 301,671C388,671 425,578 425,504C425,415 367,324 286,324C196,324 163,408 163,486M97,30C137,5 184,-14 232,-14C375,-14 505,131 505,414C505,553 471,734 296,734C159,734 88,608 88,485C88,373 153,261 277,261C344,261 386,286 430,335C424,231 361,49 235,49C199,49 161,72 133,92z"/>
+<glyph unicode="1" horiz-adv-x="600" d="M341,742l-216,-68l0,-57l141,43l0,-597l-135,0l0,-63l339,0l0,63l-129,0z"/>
+<glyph unicode="(" horiz-adv-x="600" d="M411,-29C293,56 250,192 250,332C250,472 293,608 411,692l-36,50C238,653 175,490 175,332C175,174 238,9 375,-78z"/>
+<glyph unicode=")" horiz-adv-x="600" d="M189,692C307,608 350,471 350,332C350,192 307,55 189,-29l36,-49C362,10 425,174 425,332C425,490 362,653 225,742z"/>
+<glyph unicode="." horiz-adv-x="600" d="M220,64C220,20 257,-14 301,-14C344,-14 381,20 381,64C381,108 344,141 301,141C258,141 220,108 220,64z"/>
+<glyph unicode="7" horiz-adv-x="600" d="M93,720l0,-63l306,0l-264,-657l81,0l281,720z"/>
+<glyph unicode="6" horiz-adv-x="600" d="M436,234C436,148 400,49 299,49C211,49 175,142 175,217C175,304 232,396 313,396C404,396 436,312 436,234M503,690C463,715 415,734 368,734C234,734 95,604 95,306C95,167 129,-14 304,-14C441,-14 511,112 511,235C511,347 447,459 323,459C256,459 213,434 170,386C175,489 239,671 365,671C405,671 436,649 467,628z"/>
+<glyph unicode="/" horiz-adv-x="600" d="M187,-27l301,774l-75,0l-301,-774z"/>
+<glyph unicode="3" horiz-adv-x="600" d="M248,354C354,364 438,307 438,192C438,103 375,49 288,49C210,49 166,94 136,162l-66,-39C120,40 184,-14 285,-14C415,-14 513,69 513,202C513,291 465,356 385,391C441,426 480,478 480,546C480,652 394,734 288,734C196,734 122,684 80,603l63,-36C167,620 218,671 280,671C347,671 405,623 405,552C405,466 329,413 248,417z"/>
+<glyph unicode="2" horiz-adv-x="600" d="M175,63C179,155 223,213 288,272l52,47C413,385 501,452 501,560C501,669 426,734 320,734C191,734 121,643 114,521l75,0C193,599 231,671 319,671C387,671 426,626 426,559C426,478 335,405 278,357C165,260 100,190 100,32l0,-32l403,0l0,63z"/>
+<glyph unicode="0" horiz-adv-x="600" d="M509,360C509,464 508,734 300,734C74,734 91,402 91,360C91,276 90,-14 300,-14C512,-14 509,260 509,360M166,360C166,428 158,671 300,671C372,671 434,615 434,360C434,96 366,49 300,49C164,49 166,268 166,360z"/>
+</font>
+
+	<font horiz-adv-x="1000">
+<!-- Copyright 1987, 1990, 1991, 1995, 1998, 2001 , 2002Adobe Systems Incorporated. All Rights Reserved.  -->
+<font-face font-family="LetterGothicStd" units-per-em="1000" underline-position="-100" underline-thickness="50"/>
+<missing-glyph horiz-adv-x="600" d="M50,0l500,0l0,700l-500,0M300,395l-170,255l340,0M330,350l170,255l0,-510M130,50l170,255l170,-255M100,605l170,-255l-170,-255z"/>
+<glyph unicode="5" horiz-adv-x="600" d="M449,720l-301,0l-29,-388l56,-11C204,368 247,403 306,403C359,403 447,359 447,215C447,115 388,29 299,29C236,29 180,71 150,124l-35,-27C157,36 215,-11 293,-11C422,-11 494,100 494,219C494,366 405,443 305,443C247,443 199,414 165,368l24,312l260,0z"/>
+<glyph unicode="6" horiz-adv-x="600" d="M453,230C453,133 411,29 298,29C200,29 158,127 158,211C158,343 249,410 314,410C415,410 453,318 453,230M488,697C454,719 409,734 369,734C238,734 105,598 105,304C105,60 201,-11 297,-11C435,-11 500,106 500,230C500,337 443,450 323,450C243,450 190,404 152,339C145,463 213,694 367,694C404,694 436,678 465,657z"/>
+<glyph unicode="2" horiz-adv-x="600" d="M157,40C159,142 182,194 332,328C404,392 490,461 490,566C490,670 424,734 320,734C202,734 136,652 127,540l47,0C180,624 228,694 319,694C395,694 443,644 443,569C443,476 350,403 286,347C136,216 110,157 110,0l383,0l0,40z"/>
+<glyph unicode="0" horiz-adv-x="600" d="M498,360C498,436 496,527 471,599C444,676 387,734 300,734C209,734 152,672 126,591C104,524 102,431 102,360C102,284 104,192 129,121C156,44 214,-14 300,-14C390,-14 448,48 474,129C496,195 498,290 498,360M451,360C451,301 449,221 436,165C419,97 379,25 300,25C226,25 185,90 168,153C150,215 149,296 149,360C149,419 151,498 164,555C181,623 221,695 300,695C374,695 415,630 432,566C450,505 451,424 451,360z"/>
+</font>
+
+	<defs>
+</defs>
+<rect fill="#FFFFFF" width="306" height="527"/>
+<rect x="72.5078125" y="18.5151367" fill="#E1E1E1" stroke="#8C8C8C" width="160.3398438" height="18.6142578"/>
+<rect x="72.5078125" y="42.7797852" fill="#E1E1E1" stroke="#8C8C8C" width="160.3398438" height="18.6137695"/>
+<rect x="71.9633789" y="67.4379883" fill="#E1E1E1" stroke="#8C8C8C" width="160.8227539" height="18.6704102"/>
+<rect x="71.9633789" y="91.7749023" fill="#E1E1E1" stroke="#8C8C8C" width="160.8227539" height="18.6704102"/>
+<rect x="71.9633789" y="117.4038086" fill="#E1E1E1" stroke="#8C8C8C" width="160.8227539" height="18.6157227"/>
+<rect x="71.9633789" y="141.668457" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6147461"/>
+<rect x="71.9633789" y="166.3901367" fill="#E1E1E1" stroke="#8C8C8C" width="160.3393555" height="18.6142578"/>
+<rect x="71.9633789" y="191.3188477" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6157227"/>
+<rect x="71.9633789" y="215.5830078" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6142578"/>
+<rect x="71.9633789" y="240.3061523" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6157227"/>
+<rect x="71.9633789" y="266.1962891" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6132813"/>
+<rect x="71.9633789" y="290.4580078" fill="#E1E1E1" stroke="#8C8C8C" width="160.3413086" height="18.6152344"/>
+<rect x="71.4189453" y="315.1806641" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6142578"/>
+<rect x="71.4189453" y="339.4453125" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6152344"/>
+<rect x="71.4189453" y="365.0859375" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6132813"/>
+<rect x="71.4189453" y="389.3476563" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6132813"/>
+<rect x="71.4189453" y="414.0693359" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6181641"/>
+<rect x="71.4189453" y="438.9980469" fill="#E1E1E1" stroke="#8C8C8C" width="160.8183594" height="18.6142578"/>
+<rect x="71.4189453" y="463.2597656" fill="#E1E1E1" stroke="#8C8C8C" width="161.2998047" height="18.6171875"/>
+<rect x="71.4189453" y="487.9863281" fill="#E1E1E1" stroke="#8C8C8C" width="161.2998047" height="18.6132813"/>
+<g>
+	<g>
+		<path fill="#2E2E2E" d="M160.9443359,9.1069336c-0.09375,4.6303711-3.9414063,8.3579102-8.6875,8.3579102
+			c-4.7441406,0-8.59375-3.7275391-8.6875-8.3579102H89.2543945v508.6362305h125.7602539V9.1069336H160.9443359z"/>
+	</g>
+	<g>
+		<path fill="none" stroke="#000000" d="M160.9443359,9.1069336c-0.09375,4.6303711-3.9414063,8.3579102-8.6875,8.3579102
+			c-4.7441406,0-8.59375-3.7275391-8.6875-8.3579102H89.2543945v508.6362305h125.7602539V9.1069336H160.9443359z"/>
+	</g>
+</g>
+<path fill="#B2B2B2" stroke="#B2B2B2" d="M159.1308594,303.6621094c-2.3779297,0-4.3212891-2.7304688-4.3212891-6.0009766
+	l-0.0830078-15.9521484l7.5478516,0.0839844l0.0185547,21.8349609L159.1308594,303.6621094z"/>
+<polygon fill="#B2B2B2" stroke="#B2B2B2" points="165.046875,303.6972656 165.046875,281.84375 171.6044922,281.8769531 
+	171.6152344,303.7177734 "/>
+<path fill="#B2B2B2" stroke="#B2B2B2" d="M180.6689453,303.6728516l-6.3427734,0.0244141l0.0351563-21.921875l1.6132813,0.0351563
+	c2.6386719,0,4.7216797,3.0332031,4.7216797,6.8876953L180.6689453,303.6728516z"/>
+<ellipse fill="#B2B2B2" stroke="#B2B2B2" cx="167.7705078" cy="265.2573242" rx="13.2626953" ry="12.6577148"/>
+<rect x="154.8095703" y="224.5556641" fill="#B2B2B2" stroke="#B2B2B2" width="25.0126953" height="6.8574219"/>
+<path fill="#B2B2B2" stroke="#B2B2B2" d="M154.7724609,240.1054688l19.6943359-0.0263672h0.0175781
+	c3.0810547,0,5.4111328-2.5654297,5.4111328-6.0253906v-0.4042969L154.75,233.6953125L154.7724609,240.1054688z"/>
+<path fill="#B2B2B2" stroke="#B2B2B2" d="M154.7949219,248.8447266l19.5839844-0.0258789h0.0146484
+	c3.0830078,0,5.4130859-2.5639648,5.4130859-6.0253906v-0.4018555l-24.9794922,0.0664063L154.7949219,248.8447266z"/>
+<text transform="matrix(0 1 -1 0 128.6259766 232.9804688)" fill="#B2B2B2" stroke="#B2B2B2" font-family="'LetterGothicStd'" font-size="24.7222195">6502</text>
+<text transform="matrix(1.04729 0 0 1 216.8339844 32.8920898)" font-family="'LetterGothicStd-Bold'" font-size="12">40</text>
+<text transform="matrix(0.95485 0 0 1 217.4726563 502.4775391)" font-family="'LetterGothicStd-Bold'" font-size="12">21</text>
+<text transform="matrix(1 0 0 1 216.5273438 477.7744141)" font-family="'LetterGothicStd-Bold'" font-size="12">22</text>
+<text transform="matrix(1 0 0 1 216.4375 453.3154297)" font-family="'LetterGothicStd-Bold'" font-size="12">23</text>
+<text transform="matrix(1 0 0 1 216.2978516 428.6005859)" font-family="'LetterGothicStd-Bold'" font-size="12">24</text>
+<text transform="matrix(1 0 0 1 216.3671875 403.671875)" font-family="'LetterGothicStd-Bold'" font-size="12">25</text>
+<text transform="matrix(1 0 0 1 216.4140625 379.4248047)" font-family="'LetterGothicStd-Bold'" font-size="12">26</text>
+<text transform="matrix(1 0 0 1 216.5546875 353.9814453)" font-family="'LetterGothicStd-Bold'" font-size="12">27</text>
+<text transform="matrix(1 0 0 1 216.4833984 329.5429688)" font-family="'LetterGothicStd-Bold'" font-size="12">28</text>
+<text transform="matrix(1 0 0 1 216.5058594 304.7802734)" font-family="'LetterGothicStd-Bold'" font-size="12">29</text>
+<text transform="matrix(1 0 0 1 216.9511719 280.546875)" font-family="'LetterGothicStd-Bold'" font-size="12">30</text>
+<text transform="matrix(1 0 0 1 217.3779297 254.6660156)" font-family="'LetterGothicStd-Bold'" font-size="12">31</text>
+<text transform="matrix(1 0 0 1 216.9921875 229.9599609)" font-family="'LetterGothicStd-Bold'" font-size="12">32</text>
+<text transform="matrix(1 0 0 1 216.984375 205.7246094)" font-family="'LetterGothicStd-Bold'" font-size="12">33</text>
+<text transform="matrix(1 0 0 1 216.8740234 180.7285156)" font-family="'LetterGothicStd-Bold'" font-size="12">34</text>
+<text transform="matrix(1 0 0 1 217.015625 155.9863281)" font-family="'LetterGothicStd-Bold'" font-size="12">35</text>
+<text transform="matrix(1 0 0 1 217.0322266 131.7915039)" font-family="'LetterGothicStd-Bold'" font-size="12">36</text>
+<text transform="matrix(1 0 0 1 217.109375 106.1870117)" font-family="'LetterGothicStd-Bold'" font-size="12">37</text>
+<text transform="matrix(1 0 0 1 217.0449219 81.8364258)" font-family="'LetterGothicStd-Bold'" font-size="12">38</text>
+<text transform="matrix(1 0 0 1 217.0927734 57.1118164)" font-family="'LetterGothicStd-Bold'" font-size="12">39</text>
+<text transform="matrix(1.04729 0 0 1 76.8676758 32.4697266)" font-family="'LetterGothicStd-Bold'" font-size="12">1</text>
+<text transform="matrix(0.95485 0 0 1 73.5063477 502.0566406)" font-family="'LetterGothicStd-Bold'" font-size="12">20</text>
+<text transform="matrix(1 0 0 1 72.5625 477.3535156)" font-family="'LetterGothicStd-Bold'" font-size="12">19</text>
+<text transform="matrix(1 0 0 1 72.4702148 452.8945313)" font-family="'LetterGothicStd-Bold'" font-size="12">18</text>
+<text transform="matrix(1 0 0 1 72.3305664 428.1767578)" font-family="'LetterGothicStd-Bold'" font-size="12">17</text>
+<text transform="matrix(1 0 0 1 72.4003906 403.25)" font-family="'LetterGothicStd-Bold'" font-size="12">16</text>
+<text transform="matrix(1 0 0 1 72.4467773 379.0009766)" font-family="'LetterGothicStd-Bold'" font-size="12">15</text>
+<text transform="matrix(1 0 0 1 72.5878906 353.5605469)" font-family="'LetterGothicStd-Bold'" font-size="12">14</text>
+<text transform="matrix(1 0 0 1 72.5141602 329.1210938)" font-family="'LetterGothicStd-Bold'" font-size="12">13</text>
+<text transform="matrix(1 0 0 1 72.5405273 304.3574219)" font-family="'LetterGothicStd-Bold'" font-size="12">12</text>
+<text transform="matrix(1 0 0 1 72.4228516 280.1552734)" font-family="'LetterGothicStd-Bold'" font-size="12">11</text>
+<text transform="matrix(1 0 0 1 72.4121094 254.2109375)" font-family="'LetterGothicStd-Bold'" font-size="12">10</text>
+<text transform="matrix(1 0 0 1 76.4931641 229.5063477)" font-family="'LetterGothicStd-Bold'" font-size="12">9</text>
+<text transform="matrix(1 0 0 1 76.4248047 205.2099609)" font-family="'LetterGothicStd-Bold'" font-size="12">8</text>
+<text transform="matrix(1 0 0 1 76.2817383 180.3061523)" font-family="'LetterGothicStd-Bold'" font-size="12">7</text>
+<text transform="matrix(1 0 0 1 76.3291016 155.5644531)" font-family="'LetterGothicStd-Bold'" font-size="12">6</text>
+<text transform="matrix(1 0 0 1 76.3769531 131.3383789)" font-family="'LetterGothicStd-Bold'" font-size="12">5</text>
+<text transform="matrix(1 0 0 1 76.4248047 105.7333984)" font-family="'LetterGothicStd-Bold'" font-size="12">4</text>
+<text transform="matrix(1 0 0 1 76.4228516 81.4135742)" font-family="'LetterGothicStd-Bold'" font-size="12">3</text>
+<text transform="matrix(1 0 0 1 76.46875 56.7202148)" font-family="'LetterGothicStd-Bold'" font-size="12">2</text>
+<text transform="matrix(1.04729 0 0 1 243.3623047 34.3388672)" font-family="'LetterGothicStd-Bold'" font-size="14">RES</text>
+<text transform="matrix(0.95485 0 0 1 244.0009766 503.9228516)" font-family="'LetterGothicStd-Bold'" font-size="14">VSS</text>
+<text transform="matrix(1 0 0 1 243.0576172 479.2216797)" font-family="'LetterGothicStd-Bold'" font-size="14">A12</text>
+<text transform="matrix(1 0 0 1 242.9638672 454.7636719)" font-family="'LetterGothicStd-Bold'" font-size="14">A13</text>
+<text transform="matrix(1 0 0 1 242.8242188 430.046875)" font-family="'LetterGothicStd-Bold'" font-size="14">A14</text>
+<text transform="matrix(1 0 0 1 242.8964844 405.1181641)" font-family="'LetterGothicStd-Bold'" font-size="14">A15</text>
+<text transform="matrix(1 0 0 1 245.9414063 380.8720703)" font-family="'LetterGothicStd-Bold'" font-size="14">D7</text>
+<text transform="matrix(1 0 0 1 246.0820313 355.4277344)" font-family="'LetterGothicStd-Bold'" font-size="14">D6</text>
+<text transform="matrix(1 0 0 1 246.0097656 330.9912109)" font-family="'LetterGothicStd-Bold'" font-size="14">D5</text>
+<text transform="matrix(1 0 0 1 246.0361328 306.2285156)" font-family="'LetterGothicStd-Bold'" font-size="14">D4</text>
+<text transform="matrix(1 0 0 1 245.9160156 282.0263672)" font-family="'LetterGothicStd-Bold'" font-size="14">D3</text>
+<text transform="matrix(1 0 0 1 245.90625 256.0810547)" font-family="'LetterGothicStd-Bold'" font-size="14">D2</text>
+<text transform="matrix(1 0 0 1 245.9882813 231.3754883)" font-family="'LetterGothicStd-Bold'" font-size="14">D1</text>
+<text transform="matrix(1 0 0 1 245.9189453 207.078125)" font-family="'LetterGothicStd-Bold'" font-size="14">D0</text>
+<text transform="matrix(1 0 0 1 242.7753906 182.1738281)" font-family="'LetterGothicStd-Bold'" font-size="14">R/W</text>
+<text transform="matrix(1 0 0 1 242.8232422 157.4345703)" font-family="'LetterGothicStd-Bold'" font-size="14">N.C.</text>
+<text transform="matrix(1 0 0 1 242.8720703 133.2080078)" font-family="'LetterGothicStd-Bold'" font-size="14">N.C.</text>
+<text transform="matrix(1 0 0 1 257.9189453 107.6035156)" font-family="'LetterGothicStd-Bold'" font-size="14">(IN)</text>
+<text transform="matrix(1 0 0 1 242.9160156 83.2836914)" font-family="'LetterGothicStd-Bold'" font-size="14">S0</text>
+<text transform="matrix(1 0 0 1 256.9628906 58.5888672)" font-family="'LetterGothicStd-Bold'" font-size="14">(OUT)</text>
+<text transform="matrix(1.04729 0 0 1 26.2368164 32.3745117)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">VSS</text>
+<text transform="matrix(0.95485 0 0 1 31.875 501.9658203)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A11</text>
+<text transform="matrix(1 0 0 1 30.9321289 477.2607422)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A10</text>
+<text transform="matrix(1 0 0 1 33.8388672 452.8017578)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A9</text>
+<text transform="matrix(1 0 0 1 33.6992188 428.0839844)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A8</text>
+<text transform="matrix(1 0 0 1 33.7700195 403.1572266)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A7</text>
+<text transform="matrix(1 0 0 1 33.815918 378.90625)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A6</text>
+<text transform="matrix(1 0 0 1 33.9570313 353.4658203)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A5</text>
+<text transform="matrix(1 0 0 1 33.8842773 329.0292969)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A4</text>
+<text transform="matrix(1 0 0 1 33.9101563 304.265625)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A3</text>
+<text transform="matrix(1 0 0 1 33.7919922 280.0615234)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A2</text>
+<text transform="matrix(1 0 0 1 33.78125 254.1181641)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A1</text>
+<text transform="matrix(1 0 0 1 33.862793 229.4121094)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">A0</text>
+<text transform="matrix(1 0 0 1 25.7924805 205.1162109)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">VCC</text>
+<text transform="matrix(1 0 0 1 25.6508789 180.2114258)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">SYNC</text>
+<text transform="matrix(1 0 0 1 25.6982422 155.472168)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">NMI</text>
+<text transform="matrix(1 0 0 1 25.7460938 131.2441406)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">N.C.</text>
+<text transform="matrix(1 0 0 1 25.793457 105.6391602)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">IRQ</text>
+<text transform="matrix(1 0 0 1 25.7919922 81.3212891)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">(OUT)</text>
+<text transform="matrix(1 0 0 1 25.8388672 56.6274414)" font-family="'LetterGothicStd-Bold'" font-size="13.4565802">RDY</text>
+<ellipse fill="none" stroke="#000000" stroke-width="0.75" cx="13.9250488" cy="75.2705078" rx="3.9250488" ry="4.0180664"/>
+<line fill="none" stroke="#000000" stroke-width="0.75" x1="10" y1="80.7841797" x2="18.034668" y2="69.7558594"/>
+<text transform="matrix(1 0 0 1 17.4765625 87.2319336)" font-family="'LetterGothicStd-Bold'" font-size="12.3352003">1</text>
+<ellipse fill="none" stroke="#000000" stroke-width="0.75" cx="244.5561523" cy="53.5898438" rx="3.9233398" ry="4.0185547"/>
+<line fill="none" stroke="#000000" stroke-width="0.75" x1="240.6328125" y1="59.1025391" x2="248.6660156" y2="48.0766602"/>
+<text transform="matrix(1 0 0 1 249.2265625 65.7373047)" font-family="'LetterGothicStd'" font-size="12.3352003">2</text>
+<path fill="none" stroke="#000000" stroke-width="0.75" d="M249.0380859,103.4926758
+	c0,2.21875-1.7548828,4.0161133-3.9228516,4.0161133c-2.1689453,0-3.9238281-1.7973633-3.9238281-4.0161133
+	c0-2.2216797,1.7548828-4.0200195,3.9238281-4.0200195C247.2832031,99.4726563,249.0380859,101.2709961,249.0380859,103.4926758z"/>
+<line fill="none" stroke="#000000" stroke-width="0.75" x1="241.1914063" y1="109.0058594" x2="249.2246094" y2="97.9775391"/>
+<text transform="matrix(1 0 0 1 249.9755859 115.6386719)" font-family="'LetterGothicStd'" font-size="12.3352003">0</text>
+<line stroke="#000000" x1="26.6962891" y1="91.7177734" x2="45.7607422" y2="91.7177734"/>
+<line stroke="#000000" x1="26.8027344" y1="141.4316406" x2="50.0966797" y2="141.4316406"/>
+</svg>
