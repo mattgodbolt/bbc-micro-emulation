@@ -1,0 +1,208 @@
+@font-face {
+  font-family: "Teletext";
+  src: url("teletext.ttf");
+}
+
+.no-border {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+div.footer {
+  position: absolute;
+  height: 64px;
+  width: 100%;
+  bottom: 0;
+  background: #929292;
+  border-top: 1px solid #b9b9b9;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+div.footer-img img {
+  width: 64px;
+}
+
+span.cursor::before {
+  content: "\2588";
+}
+
+span.cursor.blink {
+  opacity: 0;
+}
+
+.hidden {
+  display: none !important;
+}
+
+div.flex {
+  display: flex;
+  justify-content: space-around;
+}
+
+.w40 {
+  width: 40%;
+}
+
+img.au-mag {
+  height: 550px;
+}
+
+.reveal {
+  font-size: 30px;
+}
+
+.reveal h1,
+.reveal h2,
+.reveal h3,
+.reveal h4,
+.reveal h5,
+.reveal h6 {
+  font-family: "Teletext", Impact, sans-serif;
+}
+
+.reveal .teletext {
+  font-family: "Teletext", Impact, sans-serif;
+}
+
+.reveal .slides section .fragment.highlight-current-code {
+  opacity: 1;
+  visibility: inherit;
+}
+
+.reveal
+  .slides
+  section
+  .fragment.highlight-current-code.current-fragment {
+  background: #555a5f;
+  color: #ffffff;
+}
+
+.registers code {
+  text-decoration: underline;
+}
+
+div.computers img {
+  height: 150px;
+}
+
+div.computers img.big {
+  height: 300px;
+}
+
+table.rol {
+  font-size: smaller;
+}
+
+table.horizontal {
+  border-collapse: collapse;
+}
+
+table.horizontal th,
+table.horizontal td {
+  border: 1px solid grey;
+  text-align: center;
+  width: 6em;
+}
+
+table.horizontal th:nth-child(even) {
+  background-color: #444;
+}
+
+table.horizontal th:nth-child(odd) {
+  background-color: #222;
+}
+
+table.horizontal td:nth-child(even) {
+  background-color: #444;
+}
+
+table.horizontal td:nth-child(odd) {
+  background-color: #222;
+}
+
+table.opcodes th {
+  font-family: monospace;
+}
+
+div.credit {
+  font-size: small;
+}
+
+div.wavedrom {
+  background: #ffffff;
+}
+
+table.memmap {
+  width: 50%;
+  font-size: 0.6em;
+}
+
+table.memmap th {
+  width: 6em;
+  font-family: monospace;
+  font-weight: normal;
+  text-align: center;
+}
+
+table.memmap .addr {
+  font-family: monospace;
+}
+
+table.memmap td {
+  vertical-align: middle;
+}
+
+table.memmap tr.osrom {
+  background-color: #222244;
+}
+
+table.memmap tr.hw {
+  background-color: #444433;
+}
+
+table.memmap tr.rom1 {
+  background-color: #222233;
+}
+
+table.memmap tr.ram1 {
+  background-color: #223322;
+}
+
+table.memmap tr.ram2 {
+  background-color: #283828;
+}
+
+code.asm6502,
+code.javascript {
+  font-size: 22pt;
+  line-height: 110%;
+}
+
+.first h1,
+.first h2,
+.first h3,
+.first h4 {
+  font-family: "Helvetica", sans-serif;
+}
+
+.first h1 {
+  font-size: 4em;
+  font-weight: bold;
+}
+
+.first h2 {
+  font-size: 2.5em;
+  font-weight: bold;
+}
+
+.first h3 {
+  font-size: 2em;
+  font-style: italic;
+}
+
+/* Highlight.js custom styling for 6502 assembly opcodes */
+.hljs-opcodes {
+  color: #569cd6;
+  font-weight: bold;
+}
