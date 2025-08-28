@@ -27,8 +27,15 @@ span.cursor::before {
   content: "\2588";
 }
 
-span.cursor.blink {
-  opacity: 0;
+span.cursor {
+  animation: blink 1.1s step-start infinite;
+  display: inline;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
 }
 
 .hidden {
@@ -201,13 +208,7 @@ code.javascript {
   font-style: italic;
 }
 
-/* Highlight.js custom styling for 6502 assembly opcodes */
 .hljs-opcodes {
   color: #569cd6;
   font-weight: bold;
-}
-
-/* Hide typing animation spans initially to prevent text flash */
-.type-in span {
-  visibility: hidden;
 }
