@@ -400,17 +400,17 @@ b5 70     LDA $70, X   ; A = readmem(0x70 + X)
           </section>
           <section>
             <h2>Emulation</h2>
-            <pre><code class="javascript" data-trim data-noescape>
-<span class="fragment highlight-current-code">var a = 0, x = 0, y = 0, pc = readword(0xfffe);
-</span>while (true) {
-  switch (<span class="fragment highlight-current-code">readmem(pc++)</span>) {
-<div class="fragment highlight-current-code">  case 0xa9: // LDA #imm
+            <pre><code class="javascript" data-trim data-line-numbers="1|3|4-5|6-9">
+var a = 0, x = 0, y = 0, pc = readword(0xfffe);
+while (true) {
+  switch (readmem(pc++)) {
+  case 0xa9: // LDA #imm
     a = readmem(pc++); break;
-</div><div class="fragment highlight-current-code">  case 0xad: // LDA $addr
+  case 0xad: // LDA $addr
     var addr = readword(pc); pc += 2;
     a = readmem(addr);
     break;
-</div>  // and so on for all other instructions...
+  // and so on for all other instructions...
   }
 }
 </code></pre>
@@ -589,15 +589,15 @@ function writemem(addr, b) {
           </section>
           <section>
             <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-noescape>
+            <pre><code class="javascript" data-trim data-line-numbers="2-4|5|6">
 case 0xa9: // LDA #imm
-<div class="fragment highlight-current-code">  a = readmem(pc++);
+  a = readmem(pc++);
   p.z = !a;
-  p.n = !!(a &amp; 0x80);
-</div><div class="fragment highlight-current-code">  video.run(2);
-</div><div class="fragment highlight-current-code">  timers.run(2);
-</div>  break;
-                     </code></pre>
+  p.n = !!(a & 0x80);
+  video.run(2);
+  timers.run(2);
+  break;
+</code></pre>
 
             <h3 class="fragment">
               <a
@@ -868,20 +868,20 @@ case 0xa9: // LDA #imm
           </section>
           <section>
             <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-noescape>
+            <pre><code class="javascript" data-trim data-line-numbers="2-3|4-5|6-7|8-9|10-11">
 case 0x2e: // ROL abs
-<div class="fragment highlight-current-code">  addr = readword(pc); pc += 2;
+  addr = readword(pc); pc += 2;
   hardware.run(3);
-</div><div class="fragment highlight-current-code">  val = readbyte(addr);
+  val = readbyte(addr);
   hardware.run(1);
-</div><div class="fragment highlight-current-code">  writebyte(addr, val); // unmodified value
+  writebyte(addr, val); // unmodified value
   hardware.run(1);
-</div><div class="fragment highlight-current-code">  val = (val &lt;&lt; 1) | (carry ? 1);
+  val = (val &lt;&lt; 1) | (carry ? 1);
   carry = val & 0x100;
-</div><div class="fragment highlight-current-code">  writebyte(addr, val & 0xff); // modified value
+  writebyte(addr, val & 0xff); // modified value
   hardware.run(1);
-</div>  break;
-                     </code></pre>
+  break;
+</code></pre>
           </section>
           <section>
             <h2>Cycle stretching</h2>
@@ -975,31 +975,25 @@ case 0x2e: // ROL abs
       import Reveal from "./reveal.js/dist/reveal.esm.js";
       import Highlight from "./reveal.js/plugin/highlight/highlight.esm.js";
 
-      // Register custom 6502 assembly language for syntax highlighting
-      import('./reveal.js/plugin/highlight/highlight.esm.js').then((hljs) => {
-        function asm6502() {
-          return {
-            k: {
-              keyword:
-                "LDA LDX LDY STA STX STY INC INX INY DEC DEX DEY CMP CPX CPY BEQ BNE BMI BPL BCS BCC BVS BVC " +
-                "JMP JSR RTS RTI ASL ROL ROR PHP PHA PHX PHY PLP PLA PLX PLY TAX TAY TXA TYA TXS TSX ADC SBC " +
-                "SEC CLC SED CLD SEI CLI",
-              built_in: "A X Y",
-            },
-            c: [
-              { cN: "comment", b: ";", e: "$" },
-              { cN: "labeldef", b: "^\\.[a-zA-Z_][a-zA-Z_0-9]*" },
-              { cN: "opcodes", b: "^[0-9a-f]{2}( [0-9a-f]{2})*" },
-              { cN: "label", b: "[a-z][a-zA-Z]*" },
-              { cN: "literal", b: "#?\\$?[0-9a-f]+" },
-            ],
-          };
-        }
-        
-        if (window.hljs) {
-          hljs.registerLanguage("asm6502", asm6502);
-        }
-      });
+      // Define custom 6502 assembly language for syntax highlighting
+      function asm6502() {
+        return {
+          keywords: {
+            keyword:
+              "LDA LDX LDY STA STX STY INC INX INY DEC DEX DEY CMP CPX CPY BEQ BNE BMI BPL BCS BCC BVS BVC " +
+              "JMP JSR RTS RTI ASL ROL ROR PHP PHA PHX PHY PLP PLA PLX PLY TAX TAY TXA TYA TXS TSX ADC SBC " +
+              "SEC CLC SED CLD SEI CLI",
+            built_in: "A X Y",
+          },
+          contains: [
+            { className: "comment", begin: ";", end: "$" },
+            { className: "labeldef", begin: "^\\.[a-zA-Z_][a-zA-Z_0-9]*" },
+            { className: "opcodes", begin: "^[0-9a-f]{2}( [0-9a-f]{2})*" },
+            { className: "label", begin: "[a-z][a-zA-Z]*" },
+            { className: "literal", begin: "#?\\$?[0-9a-f]+" },
+          ],
+        };
+      }
 
       Reveal.initialize({
         controls: false,
@@ -1009,23 +1003,34 @@ case 0x2e: // ROL abs
         width: 1920,
         height: 800,
         transition: "fade",
+        highlight: {
+          beforeHighlight: (hljs) => hljs.registerLanguage("asm6502", asm6502),
+        },
         plugins: [Highlight],
       });
 
-      // Load WaveDrom if it exists
-      if (typeof WaveDrom !== 'undefined') {
-        WaveDrom.ProcessAll();
+      // Load additional functionality
+      async function loadExtras() {
+        // Load WaveDrom if it exists
+        if (typeof WaveDrom !== 'undefined') {
+          WaveDrom.ProcessAll();
+        }
+
+        // Load fullscreen-img functionality
+        try {
+          await import('./lib/js/fullscreen-img.js');
+        } catch {}
+        
+        // Load and initialize blink functionality
+        try {
+          const blinkModule = await import('./blink.js');
+          if (blinkModule.initializeBlink) {
+            blinkModule.initializeBlink();
+          }
+        } catch {}
       }
 
-      // Load fullscreen-img functionality
-      import('./lib/js/fullscreen-img.js').catch(() => {});
-      
-      // Import and initialize blink.js functionality
-      import('./blink.js').then(module => {
-        if (module.initializeBlink) {
-          module.initializeBlink();
-        }
-      }).catch(() => {});
+      loadExtras();
     </script>
   </body>
 </html>
