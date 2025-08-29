@@ -171,6 +171,10 @@ table.memmap tr.ram2 {
   background-color: #283828;
 }
 
+code {
+  box-shadow: 10px 10px 20px #333;
+}
+
 code.asm6502,
 code.javascript {
   font-size: 22pt;
