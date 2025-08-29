@@ -13,11 +13,11 @@ div.footer {
   height: 64px;
   width: 100%;
   bottom: 0;
-  background: #929292;
-  border-top: 1px solid #b9b9b9;
+  background: url(cppconheader.png);
   padding: 10px;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 div.footer-img img {
   width: 64px;
@@ -72,17 +72,8 @@ img.au-mag {
   font-family: "Teletext", Impact, sans-serif;
 }
 
-.reveal .slides section .fragment.highlight-current-code {
-  opacity: 1;
-  visibility: inherit;
-}
-
-.reveal
-  .slides
-  section
-  .fragment.highlight-current-code.current-fragment {
-  background: #555a5f;
-  color: #ffffff;
+tr.highlight-line {
+  text-shadow: 0px 0px 10px #aaa, 0px 0px 25px #585 !important;
 }
 
 .registers code {

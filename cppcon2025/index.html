@@ -27,7 +27,11 @@
         <section>
           <section class="first">
             <h1>Emulating the<br />BBC&nbsp;Micro<br />in Javascript</h1>
-            <h3><a href="https://bsky.app/profile/matt.godbolt.org">Matt Godbolt</a></h3>
+            <h3>
+              <a href="https://bsky.app/profile/matt.godbolt.org"
+                >Matt Godbolt</a
+              >
+            </h3>
             <h3>CppCon 2025</h3>
           </section>
           <section>
@@ -62,32 +66,29 @@
           </section>
           <section>
             <h2>Why BBC Micro?</h2>
-            <img class="fragment au-mag" src="AcornUser1.png" />
-          </section>
-          <section>
-            <h2>Why BBC Micro?</h2>
-            <img src="AcornUser2.png" class="au-mag" />
+            <div class="r-stack">
+              <img class="fragment au-mag" src="AcornUser1.png" />
+              <img class="fragment au-mag" src="AcornUser2.png" />
+            </div>
           </section>
           <section>
             <h2>Why Javascript?</h2>
-            <div class="flex">
-              <div class="">
-                <ul class="fragment" data-fragment-index="1">
-                  <li>Surely it'd be too slow?</li>
-                  <li>"Worse" than C++?</li>
-                  <li>Why not?</li>
-                  <li class="fragment" data-fragment-index="2">
-                    Runs in browser
-                  </li>
-                </ul>
-              </div>
-              <div class="">
-                <img
-                  class="no-border fragment"
-                  data-fragment-index="2"
-                  src="Exile.png"
-                />
-              </div>
+            <div class="">
+              <ul class="fragment" data-fragment-index="1">
+                <li>Surely it'd be too slow?</li>
+                <li>"Worse" than C++?</li>
+                <li>Why not?</li>
+                <li class="fragment" data-fragment-index="2">
+                  Runs in browser
+                </li>
+              </ul>
+            </div>
+            <div class="flex-grow">
+              <img
+                class="no-border fragment"
+                data-fragment-index="2"
+                src="Exile.png"
+              />
             </div>
           </section>
         </section>
@@ -195,7 +196,7 @@ b5 70     LDA $70, X   ; A = readmem(0x70 + X)
           </section>
           <section>
             <h2>Emulation</h2>
-            <pre><code class="javascript" data-trim data-line-numbers="1|3|4-5|6-9">
+            <pre><code class="javascript" data-trim data-line-numbers="|1|3|4-5|6-9|">
 var a = 0, x = 0, y = 0, pc = readword(0xfffe);
 while (true) {
   switch (readmem(pc++)) {
@@ -319,6 +320,7 @@ case 0xa9: // LDA #imm
             </table>
           </section>
           <section>
+            <h2>Memory - Reading</h2>
             <pre><code class="javascript" data-trim>
 var ram = new Uint8Array(0x8000), romsel = 0, roms = [];
 var os = load("OS");
@@ -335,6 +337,7 @@ function readmem(addr) {
                          </code></pre>
           </section>
           <section>
+            <h2>Memory - Writing</h2>
             <pre><code class="javascript" data-trim>
 function writemem(addr, b) {
     if (addr &lt; 0x8000) ram[addr] = b;
@@ -384,7 +387,7 @@ function writemem(addr, b) {
           </section>
           <section>
             <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-line-numbers="2-4|5|6">
+            <pre><code class="javascript" data-trim data-line-numbers="|2-4|5|6|">
 case 0xa9: // LDA #imm
   a = readmem(pc++);
   p.z = !a;
@@ -755,7 +758,7 @@ case 0x2e: // ROL abs
         </section>
       </section>
       <div class="footer">
-        <div class="footer-img"><img src="ce.svg"/></div>
+        <div class="footer-img"><img src="ce.svg" /></div>
         <div>
           &copy; 2025 Matt Godbolt - CppCon 2025
           <a
