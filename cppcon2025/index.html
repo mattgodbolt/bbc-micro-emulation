@@ -770,7 +770,7 @@ case 0x2e: // ROL abs
     <script type="module">
       import Reveal from "./reveal.js/dist/reveal.esm.js";
       import Highlight from "./reveal.js/plugin/highlight/highlight.esm.js";
-      import { initializeBlink } from "./blink.js";
+      import { initializeTypingEffect } from "./typing-effect.js";
 
       // Define custom 6502 assembly language for syntax highlighting
       function asm6502() {
@@ -807,7 +807,7 @@ case 0x2e: // ROL abs
       });
 
       // Initialize typing effect
-      initializeBlink();
+      initializeTypingEffect();
 
       // Process timing diagrams
       WaveDrom.ProcessAll();
