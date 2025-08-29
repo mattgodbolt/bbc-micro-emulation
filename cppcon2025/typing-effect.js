@@ -18,17 +18,22 @@ function startTyping(slide) {
     for (let child of f.children) {
       if (child.tagName === "SPAN") {
         // Store original text if not already stored
-        let originalText;
-        if (!child.dataset.originalText) {
-          originalText = child.textContent;
-          child.dataset.originalText = originalText;
-        } else {
-          originalText = child.dataset.originalText;
-        }
+        const originalText = child.dataset.originalText || child.textContent;
+        if (!child.dataset.originalText) child.dataset.originalText = originalText;
         child.innerText = "";
         child.style.visibility = "visible";
+        toReveal.push(() => {
+          child.appendChild(cursor);
+        });
+        
         for (let char of originalText) {
-          toReveal.push(() => (child.textContent += char));
+          toReveal.push(() => {
+            if (child.firstChild && child.firstChild.nodeType === Node.TEXT_NODE) {
+              child.firstChild.textContent += char;
+            } else {
+              child.insertBefore(document.createTextNode(char), child.firstChild);
+            }
+          });
         }
       } else if (child.tagName === "BR") {
         child.classList.add("hidden");
@@ -41,12 +46,10 @@ function startTyping(slide) {
     const toRun = toReveal.shift();
     if (!toRun) return;
     toRun();
-    const timeout = setTimeout(next, 30 + 90 * Math.random());
-    currentTimeouts.push(timeout);
+    currentTimeouts.push(setTimeout(next, 30 + 90 * Math.random()));
   };
   
-  const initialTimeout = setTimeout(next, 200);
-  currentTimeouts.push(initialTimeout);
+  currentTimeouts.push(setTimeout(next, 200));
 }
 
 export function initializeTypingEffect() {
