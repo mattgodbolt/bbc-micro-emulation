@@ -261,3 +261,23 @@ code.javascript {
   stroke: #ddd;
   stroke-width: 2;
 }
+
+/* Fragment highlighting styles */
+.fragment.highlight-current-blue.current-fragment {
+  stroke: #4488ff !important;
+  stroke-width: 3 !important;
+}
+
+.fragment.highlight-current-red.current-fragment {
+  stroke: #ff4444 !important;
+  stroke-width: 3 !important;
+  fill: #ff444422 !important;
+}
+
+.register-label-red {
+  fill: #ff4444;
+}
+
+.transistor-red {
+  stroke: #ff4444;
+}

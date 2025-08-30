@@ -498,32 +498,35 @@ case 0xa9: // LDA #imm
                   y="30"
                   width="80"
                   height="40"
-                  class="register-box"
+                  class="register-box fragment highlight-current-blue"
+                  data-fragment-index="3"
                 />
-                <text x="185" y="50" class="register-label">X</text>
+                <text x="185" y="50" class="register-label fragment highlight-current-blue" data-fragment-index="3">X</text>
 
                 <rect
                   x="340"
                   y="30"
                   width="80"
                   height="40"
-                  class="register-box"
+                  class="register-box fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
-                <text x="380" y="50" class="register-label">A</text>
+                <text x="380" y="50" class="register-label fragment highlight-current-blue" data-fragment-index="2">A</text>
 
                 <rect
                   x="540"
                   y="30"
                   width="80"
                   height="40"
-                  class="register-box"
+                  class="register-box fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
-                <text x="580" y="50" class="register-label">Y</text>
+                <text x="580" y="50" class="register-label fragment highlight-current-blue" data-fragment-index="1">Y</text>
 
                 <!-- Bus lines from registers -->
-                <line x1="185" y1="70" x2="185" y2="120" class="bus-line" />
-                <line x1="380" y1="70" x2="380" y2="120" class="bus-line" />
-                <line x1="580" y1="70" x2="580" y2="120" class="bus-line" />
+                <line x1="185" y1="70" x2="185" y2="120" class="bus-line fragment highlight-current-blue" data-fragment-index="3" />
+                <line x1="380" y1="70" x2="380" y2="120" class="bus-line fragment highlight-current-blue" data-fragment-index="2" />
+                <line x1="580" y1="70" x2="580" y2="120" class="bus-line fragment highlight-current-blue" data-fragment-index="1" />
 
                 <!-- Transistors as visible switches -->
                 <!-- X transistor switch (controlled by s) -->
@@ -532,9 +535,10 @@ case 0xa9: // LDA #imm
                   y="120"
                   width="20"
                   height="30"
-                  class="transistor"
+                  class="transistor fragment highlight-current-blue"
+                  data-fragment-index="3"
                 />
-                <circle cx="185" cy="135" r="8" class="transistor" />
+                <circle cx="185" cy="135" r="8" class="transistor fragment highlight-current-blue" data-fragment-index="3" />
                 <line
                   x1="155"
                   y1="135"
@@ -542,7 +546,7 @@ case 0xa9: // LDA #imm
                   y2="135"
                   class="control-line"
                 />
-                <text x="135" y="140" class="bit-label">s</text>
+                <text x="135" y="140" class="bit-label fragment highlight-current-blue" data-fragment-index="3">s</text>
 
                 <!-- A transistor switch (controlled by t) -->
                 <rect
@@ -550,10 +554,11 @@ case 0xa9: // LDA #imm
                   y="120"
                   width="20"
                   height="30"
-                  class="transistor"
+                  class="transistor fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
-                <circle cx="380" cy="135" r="8" class="transistor" />
-                <text x="345" y="140" class="bit-label">t</text>
+                <circle cx="380" cy="135" r="8" class="transistor fragment highlight-current-blue" data-fragment-index="2" />
+                <text x="345" y="140" class="bit-label fragment highlight-current-blue" data-fragment-index="2">t</text>
 
                 <!-- Y transistor switch (controlled by !s&&!t) -->
                 <rect
@@ -561,14 +566,15 @@ case 0xa9: // LDA #imm
                   y="120"
                   width="20"
                   height="30"
-                  class="transistor"
+                  class="transistor fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
-                <circle cx="580" cy="135" r="8" class="transistor" />
+                <circle cx="580" cy="135" r="8" class="transistor fragment highlight-current-blue" data-fragment-index="1" />
 
                 <!-- Continue bus lines after transistors -->
-                <line x1="185" y1="150" x2="185" y2="200" class="bus-line" />
-                <line x1="380" y1="150" x2="380" y2="200" class="bus-line" />
-                <line x1="580" y1="150" x2="580" y2="200" class="bus-line" />
+                <line x1="185" y1="150" x2="185" y2="200" class="bus-line fragment highlight-current-blue" data-fragment-index="3" />
+                <line x1="380" y1="150" x2="380" y2="200" class="bus-line fragment highlight-current-blue" data-fragment-index="2" />
+                <line x1="580" y1="150" x2="580" y2="200" class="bus-line fragment highlight-current-blue" data-fragment-index="1" />
 
                 <!-- Horizontal bus wire connecting all three outputs -->
                 <line x1="185" y1="200" x2="650" y2="200" class="bus-line" />
@@ -592,8 +598,8 @@ case 0xa9: // LDA #imm
                 <text x="80" y="290" class="opcode-text">0</text>
                 <text x="100" y="290" class="opcode-text">0</text>
                 <text x="120" y="290" class="opcode-text">1</text>
-                <text x="140" y="290" class="bit-label">s</text>
-                <text x="160" y="290" class="bit-label">t</text>
+                <text x="140" y="290" class="bit-label fragment highlight-current-blue" data-fragment-index="3">s</text>
+                <text x="160" y="290" class="bit-label fragment highlight-current-blue" data-fragment-index="2">t</text>
 
                 <!-- Control lines from s and t bits to transistors -->
                 <!-- s to X -->
@@ -602,14 +608,16 @@ case 0xa9: // LDA #imm
                   y1="290"
                   x2="145"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="3"
                 />
                 <line
                   x1="145"
                   y1="135"
                   x2="177"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="3"
                 />
 
                 <!-- t to A -->
@@ -618,37 +626,42 @@ case 0xa9: // LDA #imm
                   y1="290"
                   x2="165"
                   y2="170"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
                 <line
                   x1="165"
                   y1="170"
                   x2="325"
                   y2="170"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
                 <line
                   x1="325"
                   y1="170"
                   x2="325"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
                 <line
                   x1="325"
                   y1="135"
                   x2="370"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="2"
                 />
 
                 <!-- Logic for Y control (!s && !t) -->
                 <!-- NOT gate for s -->
                 <path
                   d="M 320,310 L 340,320 L 320,330 Z"
-                  class="gate-outline"
+                  class="gate-outline fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
-                <circle cx="344" cy="320" r="4" class="gate-outline" />
+                <circle cx="344" cy="320" r="4" class="gate-outline fragment highlight-current-blue" data-fragment-index="1" />
                 <line
                   x1="145"
                   y1="295"
@@ -667,9 +680,10 @@ case 0xa9: // LDA #imm
                 <!-- NOT gate for t -->
                 <path
                   d="M 320,340 L 340,350 L 320,360 Z"
-                  class="gate-outline"
+                  class="gate-outline fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
-                <circle cx="344" cy="350" r="4" class="gate-outline" />
+                <circle cx="344" cy="350" r="4" class="gate-outline fragment highlight-current-blue" data-fragment-index="1" />
                 <line
                   x1="165"
                   y1="295"
@@ -688,7 +702,8 @@ case 0xa9: // LDA #imm
                 <!-- AND gate -->
                 <path
                   d="M 380,315 L 380,355 L 400,355 Q 420,335 400,315 Z"
-                  class="gate-outline"
+                  class="gate-outline fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
                 <!-- Connect NOT outputs to AND inputs -->
                 <line
@@ -696,14 +711,16 @@ case 0xa9: // LDA #imm
                   y1="320"
                   x2="380"
                   y2="320"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
                 <line
                   x1="348"
                   y1="350"
                   x2="380"
                   y2="350"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
 
                 <!-- AND output to Y transistor -->
@@ -712,23 +729,175 @@ case 0xa9: // LDA #imm
                   y1="335"
                   x2="540"
                   y2="335"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
                 <line
                   x1="540"
                   y1="335"
                   x2="540"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
                 <line
                   x1="540"
                   y1="135"
                   x2="570"
                   y2="135"
-                  class="control-line"
+                  class="control-line fragment highlight-current-blue"
+                  data-fragment-index="1"
                 />
-                <text x="500" y="140" class="bit-label">!s&amp;&amp;!t</text>
+                <text x="500" y="140" class="bit-label fragment highlight-current-blue" data-fragment-index="1">!s&amp;&amp;!t</text>
+
+                <!-- Fragment 4: SAX demonstration overlays (both A and X active) -->
+                <!-- X register highlights -->
+                <rect x="145" y="30" width="80" height="40" 
+                      class="fragment highlight-current-red" 
+                      data-fragment-index="4" 
+                      fill="none" pointer-events="none"/>
+                <text x="185" y="50" 
+                      class="register-label register-label-red fragment" 
+                      data-fragment-index="4"
+                      pointer-events="none">X</text>
+                <rect x="175" y="120" width="20" height="30"
+                      class="transistor transistor-red fragment"
+                      data-fragment-index="4"
+                      pointer-events="none"/>
+                <circle cx="185" cy="135" r="8"
+                        class="transistor transistor-red fragment"
+                        data-fragment-index="4"
+                        pointer-events="none"/>
+                <line x1="185" y1="70" x2="185" y2="120"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="185" y1="150" x2="185" y2="200"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="145" y1="290" x2="145" y2="135"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="145" y1="135" x2="177" y2="135"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+
+                <!-- A register highlights -->
+                <rect x="340" y="30" width="80" height="40"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      fill="none" pointer-events="none"/>
+                <text x="380" y="50"
+                      class="register-label register-label-red fragment"
+                      data-fragment-index="4"
+                      pointer-events="none">A</text>
+                <rect x="370" y="120" width="20" height="30"
+                      class="transistor transistor-red fragment"
+                      data-fragment-index="4"
+                      pointer-events="none"/>
+                <circle cx="380" cy="135" r="8"
+                        class="transistor transistor-red fragment"
+                        data-fragment-index="4"
+                        pointer-events="none"/>
+                <line x1="380" y1="70" x2="380" y2="120"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="380" y1="150" x2="380" y2="200"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="165" y1="290" x2="165" y2="170"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="165" y1="170" x2="325" y2="170"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="325" y1="170" x2="325" y2="135"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+                <line x1="325" y1="135" x2="370" y2="135"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke="none" pointer-events="none"/>
+
+                <!-- Bus line highlighting for each fragment -->
+                <!-- Fragment 1: Y output (rightmost section) -->
+                <line x1="580" y1="200" x2="650" y2="200"
+                      class="fragment highlight-current-blue"
+                      data-fragment-index="1"
+                      stroke-width="3" pointer-events="none"/>
+                
+                <!-- Fragment 2: A output (middle to end) -->
+                <line x1="380" y1="200" x2="650" y2="200"
+                      class="fragment highlight-current-blue"
+                      data-fragment-index="2"
+                      stroke-width="3" pointer-events="none"/>
+                
+                <!-- Fragment 3: X output (leftmost to end) -->
+                <line x1="185" y1="200" x2="650" y2="200"
+                      class="fragment highlight-current-blue"
+                      data-fragment-index="3"
+                      stroke-width="3" pointer-events="none"/>
+                
+                <!-- Fragment 4: Both outputs (entire line) -->
+                <line x1="185" y1="200" x2="650" y2="200"
+                      class="fragment highlight-current-red"
+                      data-fragment-index="4"
+                      stroke-width="3" pointer-events="none"/>
+                
+                <!-- Circle highlighting overlays for each fragment -->
+                <!-- Fragment 1: Y node -->
+                <circle cx="580" cy="200" r="5"
+                        class="fragment fade-in-then-out"
+                        data-fragment-index="1"
+                        fill="#4488ff" pointer-events="none"/>
+                
+                <!-- Fragment 2: A node -->
+                <circle cx="380" cy="200" r="5"
+                        class="fragment fade-in-then-out"
+                        data-fragment-index="2"
+                        fill="#4488ff" pointer-events="none"/>
+                
+                <!-- Fragment 3: X node -->
+                <circle cx="185" cy="200" r="5"
+                        class="fragment fade-in-then-out"
+                        data-fragment-index="3"
+                        fill="#4488ff" pointer-events="none"/>
+                
+                <!-- Fragment 4: Both X and A nodes -->
+                <circle cx="185" cy="200" r="5" 
+                        class="fragment"
+                        data-fragment-index="4"
+                        fill="#ff4444" pointer-events="none"/>
+                <circle cx="380" cy="200" r="5"
+                        class="fragment"
+                        data-fragment-index="4"
+                        fill="#ff4444" pointer-events="none"/>
+
+                <!-- Output indicator boxes -->
+                <g>
+                  <rect x="660" y="215" width="40" height="30"
+                        class="register-box"/>
+                  <text x="680" y="235" 
+                        class="register-label fragment fade-in-then-out"
+                        data-fragment-index="1">Y</text>
+                  <text x="680" y="235"
+                        class="register-label fragment fade-in-then-out"
+                        data-fragment-index="2">A</text>
+                  <text x="680" y="235"
+                        class="register-label fragment fade-in-then-out"
+                        data-fragment-index="3">X</text>
+                  <text x="680" y="235"
+                        class="register-label fragment"
+                        data-fragment-index="4">???</text>
+                </g>
               </svg>
             </div>
           </section>
