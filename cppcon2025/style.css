@@ -207,3 +207,57 @@ code.javascript {
   color: #569cd6;
   font-weight: bold;
 }
+
+/* SVG 6502 Circuit Diagram Styles */
+.register-box {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 2;
+}
+
+.register-label {
+  font-family: "Courier New", monospace;
+  font-size: 24px;
+  font-weight: bold;
+  fill: #ddd;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+.bus-line {
+  stroke: #ddd;
+  stroke-width: 3;
+  fill: none;
+}
+
+.control-line {
+  stroke: #888;
+  stroke-width: 1.5;
+  fill: none;
+  stroke-dasharray: 3, 3;
+}
+
+.gate-outline {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 2;
+}
+
+.opcode-text {
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  fill: #ddd;
+}
+
+.bit-label {
+  font-family: "Courier New", monospace;
+  font-size: 16px;
+  fill: #ddd;
+  font-weight: bold;
+}
+
+.transistor {
+  fill: none;
+  stroke: #ddd;
+  stroke-width: 2;
+}

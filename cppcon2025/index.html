@@ -484,75 +484,253 @@ case 0xa9: // LDA #imm
           </section>
           <section>
             <h2>Inside the 6502</h2>
-            <pre style="width: 40%">
-                 <span class="fragment highlight-current-red" data-fragment-index="2">+-----+</span><span
-                         class="fragment highlight-current-red" data-fragment-index="3">-----</span><span
-                         class="fragment highlight-current-red" data-fragment-index="1">+-----+</span>
-                 <span class="fragment highlight-current-red" data-fragment-index="2">|  A  |</span><span
-                         class="fragment highlight-current-red" data-fragment-index="3">  X  </span><span
-                         class="fragment highlight-current-red" data-fragment-index="1">|  Y  |</span>
-                 <span class="fragment highlight-current-red" data-fragment-index="2">+-----+</span><span
-                         class="fragment highlight-current-red" data-fragment-index="3">-----</span><span
-                         class="fragment highlight-current-red" data-fragment-index="1">+-----+</span>
-                    <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-        /+--------- <span class="fragment highlight-current-red" data-fragment-index="2">|</span> --- <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span> <span
-                         class="fragment highlight-current-red" data-fragment-index="1">(!s && !t)</span>
-        ||          <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-+----------+        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-| opcode|| |        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-| 100001<span class="fragment highlight-current-red" data-fragment-index="3">s</span><span
-                         class="fragment highlight-current-red" data-fragment-index="2">t</span> |<span
-                         class="fragment highlight-current-red"
-                         data-fragment-index="2">------->t</span>     <span class="fragment highlight-current-red"
-                                                                            data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-+----------+        <span class="fragment highlight-current-red" data-fragment-index="2">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-     ^  <span class="fragment highlight-current-red" data-fragment-index="3">\----------</span> <span
-                         class="fragment highlight-current-red" data-fragment-index="2">|</span> <span
-                         class="fragment highlight-current-red" data-fragment-index="3">--->s</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span>
-     |              <span class="fragment highlight-current-red" data-fragment-index="2">\</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>     <span
-                         class="fragment highlight-current-red" data-fragment-index="1">/</span>
-     |               <span class="fragment highlight-current-red" data-fragment-index="2">\</span>    <span
-                         class="fragment highlight-current-red" data-fragment-index="3">|</span>    <span
-                         class="fragment highlight-current-red" data-fragment-index="1">/</span>
-  select              write bus
-   store
-            </pre>
-          </section>
-          <section>
-            <h2>Inside the 6502</h2>
-            <pre style="width: 40%">
-                 <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
-                 <span class="fragment highlight-current-red" data-fragment-index="1">|  A  |  X  |</span>  Y  |
-                 <span class="fragment highlight-current-red" data-fragment-index="1">+-----+-----+</span>-----+
-                    <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
-        /+--------- <span class="fragment highlight-current-red" data-fragment-index="1">|</span> --- <span
-                         class="fragment highlight-current-red" data-fragment-index="1">|</span> (!s && !t)
-        ||          <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
-+----------+        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
-| opcode|| |        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
-| 100001<span class="fragment highlight-current-red" data-fragment-index="1">st</span> |<span
-                         class="fragment highlight-current-red" data-fragment-index="1">------->t     |</span>     |
-+----------+        <span class="fragment highlight-current-red" data-fragment-index="1">|     |</span>     |
-     ^  <span class="fragment highlight-current-red" data-fragment-index="1">\---------- | --->s</span>     |
-     |              <span class="fragment highlight-current-red" data-fragment-index="1">\     |</span>     /
-     |               <span class="fragment highlight-current-red" data-fragment-index="1">\    |</span>    /
-  select              write bus
-   store
-            </pre>
+            <div class="decode-diagram">
+              <svg
+                width="800"
+                height="400"
+                viewBox="0 0 800 400"
+                xmlns="http://www.w3.org/2000/svg"
+                class="stretch"
+              >
+                <!-- Register boxes at top - positioned for orthogonal lines -->
+                <rect
+                  x="145"
+                  y="30"
+                  width="80"
+                  height="40"
+                  class="register-box"
+                />
+                <text x="185" y="50" class="register-label">X</text>
+
+                <rect
+                  x="340"
+                  y="30"
+                  width="80"
+                  height="40"
+                  class="register-box"
+                />
+                <text x="380" y="50" class="register-label">A</text>
+
+                <rect
+                  x="540"
+                  y="30"
+                  width="80"
+                  height="40"
+                  class="register-box"
+                />
+                <text x="580" y="50" class="register-label">Y</text>
+
+                <!-- Bus lines from registers -->
+                <line x1="185" y1="70" x2="185" y2="120" class="bus-line" />
+                <line x1="380" y1="70" x2="380" y2="120" class="bus-line" />
+                <line x1="580" y1="70" x2="580" y2="120" class="bus-line" />
+
+                <!-- Transistors as visible switches -->
+                <!-- X transistor switch (controlled by s) -->
+                <rect
+                  x="175"
+                  y="120"
+                  width="20"
+                  height="30"
+                  class="transistor"
+                />
+                <circle cx="185" cy="135" r="8" class="transistor" />
+                <line
+                  x1="155"
+                  y1="135"
+                  x2="177"
+                  y2="135"
+                  class="control-line"
+                />
+                <text x="135" y="140" class="bit-label">s</text>
+
+                <!-- A transistor switch (controlled by t) -->
+                <rect
+                  x="370"
+                  y="120"
+                  width="20"
+                  height="30"
+                  class="transistor"
+                />
+                <circle cx="380" cy="135" r="8" class="transistor" />
+                <text x="345" y="140" class="bit-label">t</text>
+
+                <!-- Y transistor switch (controlled by !s&&!t) -->
+                <rect
+                  x="570"
+                  y="120"
+                  width="20"
+                  height="30"
+                  class="transistor"
+                />
+                <circle cx="580" cy="135" r="8" class="transistor" />
+
+                <!-- Continue bus lines after transistors -->
+                <line x1="185" y1="150" x2="185" y2="200" class="bus-line" />
+                <line x1="380" y1="150" x2="380" y2="200" class="bus-line" />
+                <line x1="580" y1="150" x2="580" y2="200" class="bus-line" />
+
+                <!-- Horizontal bus wire connecting all three outputs -->
+                <line x1="185" y1="200" x2="650" y2="200" class="bus-line" />
+                <circle cx="185" cy="200" r="5" fill="#ddd" />
+                <circle cx="380" cy="200" r="5" fill="#ddd" />
+                <circle cx="580" cy="200" r="5" fill="#ddd" />
+                <text x="660" y="205" class="opcode-text">write bus</text>
+
+                <!-- Opcode box -->
+                <rect
+                  x="5"
+                  y="250"
+                  width="175"
+                  height="50"
+                  class="register-box"
+                />
+                <text x="60" y="270" class="opcode-text">opcode:</text>
+                <text x="20" y="290" class="opcode-text">1</text>
+                <text x="40" y="290" class="opcode-text">0</text>
+                <text x="60" y="290" class="opcode-text">0</text>
+                <text x="80" y="290" class="opcode-text">0</text>
+                <text x="100" y="290" class="opcode-text">0</text>
+                <text x="120" y="290" class="opcode-text">1</text>
+                <text x="140" y="290" class="bit-label">s</text>
+                <text x="160" y="290" class="bit-label">t</text>
+
+                <!-- Control lines from s and t bits to transistors -->
+                <!-- s to X -->
+                <line
+                  x1="145"
+                  y1="290"
+                  x2="145"
+                  y2="135"
+                  class="control-line"
+                />
+                <line
+                  x1="145"
+                  y1="135"
+                  x2="177"
+                  y2="135"
+                  class="control-line"
+                />
+
+                <!-- t to A -->
+                <line
+                  x1="165"
+                  y1="290"
+                  x2="165"
+                  y2="170"
+                  class="control-line"
+                />
+                <line
+                  x1="165"
+                  y1="170"
+                  x2="325"
+                  y2="170"
+                  class="control-line"
+                />
+                <line
+                  x1="325"
+                  y1="170"
+                  x2="325"
+                  y2="135"
+                  class="control-line"
+                />
+                <line
+                  x1="325"
+                  y1="135"
+                  x2="370"
+                  y2="135"
+                  class="control-line"
+                />
+
+                <!-- Logic for Y control (!s && !t) -->
+                <!-- NOT gate for s -->
+                <path
+                  d="M 320,310 L 340,320 L 320,330 Z"
+                  class="gate-outline"
+                />
+                <circle cx="344" cy="320" r="4" class="gate-outline" />
+                <line
+                  x1="145"
+                  y1="295"
+                  x2="145"
+                  y2="320"
+                  class="control-line"
+                />
+                <line
+                  x1="145"
+                  y1="320"
+                  x2="320"
+                  y2="320"
+                  class="control-line"
+                />
+
+                <!-- NOT gate for t -->
+                <path
+                  d="M 320,340 L 340,350 L 320,360 Z"
+                  class="gate-outline"
+                />
+                <circle cx="344" cy="350" r="4" class="gate-outline" />
+                <line
+                  x1="165"
+                  y1="295"
+                  x2="165"
+                  y2="350"
+                  class="control-line"
+                />
+                <line
+                  x1="165"
+                  y1="350"
+                  x2="320"
+                  y2="350"
+                  class="control-line"
+                />
+
+                <!-- AND gate -->
+                <path
+                  d="M 380,315 L 380,355 L 400,355 Q 420,335 400,315 Z"
+                  class="gate-outline"
+                />
+                <!-- Connect NOT outputs to AND inputs -->
+                <line
+                  x1="348"
+                  y1="320"
+                  x2="380"
+                  y2="320"
+                  class="control-line"
+                />
+                <line
+                  x1="348"
+                  y1="350"
+                  x2="380"
+                  y2="350"
+                  class="control-line"
+                />
+
+                <!-- AND output to Y transistor -->
+                <line
+                  x1="410"
+                  y1="335"
+                  x2="540"
+                  y2="335"
+                  class="control-line"
+                />
+                <line
+                  x1="540"
+                  y1="335"
+                  x2="540"
+                  y2="135"
+                  class="control-line"
+                />
+                <line
+                  x1="540"
+                  y1="135"
+                  x2="570"
+                  y2="135"
+                  class="control-line"
+                />
+                <text x="500" y="140" class="bit-label">!s&amp;&amp;!t</text>
+              </svg>
+            </div>
           </section>
           <section>
             <h2>Inside the 6502</h2>
@@ -808,7 +986,7 @@ case 0x2e: // ROL abs
         },
         plugins: [Highlight, TypingEffect],
       });
-      
+
       // Process timing diagrams
       WaveDrom.ProcessAll();
     </script>
