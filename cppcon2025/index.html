@@ -903,6 +903,54 @@ case 0xa9: // LDA #imm
           </section>
           <section>
             <h2>Inside the 6502</h2>
+            <!-- claude here -->
+            <svg width="400" height="500" viewBox="0 0 400 500" xmlns="http://www.w3.org/2000/svg">
+              <!-- Vdd at top -->
+              <text x="200" y="30" class="register-label">Vdd</text>
+              <line x1="200" y1="40" x2="200" y2="80" class="bus-line"/>
+              
+              <!-- Resistor (pullup) -->
+              <path d="M 200,80 l 0,10 l -10,5 l 20,10 l -20,10 l 20,10 l -20,10 l 20,10 l -10,5 l 0,10" class="gate-outline"/>
+              
+              <!-- Wire from resistor to output branch point -->
+              <line x1="200" y1="150" x2="200" y2="200" class="bus-line"/>
+              
+              <!-- Branch to output -->
+              <circle cx="200" cy="200" r="5" fill="#ddd"/>
+              <line x1="200" y1="200" x2="320" y2="200" class="bus-line"/>
+              <text x="340" y="200" class="register-label" dominant-baseline="middle">out</text>
+              
+              <!-- NMOS transistor -->
+              <!-- Gate connection from left with dotted line -->
+              <line x1="80" y1="280" x2="160" y2="280" class="control-line"/>
+              <text x="60" y="280" class="register-label" text-anchor="end" dominant-baseline="middle">in</text>
+              
+              <!-- Transistor symbol - N-channel MOSFET -->
+              <!-- Gate (vertical flat line on left) -->
+              <line x1="160" y1="250" x2="160" y2="310" class="transistor"/>
+              
+              <!-- Channel (vertical flat line on right, slightly longer) -->
+              <line x1="180" y1="240" x2="180" y2="320" class="transistor"/>
+              
+              <!-- Drain connection: from output node, step in to channel top -->
+              <line x1="200" y1="200" x2="200" y2="240" class="bus-line"/>
+              <line x1="200" y1="240" x2="180" y2="240" class="transistor"/>
+              
+              <!-- Source connection: from channel bottom, step out, then to ground -->
+              <line x1="180" y1="320" x2="200" y2="320" class="transistor"/>
+              <line x1="200" y1="320" x2="200" y2="380" class="bus-line"/>
+              
+              <!-- Ground -->
+              <line x1="200" y1="380" x2="200" y2="420" class="bus-line"/>
+              <!-- Ground symbol -->
+              <line x1="180" y1="420" x2="220" y2="420" class="gate-outline"/>
+              <line x1="185" y1="430" x2="215" y2="430" class="gate-outline"/>
+              <line x1="190" y1="440" x2="210" y2="440" class="gate-outline"/>
+              <text x="200" y="465" class="register-label">GND</text>
+            </svg>
+          </section>
+          <section>
+            <h2>Inside the 6502</h2>
             <table class="opcodes">
               <tr>
                 <th>$84 10000100</th>
@@ -1012,7 +1060,7 @@ case 0xa9: // LDA #imm
           </section>
           <section>
             <h2>Fixing it</h2>
-            <pre><code class="javascript" data-trim data-line-numbers="2-3|4-5|6-7|8-9|10-11">
+            <pre><code class="javascript" data-trim data-line-numbers="|2-3|4-5|6-7|8-9|10-11|">
 case 0x2e: // ROL abs
   addr = readword(pc); pc += 2;
   hardware.run(3);
@@ -1148,7 +1196,7 @@ case 0x2e: // ROL abs
         history: true,
         slideNumber: true,
         width: 1920,
-        height: 800,
+        height: 720,
         transition: "fade",
         highlight: {
           beforeHighlight: (hljs) => hljs.registerLanguage("asm6502", asm6502),
